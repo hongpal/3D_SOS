@@ -8,32 +8,32 @@ public class Button_Event3 : MonoBehaviour{
     public GameObject[] temp = new GameObject[100]; // 생성된 큐브가 저장될 배열
     public static int floor; // 층수를 기록하는 변수
     public int count;
-    public int block_number;
+    public int Block_Number;
     public int[] FloorArr = new int[20];
-    public Vector3[] v = new Vector3[20];
+    public static Vector3[] v = new Vector3[20];
 
     public void Start()
     {
-        v[0] = new Vector3(-2, 0, 8);
-        v[1] = new Vector3(-1, 0, 8);
-        v[2] = new Vector3(0, 0, 8);
-        v[3] = new Vector3(1, 0, 8);
-        v[4] = new Vector3(2, 0, 8);
-        v[5] = new Vector3(-2, 0, 7);
-        v[6] = new Vector3(-1, 0, 7);
-        v[7] = new Vector3(0, 0, 7);
-        v[8] = new Vector3(1, 0, 7);
-        v[9] = new Vector3(2, 0, 7);
-        v[10] = new Vector3(-2, 0, 6);
-        v[11] = new Vector3(-1, 0, 6);
-        v[12] = new Vector3(0, 0, 6);
-        v[13] = new Vector3(1, 0, 6);
-        v[14] = new Vector3(2, 0, 6);
-        v[15] = new Vector3(-2, 0, 5);
-        v[16] = new Vector3(-1, 0, 5);
-        v[17] = new Vector3(0, 0, 5);
-        v[18] = new Vector3(1, 0, 5);
-        v[19] = new Vector3(2, 0, 5);
+        v[0] = new Vector3(-2, -1, 8);
+        v[1] = new Vector3(-1, -1, 8);
+        v[2] = new Vector3(0, -1, 8);
+        v[3] = new Vector3(1, -1, 8);
+        v[4] = new Vector3(2, -1, 8);
+        v[5] = new Vector3(-2, -1, 7);
+        v[6] = new Vector3(-1, -1, 7);
+        v[7] = new Vector3(0, -1, 7);
+        v[8] = new Vector3(1, -1, 7);
+        v[9] = new Vector3(2, -1, 7);
+        v[10] = new Vector3(-2, -1, 6);
+        v[11] = new Vector3(-1, -1, 6);
+        v[12] = new Vector3(0, -1, 6);
+        v[13] = new Vector3(1, -1, 6);
+        v[14] = new Vector3(2, -1, 6);
+        v[15] = new Vector3(-2, -1, 5);
+        v[16] = new Vector3(-1, -1, 5);
+        v[17] = new Vector3(0, -1, 5);
+        v[18] = new Vector3(1, -1, 5);
+        v[19] = new Vector3(2, -1, 5);
     }
 
     //블록 쌓기를 눌렀을 경우 
@@ -73,8 +73,27 @@ public class Button_Event3 : MonoBehaviour{
                 
                 for(int k = 0; k < FloorArr[i]; k++)
                 {
-                    temp[block_number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    temp[block_number++].transform.position = tempV;
+                    temp[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    temp[Block_Number++].transform.position = tempV;
+                    int n = Random.Range(0, 5);
+                    switch (n)
+                    {
+                        case 0:
+                            temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;
+                            break;
+                        case 1:
+                            temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.blue;
+                            break;
+                        case 2:
+                            temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.green;
+                            break;
+                        case 3:
+                            temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.yellow;
+                            break;
+                        case 4:
+                            temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.black;
+                            break;
+                    }
                     tempV.y += 1;
                 }
             }
@@ -85,13 +104,13 @@ public class Button_Event3 : MonoBehaviour{
 
     public void Back()
     {
-        for (int i = 0; i < block_number; i++)
+        for (int i = 0; i < Block_Number; i++)
             Destroy(temp[i]);
 
         for (int i = 0; i < 20; i++)
             FloorArr[i] = 0;
 
-        floor = count = block_number = 0;
+        floor = count = Block_Number = 0;
 
         BlockButton[20].SetActive(false);
 

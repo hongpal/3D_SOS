@@ -84,6 +84,7 @@
     <Compile Include="Assets\Sript\Button_Event3.cs" />
     <Compile Include="Assets\Sript\CubeInit.cs" />
     <Compile Include="Assets\Sript\Menu_Event.cs" />
+    <Compile Include="Assets\Sript\TimeCheck.cs" />
     <Compile Include="Assets\Sript\zoomInAndOut.cs" />
   </ItemGroup>
   <ItemGroup>
