@@ -4,48 +4,53 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
-    public GameObject[] Button = new GameObject[9];
+    public GameObject[] Button = new GameObject[11];
+    public GameObject[] Easy_Ans = new GameObject[4];
+    public GameObject[] Middle_Ans = new GameObject[9];
+    public GameObject[] Hard_Ans = new GameObject[16];
     private GameObject[] Block = new GameObject[16 * 4];
     private Vector3[,] Difficulty = new Vector3[3, 16];
-    private Vector3[] Middle = new Vector3[9];
-    private Vector3[] Hard = new Vector3[16];
     private int[] Ans   = new int[16];
+    private int[] Select = new int[16];
+    private int temp = 0;
+    private int count = 0;
     private int problem = 0;
     private int Block_Number = 0;
+    private int Dif = 0;
 
     public void Start()
     {
-        Difficulty[0, 0] = new Vector3(-0.5f, -1f, 8f);
-        Difficulty[0, 1] = new Vector3(0.5f, -1f, 8f);
-        Difficulty[0, 2] = new Vector3(-0.5f, -1f, 7f);
-        Difficulty[0, 3] = new Vector3(0.5f, -1f, 7f);
+        Difficulty[0, 0] = new Vector3(-0.5f, -2f, 8f);
+        Difficulty[0, 1] = new Vector3(0.5f, -2f, 8f);
+        Difficulty[0, 2] = new Vector3(-0.5f, -2f, 7f);
+        Difficulty[0, 3] = new Vector3(0.5f, -2f, 7f);
 
-        Difficulty[1, 0] = new Vector3(-1f, -1f, 8f);
-        Difficulty[1, 1] = new Vector3(0f, -1f, 8f);
-        Difficulty[1, 2] = new Vector3(1f, -1f, 8f);
-        Difficulty[1, 3] = new Vector3(-1f, -1f, 7f);
-        Difficulty[1, 4] = new Vector3(0f, -1f, 7f);
-        Difficulty[1, 5] = new Vector3(1f, -1f, 7f);
-        Difficulty[1, 6] = new Vector3(-1f, -1f, 6f);
-        Difficulty[1, 7] = new Vector3(0f, -1f, 6f);
-        Difficulty[1, 8] = new Vector3(1f, -1f, 6f);
+        Difficulty[1, 0] = new Vector3(-1f, -2f, 8f);
+        Difficulty[1, 1] = new Vector3(0f, -2f, 8f);
+        Difficulty[1, 2] = new Vector3(1f, -2f, 8f);
+        Difficulty[1, 3] = new Vector3(-1f, -2f, 7f);
+        Difficulty[1, 4] = new Vector3(0f, -2f, 7f);
+        Difficulty[1, 5] = new Vector3(1f, -2f, 7f);
+        Difficulty[1, 6] = new Vector3(-1f, -2f, 6f);
+        Difficulty[1, 7] = new Vector3(0f, -2f, 6f);
+        Difficulty[1, 8] = new Vector3(1f, -2f, 6f);
 
-        Difficulty[2, 0]  = new Vector3(-1.5f, -1f, 8f);
-        Difficulty[2, 1]  = new Vector3(-0.5f, -1f, 8f);
-        Difficulty[2, 2]  = new Vector3(0.5f, -1f, 8f);
-        Difficulty[2, 3]  = new Vector3(1.5f, -1f, 8f);
-        Difficulty[2, 4]  = new Vector3(-1.5f, -1f, 7f);
-        Difficulty[2, 5]  = new Vector3(-0.5f, -1f, 7f);
-        Difficulty[2, 6]  = new Vector3(0.5f, -1f, 7f);
-        Difficulty[2, 7]  = new Vector3(1.5f, -1f, 7f);
-        Difficulty[2, 8]  = new Vector3(-1.5f, -1f, 6f);
-        Difficulty[2, 9]  = new Vector3(-0.5f, -1f, 6f);
-        Difficulty[2, 10] = new Vector3(0.5f, -1f, 6f);
-        Difficulty[2, 11] = new Vector3(1.5f, -1f, 6f);
-        Difficulty[2, 12] = new Vector3(-1.5f, -1f, 5f);
-        Difficulty[2, 13] = new Vector3(-0.5f, -1f, 5f);
-        Difficulty[2, 14] = new Vector3(0.5f, -1f, 5f);
-        Difficulty[2, 15] = new Vector3(1.5f, -1f, 5f);
+        Difficulty[2, 0]  = new Vector3(-1.5f, -2f, 8f);
+        Difficulty[2, 1]  = new Vector3(-0.5f, -2f, 8f);
+        Difficulty[2, 2]  = new Vector3(0.5f, -2f, 8f);
+        Difficulty[2, 3]  = new Vector3(1.5f, -2f, 8f);
+        Difficulty[2, 4]  = new Vector3(-1.5f, -2f, 7f);
+        Difficulty[2, 5]  = new Vector3(-0.5f, -2f, 7f);
+        Difficulty[2, 6]  = new Vector3(0.5f, -2f, 7f);
+        Difficulty[2, 7]  = new Vector3(1.5f, -2f, 7f);
+        Difficulty[2, 8]  = new Vector3(-1.5f, -2f, 6f);
+        Difficulty[2, 9]  = new Vector3(-0.5f, -2f, 6f);
+        Difficulty[2, 10] = new Vector3(0.5f, -2f, 6f);
+        Difficulty[2, 11] = new Vector3(1.5f, -2f, 6f);
+        Difficulty[2, 12] = new Vector3(-1.5f, -2f, 5f);
+        Difficulty[2, 13] = new Vector3(-0.5f, -2f, 5f);
+        Difficulty[2, 14] = new Vector3(0.5f, -2f, 5f);
+        Difficulty[2, 15] = new Vector3(1.5f, -2f, 5f);
     }
 
     public void On_Off(int number)
@@ -212,13 +217,14 @@ public class Button_Event2 : MonoBehaviour {
 
     public void CreateBlock(int number)
     {
+        
         for(int i = 0; i < number*number; i++)
         {
             if (Ans[i] <= 0)
                 continue;
 
             Vector3 temp = Difficulty[number - 2, i];
-            print(Difficulty[number - 2, i]);
+           
             for (int k = 0; k < Ans[i]; k++)
             {
                 
@@ -246,9 +252,6 @@ public class Button_Event2 : MonoBehaviour {
                 temp.y += 1;
             }
         }
-
-        problem = 0;
-
     }
 
     public void Problem_Check(int number)
@@ -265,6 +268,8 @@ public class Button_Event2 : MonoBehaviour {
 
     public void Difficulty_Check(int number)
     {
+        Dif = temp = number;
+
         for (int i = 4; i < 7; i++)
         {
             Button[i].SetActive(false);
@@ -277,8 +282,173 @@ public class Button_Event2 : MonoBehaviour {
 
         Button[1].SetActive(true);
         Button[3].SetActive(true);
+        Button[9].SetActive(true);
     }
 
+    public void Change_Appear(int number, bool ok)
+    {
+        if(ok)
+        {
+            switch (Dif)
+            {
+                case 2:
+                    Easy_Ans[number].SetActive(true);
+                    break;
+                case 3:
+                    Middle_Ans[number].SetActive(true);
+                    break;
+                case 4:
+                    Hard_Ans[number].SetActive(true);
+                    break;
+            }
+        }
+
+        else
+        {
+            switch (Dif)
+            {
+                case 2:
+                    Easy_Ans[number].SetActive(false);
+                    break;
+                case 3:
+                    Middle_Ans[number].SetActive(false);
+                    break;
+                case 4:
+                    Hard_Ans[number].SetActive(false);
+                    break;
+            }
+        }
+    }
+
+    public void Answer()
+    {
+        if (problem == 1) // 블록 갯수 맞추기
+        {
+
+        }
+
+        else if (problem == 2) // 블록 똑같이 쌓기
+        {
+
+            for (int i = 0; i < Dif * Dif; i++)
+            {
+                Change_Appear(i, true);
+            }
+
+            for (int i = 0; i < Block_Number; i++)
+                Block[i].SetActive(false);
+
+            Button[1].SetActive(false);
+            Button[3].SetActive(false);
+            Button[9].SetActive(false);
+            Button[10].SetActive(true);
+        }
+    }
+    public void Check_Ans()
+    {
+        int num = 0;
+
+        for(int i = 0; i < Dif * Dif; i++)
+        {
+            if (Ans[i] == Select[i])
+                num++;
+
+            Ans[i] = Select[i] = 0;
+        }
+
+        if (num == Dif * Dif)
+            print("ok");
+        else
+            print("false");
+
+        for (int i = 0; i < Block_Number; i++)
+            Destroy(Block[i]);
+
+        problem = Block_Number = Dif = 0;
+
+        for (int i = 0; i < 3; i++)
+            Button[i].SetActive(true);
+    }
+    public void Change_Color_BLock(int number)
+    {
+        switch (Dif)
+        {
+            case 2:
+                Easy_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(0, 0, 0);
+                break;
+            case 3:
+                Middle_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(0, 0, 0);
+                break;
+            case 4:
+                Hard_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(0, 0, 0);
+                break;
+        }
+    }
+
+    public void Change_Color_White(int number)
+    {
+        switch (Dif)
+        {
+            case 2:
+                Easy_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
+                break;
+            case 3:
+                Middle_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
+                break;
+            case 4:
+                Hard_Ans[number].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
+                break;
+        }
+    }
+
+    public void ClickLocation(int number)
+    {
+        if (Select[number] == count)
+        {
+            Change_Color_BLock(number);
+            Select[number] += 1;
+        }
+        else if (Select[number] == count + 1)
+        {
+            Change_Color_White(number);
+            Select[number] -= 1;
+        }
+    }
+
+    public void Next()
+    {
+        temp--;
+
+        if (temp > 0)
+        {
+            for (int i = 0; i < Dif*Dif; i++)
+            {
+                if (Select[i] == count)
+                {
+                    Change_Appear(i, false);
+                }
+                else
+                    Change_Color_White(i);
+            }
+            count++;
+        }
+
+        else
+        {
+            for (int i = 0; i < Dif * Dif; i++)
+            {
+                Change_Color_White(i);
+            }
+            for (int i = 0; i < Dif*Dif; i++)
+                Change_Appear(i, false);
+
+
+            count = 0;
+            Button[10].SetActive(false);
+
+            Check_Ans();
+        }
+    }
 
     public void Solving_Problems()
     {

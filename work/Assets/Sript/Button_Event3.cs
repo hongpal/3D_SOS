@@ -14,26 +14,26 @@ public class Button_Event3 : MonoBehaviour{
 
     public void Start()
     {
-        v[0] = new Vector3(-2, -1, 8);
-        v[1] = new Vector3(-1, -1, 8);
-        v[2] = new Vector3(0, -1, 8);
-        v[3] = new Vector3(1, -1, 8);
-        v[4] = new Vector3(2, -1, 8);
-        v[5] = new Vector3(-2, -1, 7);
-        v[6] = new Vector3(-1, -1, 7);
-        v[7] = new Vector3(0, -1, 7);
-        v[8] = new Vector3(1, -1, 7);
-        v[9] = new Vector3(2, -1, 7);
-        v[10] = new Vector3(-2, -1, 6);
-        v[11] = new Vector3(-1, -1, 6);
-        v[12] = new Vector3(0, -1, 6);
-        v[13] = new Vector3(1, -1, 6);
-        v[14] = new Vector3(2, -1, 6);
-        v[15] = new Vector3(-2, -1, 5);
-        v[16] = new Vector3(-1, -1, 5);
-        v[17] = new Vector3(0, -1, 5);
-        v[18] = new Vector3(1, -1, 5);
-        v[19] = new Vector3(2, -1, 5);
+        v[0] = new Vector3(-2, -2, 8);
+        v[1] = new Vector3(-1, -2, 8);
+        v[2] = new Vector3(0, -2, 8);
+        v[3] = new Vector3(1, -2, 8);
+        v[4] = new Vector3(2, -2, 8);
+        v[5] = new Vector3(-2, -2, 7);
+        v[6] = new Vector3(-1, -2, 7);
+        v[7] = new Vector3(0, -2, 7);
+        v[8] = new Vector3(1, -2, 7);
+        v[9] = new Vector3(2, -2, 7);
+        v[10] = new Vector3(-2, -2, 6);
+        v[11] = new Vector3(-1, -2, 6);
+        v[12] = new Vector3(0, -2, 6);
+        v[13] = new Vector3(1, -2, 6);
+        v[14] = new Vector3(2, -2, 6);
+        v[15] = new Vector3(-2, -2, 5);
+        v[16] = new Vector3(-1, -2, 5);
+        v[17] = new Vector3(0, -2, 5);
+        v[18] = new Vector3(1, -2, 5);
+        v[19] = new Vector3(2, -2, 5);
     }
 
     //블록 쌓기를 눌렀을 경우 
@@ -74,7 +74,7 @@ public class Button_Event3 : MonoBehaviour{
                 for(int k = 0; k < FloorArr[i]; k++)
                 {
                     temp[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    temp[Block_Number++].transform.position = tempV;
+                    temp[Block_Number].transform.position = tempV;
                     int n = Random.Range(0, 5);
                     switch (n)
                     {
