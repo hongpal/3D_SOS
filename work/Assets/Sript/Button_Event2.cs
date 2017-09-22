@@ -12,6 +12,7 @@ public class Button_Event2 : MonoBehaviour {
     private Vector3[,] Difficulty = new Vector3[3, 16];
     private int[] Ans   = new int[16];
     private int[] Select = new int[16];
+    private string text;
     private int temp = 0;
     private int count = 0;
     private int problem = 0;
@@ -55,6 +56,8 @@ public class Button_Event2 : MonoBehaviour {
 
     public void On_Off(int number)
     {
+        Button[9].SetActive(false);
+
         if(Block_Number != 0)
         {
             for(int i = 0; i < Block_Number; i++)
@@ -230,6 +233,7 @@ public class Button_Event2 : MonoBehaviour {
                 
                 Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Block[Block_Number].transform.position = temp;
+                
                 int n = Random.Range(0, 5);
                 switch (n)
                 {
@@ -268,15 +272,22 @@ public class Button_Event2 : MonoBehaviour {
 
     public void Difficulty_Check(int number)
     {
+        int sum = 0;
         Dif = temp = number;
 
         for (int i = 4; i < 7; i++)
         {
             Button[i].SetActive(false);
         }
-
-        for (int i = 0; i < number*number; i++)
-            Ans[i] = Random.Range(0, number+1);
+        
+        while(sum == 0)
+        {
+            for (int i = 0; i < number * number; i++)
+            {
+                Ans[i] = Random.Range(0, number + 1);
+                sum += Ans[i];
+            }
+        }
 
         CreateBlock(number);
 
@@ -320,27 +331,35 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
 
+    public void OnGUI()
+    {
+        text = GUI.TextArea(new Rect(25, 180, 100, 40), text);
+
+        print(text);
+    }
     public void Answer()
     {
+        TimeCheck.time = 30f;
+
+        for (int i = 0; i < Block_Number; i++)
+            Block[i].SetActive(false);
+
+        Button[1].SetActive(false);
+        Button[3].SetActive(false);
+        Button[9].SetActive(false);
+
         if (problem == 1) // 블록 갯수 맞추기
         {
-
+            OnGUI();
         }
 
         else if (problem == 2) // 블록 똑같이 쌓기
         {
-
             for (int i = 0; i < Dif * Dif; i++)
             {
                 Change_Appear(i, true);
             }
 
-            for (int i = 0; i < Block_Number; i++)
-                Block[i].SetActive(false);
-
-            Button[1].SetActive(false);
-            Button[3].SetActive(false);
-            Button[9].SetActive(false);
             Button[10].SetActive(true);
         }
     }
@@ -369,6 +388,7 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(true);
     }
+
     public void Change_Color_BLock(int number)
     {
         switch (Dif)

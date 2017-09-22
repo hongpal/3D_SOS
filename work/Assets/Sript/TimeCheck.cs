@@ -18,7 +18,9 @@ public class TimeCheck : MonoBehaviour {
         {
             time -= Time.deltaTime;
             if (time <= 0)
-                time = 0;
+            {   
+                GameObject.Find("Sin-2").GetComponent<Button_Event2>().Answer();
+            }
         }
 
         int t = Mathf.FloorToInt(time);
