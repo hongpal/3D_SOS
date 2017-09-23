@@ -12,12 +12,13 @@ public class Button_Event2 : MonoBehaviour {
     private Vector3[,] Difficulty = new Vector3[3, 16];
     private int[] Ans   = new int[16];
     private int[] Select = new int[16];
-    private string text;
+    private string text ="Input Number";
     private int temp = 0;
     private int count = 0;
     private int problem = 0;
     private int Block_Number = 0;
     private int Dif = 0;
+    private bool is_Ans = false;
 
     public void Start()
     {
@@ -331,12 +332,6 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
 
-    public void OnGUI()
-    {
-        text = GUI.TextArea(new Rect(25, 180, 100, 40), text);
-
-        print(text);
-    }
     public void Answer()
     {
         TimeCheck.time = 30f;
@@ -350,7 +345,7 @@ public class Button_Event2 : MonoBehaviour {
 
         if (problem == 1) // 블록 갯수 맞추기
         {
-            OnGUI();
+            is_Ans = true;
         }
 
         else if (problem == 2) // 블록 똑같이 쌓기
@@ -468,6 +463,21 @@ public class Button_Event2 : MonoBehaviour {
 
             Check_Ans();
         }
+    }
+
+    public string stringToEdit = "Hello World";
+    private TouchScreenKeyboard keyboard;
+    void OnGUI()
+    {
+        stringToEdit = GUI.TextField(new Rect(10, 10, 200, 30), stringToEdit, 30);
+        if (GUI.Button(new Rect(10, 50, 200, 100), "Default"))
+        {
+            keyboard = TouchScreenKeyboard.Open("Cube", TouchScreenKeyboardType.Default, false, false, false, false);
+            print(keyboard.active);
+            if (keyboard == null)
+            print("asd");
+        }
+
     }
 
     public void Solving_Problems()
