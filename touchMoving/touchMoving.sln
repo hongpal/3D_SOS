@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "touchMoving", "Assembly-CSharp.csproj", "{3A97F12F-A84D-487B-D8B2-CF79875D0825}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "touchMoving", "Assembly-CSharp-Editor.csproj", "{620D49DD-D8BF-0F23-10DE-D093EE021646}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{3A97F12F-A84D-487B-D8B2-CF79875D0825}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A97F12F-A84D-487B-D8B2-CF79875D0825}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A97F12F-A84D-487B-D8B2-CF79875D0825}.Release|Any CPU.Build.0 = Release|Any CPU
+		{620D49DD-D8BF-0F23-10DE-D093EE021646}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{620D49DD-D8BF-0F23-10DE-D093EE021646}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{620D49DD-D8BF-0F23-10DE-D093EE021646}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{620D49DD-D8BF-0F23-10DE-D093EE021646}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
