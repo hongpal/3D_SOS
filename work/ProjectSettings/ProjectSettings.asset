@@ -140,7 +140,8 @@ PlayerSettings:
   useHDRDisplay: 0
   targetPixelDensity: 0
   resolutionScalingMode: 0
-  applicationIdentifier: {}
+  applicationIdentifier:
+    Android: com.Company.hongpal
   buildNumber: {}
   AndroidBundleVersionCode: 1
   AndroidMinSdkVersion: 16
@@ -594,9 +595,9 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: c3c9d01d-9bfa-4ed7-9b74-b79299b9110f
-  projectName: 3D_SOS (4)
-  organizationId: hongpal
+  cloudProjectId: a9c87a10-e5e4-4cf0-83bb-4da5bfb9377d
+  projectName: 3D_SOS
+  organizationId: jaragun2
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

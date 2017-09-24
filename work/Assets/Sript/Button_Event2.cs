@@ -4,12 +4,15 @@ using UnityEngine.UI;
 using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
+
     public GameObject[] Button = new GameObject[11];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
     private GameObject[] Block = new GameObject[16 * 4];
     private Vector3[,] Difficulty = new Vector3[3, 16];
+    private TouchScreenKeyboard keyboard;
+    public string stringToEdit = "";
     private int[] Ans   = new int[16];
     private int[] Select = new int[16];
     private string text ="Input Number";
@@ -18,6 +21,7 @@ public class Button_Event2 : MonoBehaviour {
     private int problem = 0;
     private int Block_Number = 0;
     private int Dif = 0;
+    private int sum = 0;
     private bool is_Ans = false;
 
     public void Start()
@@ -74,7 +78,7 @@ public class Button_Event2 : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
-
+            zoomInAndOut.ok = false;
             return;
         }
 
@@ -84,6 +88,7 @@ public class Button_Event2 : MonoBehaviour {
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+            zoomInAndOut.ok = false;
         }
 
         else 
@@ -295,6 +300,7 @@ public class Button_Event2 : MonoBehaviour {
         Button[1].SetActive(true);
         Button[3].SetActive(true);
         Button[9].SetActive(true);
+        zoomInAndOut.ok = true;
     }
 
     public void Change_Appear(int number, bool ok)
@@ -345,6 +351,8 @@ public class Button_Event2 : MonoBehaviour {
 
         if (problem == 1) // 블록 갯수 맞추기
         {
+            for (int i = 0; i < Dif * Dif; i++)
+                sum += Ans[i];
             is_Ans = true;
         }
 
@@ -358,22 +366,38 @@ public class Button_Event2 : MonoBehaviour {
             Button[10].SetActive(true);
         }
     }
+
     public void Check_Ans()
     {
         int num = 0;
 
-        for(int i = 0; i < Dif * Dif; i++)
+        if (sum != 0)
         {
-            if (Ans[i] == Select[i])
-                num++;
+            num = int.Parse(stringToEdit);
 
-            Ans[i] = Select[i] = 0;
+            if(num == sum)
+                Button[4].SetActive(true);
+            else
+                Button[5].SetActive(true);
+
+            sum = 0;
         }
 
-        if (num == Dif * Dif)
-            print("ok");
         else
-            print("false");
+        {
+            for (int i = 0; i < Dif * Dif; i++)
+            {
+                if (Ans[i] == Select[i])
+                    num++;
+
+                Ans[i] = Select[i] = 0;
+            }
+
+            if (num == Dif * Dif)
+                print("ok");
+            else
+                print("false");
+        }
 
         for (int i = 0; i < Block_Number; i++)
             Destroy(Block[i]);
@@ -464,20 +488,29 @@ public class Button_Event2 : MonoBehaviour {
             Check_Ans();
         }
     }
-
-    public string stringToEdit = "Hello World";
-    private TouchScreenKeyboard keyboard;
+ 
     void OnGUI()
     {
-        stringToEdit = GUI.TextField(new Rect(10, 10, 200, 30), stringToEdit, 30);
-        if (GUI.Button(new Rect(10, 50, 200, 100), "Default"))
+        if (is_Ans)
         {
-            keyboard = TouchScreenKeyboard.Open("Cube", TouchScreenKeyboardType.Default, false, false, false, false);
-            print(keyboard.active);
-            if (keyboard == null)
-            print("asd");
+            stringToEdit = "";
+            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation);
+            
+            is_Ans = false;
         }
 
+        if (keyboard.done)
+        {
+            stringToEdit = keyboard.text;
+            is_Ans = false;
+
+            Check_Ans();
+        }
+
+        else
+        {
+            stringToEdit = keyboard.text;
+        }
     }
 
     public void Solving_Problems()

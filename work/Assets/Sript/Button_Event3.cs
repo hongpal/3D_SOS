@@ -113,7 +113,7 @@ public class Button_Event3 : MonoBehaviour{
         floor = count = Block_Number = 0;
 
         BlockButton[20].SetActive(false);
-
+        zoomInAndOut.ok = false;
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
 
     }
@@ -157,12 +157,14 @@ public class Button_Event3 : MonoBehaviour{
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+            zoomInAndOut.ok = false;
         }
  
         else
         {
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(true);
+            zoomInAndOut.ok = true;
         }
     }
 }

@@ -35,7 +35,7 @@ public class Button_Event : MonoBehaviour {
     public void ClickEvent(int number)
     {
         figureNumber = number;
-
+        zoomInAndOut.ok = true;
         if (ObjectArr[number].activeSelf == false)
         {
             if (pastObject.activeSelf == true)
@@ -87,7 +87,7 @@ public class Button_Event : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 ObjectArr[i].SetActive(false);
-
+            zoomInAndOut.ok = false;
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
         }
 
