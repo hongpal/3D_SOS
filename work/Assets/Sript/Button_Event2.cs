@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[11];
+    public GameObject[] Button = new GameObject[13];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
@@ -62,6 +62,7 @@ public class Button_Event2 : MonoBehaviour {
     public void On_Off(int number)
     {
         Button[9].SetActive(false);
+        Button[12].SetActive(false);
 
         if(Block_Number != 0)
         {
@@ -79,6 +80,10 @@ public class Button_Event2 : MonoBehaviour {
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
             zoomInAndOut.ok = false;
+
+            for (int i = 0; i < Dif * Dif; i++)
+                Ans[i] = Select[i] = 0;
+
             return;
         }
 
@@ -367,6 +372,40 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
 
+    public void Correct()
+    {
+        for (int i = 0; i < Block_Number; i++)
+            Destroy(Block[i]);
+
+        for(int i = 0; i < Dif *Dif; i++)
+            Ans[i] = Select[i] = 0;
+
+        sum = problem = Block_Number = Dif = 0;
+
+        for (int i = 0; i < 3; i++)
+            Button[i].SetActive(true);
+
+        
+        Button[11].SetActive(false);
+    }
+
+    public void Wrong()
+    {
+        TimeCheck.time = 30f;
+
+        for (int i = 0; i < Block_Number; i++)
+            Block[i].SetActive(true);
+
+        Button[1].SetActive(true);
+        Button[3].SetActive(true);
+        Button[9].SetActive(true);
+
+        Button[12].SetActive(false);
+
+        for(int i = 0; i < Dif*Dif; i++)
+            Select[i] = 0;
+    }
+
     public void Check_Ans()
     {
         int num = 0;
@@ -375,12 +414,13 @@ public class Button_Event2 : MonoBehaviour {
         {
             num = int.Parse(stringToEdit);
 
-            if(num == sum)
-                Button[4].SetActive(true);
-            else
-                Button[5].SetActive(true);
-
-            sum = 0;
+            if (num == sum) // 정답
+                Button[11].SetActive(true);
+            else  // 틀림
+            {
+                Button[1].SetActive(true);
+                Button[12].SetActive(true);
+            }
         }
 
         else
@@ -389,23 +429,17 @@ public class Button_Event2 : MonoBehaviour {
             {
                 if (Ans[i] == Select[i])
                     num++;
-
-                Ans[i] = Select[i] = 0;
             }
 
             if (num == Dif * Dif)
-                print("ok");
+                Button[11].SetActive(true);
             else
-                print("false");
+            {
+                Button[1].SetActive(true);
+                Button[12].SetActive(true);
+            }
         }
 
-        for (int i = 0; i < Block_Number; i++)
-            Destroy(Block[i]);
-
-        problem = Block_Number = Dif = 0;
-
-        for (int i = 0; i < 3; i++)
-            Button[i].SetActive(true);
     }
 
     public void Change_Color_BLock(int number)
@@ -484,14 +518,14 @@ public class Button_Event2 : MonoBehaviour {
 
             count = 0;
             Button[10].SetActive(false);
-
+            temp = Dif;
             Check_Ans();
         }
     }
  
     void OnGUI()
     {
-        if (is_Ans)
+      /*  if (is_Ans)
         {
             stringToEdit = "";
             keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation);
@@ -510,7 +544,7 @@ public class Button_Event2 : MonoBehaviour {
         else
         {
             stringToEdit = keyboard.text;
-        }
+        }*/
     }
 
     public void Solving_Problems()

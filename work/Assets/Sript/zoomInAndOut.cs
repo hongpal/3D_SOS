@@ -6,7 +6,7 @@ public class zoomInAndOut : MonoBehaviour
 {
     private string touchStatus; // 손가락 상태
     private float initTouchDistance; // 두 손가락 거리
-    private Vector3 pivot = new Vector3(0, 1, -10); // 화면이동시 중심점  
+    private Vector3 pivot = new Vector3(0, 0, 6); // 화면이동시 중심점  
     private Vector2 startPosition; // 손가락 시작 좌표
     public float horizontalSpeed = 360.0F;
     public float verticalSpeed = 120.0F;

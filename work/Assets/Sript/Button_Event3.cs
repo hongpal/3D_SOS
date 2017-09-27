@@ -113,7 +113,15 @@ public class Button_Event3 : MonoBehaviour{
         floor = count = Block_Number = 0;
 
         BlockButton[20].SetActive(false);
+        BlockButton[21].SetActive(false);
         zoomInAndOut.ok = false;
+
+        for (int i = 0; i < 20; i++)
+        {
+            BlockButton[i].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
+            BlockButton[i].SetActive(false);
+        }
+
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
 
     }
