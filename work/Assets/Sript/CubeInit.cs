@@ -27,10 +27,20 @@ public class CubeInit : MonoBehaviour {
                 ani["Cube-" + number].normalizedTime = 0f;
                 ani["Cube-" + number].speed = 1.0f;
                 ani.Play("Cube-" + number);
-                if (number == 4)
+                switch (number)
                 {
-                    ani = Cube[number].GetComponent<Animation>();
-                    ani.Play("Cube-5-4");
+                    case 3:
+                        ani = Cube[number+2].GetComponent<Animation>();
+                        ani["Cube-6-3"].normalizedTime = 0f;
+                        ani["Cube-6-3"].speed = 1.0f;
+                        ani.Play("Cube-6-3");
+                        break;
+                    case 4:
+                        ani = Cube[number].GetComponent<Animation>();
+                        ani["Cube-5-4"].normalizedTime = 0f;
+                        ani["Cube-5-4"].speed = 1.0f;
+                        ani.Play("Cube-5-4");
+                        break;
                 }
                 break;
         }
@@ -48,6 +58,21 @@ public class CubeInit : MonoBehaviour {
                 ani["Cube-" + (number+1)].normalizedTime = 1f;
                 ani["Cube-" + (number+1)].speed = -1.0f;
                 ani.Play("Cube-" + (number+1));
+                switch (number)
+                {
+                    case 2:
+                        ani = Cube[number + 3].GetComponent<Animation>();
+                        ani["Cube-6-3"].normalizedTime = 1f;
+                        ani["Cube-6-3"].speed = -1.0f;
+                        ani.Play("Cube-6-3");
+                        break;
+                    case 3:
+                        ani = Cube[number+1].GetComponent<Animation>();
+                        ani["Cube-5-4"].normalizedTime = 1f;
+                        ani["Cube-5-4"].speed = -1.0f;
+                        ani.Play("Cube-5-4");
+                        break;
+                }
                 break;
         }
 
