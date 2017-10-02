@@ -16,5 +16,41 @@ public class CubeInit : MonoBehaviour {
             StartCubeLocation[i] = v;
         }
     }
-	
+
+    public int Fold(int number, int figurenumber)
+    {
+        
+        switch(figurenumber)
+        {
+            case 0:
+                Animation ani = Cube[number-1].GetComponent<Animation>();
+                ani["Cube-" + number].normalizedTime = 0f;
+                ani["Cube-" + number].speed = 1.0f;
+                ani.Play("Cube-" + number);
+                if (number == 4)
+                {
+                    ani = Cube[number].GetComponent<Animation>();
+                    ani.Play("Cube-5-4");
+                }
+                break;
+        }
+        
+        return --number;
+    }
+
+    public int UnFold(int number, int figurenumber)
+    {
+        print(number);
+        switch (figurenumber)
+        {
+            case 0:
+                Animation ani = Cube[number].GetComponent<Animation>();
+                ani["Cube-" + (number+1)].normalizedTime = 1f;
+                ani["Cube-" + (number+1)].speed = -1.0f;
+                ani.Play("Cube-" + (number+1));
+                break;
+        }
+
+        return ++number;
+    }
 }

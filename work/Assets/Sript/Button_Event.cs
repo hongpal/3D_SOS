@@ -9,10 +9,9 @@ public class Button_Event : MonoBehaviour {
     public static GameObject[] ObjectArr = new GameObject[3];
     public GameObject[] SinObject_1 = new GameObject[6]; //이 캔버스에 있는 버튼 배열
     public bool[] isChange = new bool[3]; // 전개도인 상태 : false 도형 상태 : true
-    public Vector3[] StartCubeLocation = new Vector3[6];
-    
+    public Vector3[] StartCubeLocation = new Vector3[6];    
     public static int figureNumber = -1;
-    
+    public int Cube_Number = 6;
 
     public void Start()
     {
@@ -52,18 +51,43 @@ public class Button_Event : MonoBehaviour {
         pastObject = ObjectArr[number];
     }
 
-    public void CubeChange()
+    public void CubeChange(bool is_Fold)
     {
-        //this.GetComponent<Animation>().Play("CubeFold-1");
+        if (is_Fold)
+        {
+            Cube_Number = GameObject.Find("Figure/Plane").GetComponent<CubeInit>().Fold(Cube_Number, figureNumber);
+        }
+        else
+        {
+            Cube_Number = GameObject.Find("Figure/Plane").GetComponent<CubeInit>().UnFold(Cube_Number, figureNumber);
+        }
     }
 
-    public void Change()
+    public void Fold()
     {
-        print(figureNumber);
         switch (figureNumber)
         {
             case 0:
-                CubeChange();
+                CubeChange(true);
+                break;
+            case 1:
+                print("a");
+                break;
+            case 2:
+                print("s");
+                break;
+            default:
+                print("bobo");
+                break;
+        }
+    }
+
+    public void UnFold()
+    {
+        switch (figureNumber)
+        {
+            case 0:
+                CubeChange(false);
                 break;
             case 1:
                 print("a");
