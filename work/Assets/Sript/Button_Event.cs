@@ -18,11 +18,12 @@ public class Button_Event : MonoBehaviour {
         Vector3 v = new Vector3(0, 0, 5);
         
         ObjectArr[0] = GameObject.Find("Figure/Plane");
-        ObjectArr[1] = GameObject.Find("Figure/Sphere");
-        ObjectArr[2] = GameObject.Find("Figure/Capsule");
+        ObjectArr[1] = GameObject.Find("Figure/Triangle");
+        ObjectArr[2] = GameObject.Find("Figure/Triangle");
 
         for (int i = 0; i < 3; i++)
         {
+            print(i);
             ObjectArr[i].SetActive(false);
             ObjectArr[i].transform.position = v;
             isChange[i] = false;

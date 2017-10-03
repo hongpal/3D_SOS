@@ -29,6 +29,12 @@ public class CubeInit : MonoBehaviour {
                 ani.Play("Cube-" + number);
                 switch (number)
                 {
+                    case 2:
+                        ani = Cube[number+1].GetComponent<Animation>();
+                        ani["Cube-4-2"].normalizedTime = 0f;
+                        ani["Cube-4-2"].speed = 1.0f;
+                        ani.Play("Cube-4-2");
+                        break;
                     case 3:
                         ani = Cube[number+2].GetComponent<Animation>();
                         ani["Cube-6-3"].normalizedTime = 0f;
