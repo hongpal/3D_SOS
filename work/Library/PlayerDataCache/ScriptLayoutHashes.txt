@@ -191,3 +191,5 @@ e7cecaedb57da7aa2da2ecf128a29c40 Assembly-CSharp.dll:.GA_FREE_Demo03
 e1b523733e31491ecb16527c7582e72c Assembly-UnityScript.dll:.GA_FREE_JS_Demo01
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
 42057599834e76900d0987379e4fa2cd Assembly-CSharp.dll:.GA_FREE_Demo06
+e1fbc334361ef697b0add91c069378ae Assembly-CSharp.dll:.Cardboard
+b7797416cbcf117e668abd95ec922572 Assembly-CSharp.dll:.CardboardHead
