@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/touchZoomInOut.unity
+- path: Assets/Cardboard/Legacy/DemoScene/DemoScene.unity
   isLoaded: 1
   isActive: 1
