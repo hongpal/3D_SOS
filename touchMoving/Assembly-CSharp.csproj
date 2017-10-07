@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LangVersion>4</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <RootNamespace></RootNamespace>
+    <ProjectGuid>{3A97F12F-A84D-487B-D8B2-CF79875D0825}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <BaseDirectory>Assets</BaseDirectory>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Temp\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;UNITY_5_3_OR_NEWER;UNITY_5_4_OR_NEWER;UNITY_5_5_OR_NEWER;UNITY_5_6_OR_NEWER;UNITY_2017_1_OR_NEWER;UNITY_2017_1_1;UNITY_2017_1;UNITY_2017;UNITY_ANALYTICS;ENABLE_AUDIO;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_GENERICS;ENABLE_PVR_GI;ENABLE_MICROPHONE;ENABLE_MULTIPLE_DISPLAYS;ENABLE_PHYSICS;ENABLE_RUNTIME_NAVMESH_BUILDING;ENABLE_SPRITERENDERER_FLIPPING;ENABLE_SPRITES;ENABLE_TERRAIN;ENABLE_RAKNET;ENABLE_DIRECTOR;ENABLE_UNET;ENABLE_LZMA;ENABLE_UNITYEVENTS;ENABLE_WEBCAM;ENABLE_WWW;ENABLE_CLOUD_SERVICES_COLLAB;ENABLE_CLOUD_SERVICES_COLLAB_SOFTLOCKS;ENABLE_CLOUD_SERVICES_ADS;ENABLE_CLOUD_HUB;ENABLE_CLOUD_PROJECT_ID;ENABLE_CLOUD_SERVICES_USE_WEBREQUEST;ENABLE_CLOUD_SERVICES_UNET;ENABLE_CLOUD_SERVICES_BUILD;ENABLE_CLOUD_LICENSE;ENABLE_WEBSOCKET_CLIENT;ENABLE_DIRECTOR_AUDIO;ENABLE_TIMELINE;ENABLE_EDITOR_METRICS;ENABLE_EDITOR_METRICS_CACHING;ENABLE_NATIVE_ARRAY;ENABLE_SPRITE_MASKING;INCLUDE_DYNAMIC_GI;INCLUDE_GI;ENABLE_MONO_BDWGC;PLATFORM_SUPPORTS_MONO;INCLUDE_PUBNUB;ENABLE_PLAYMODE_TESTS_RUNNER;ENABLE_VIDEO;ENABLE_RMGUI;ENABLE_CUSTOM_RENDER_TEXTURE;ENABLE_STYLE_SHEETS;PLATFORM_ANDROID;UNITY_ANDROID;UNITY_ANDROID_API;ENABLE_SUBSTANCE;ENABLE_EGL;ENABLE_NETWORK;ENABLE_RUNTIME_GI;ENABLE_CRUNCH_TEXTURE_COMPRESSION;ENABLE_UNITYWEBREQUEST;ENABLE_CLOUD_SERVICES;ENABLE_CLOUD_SERVICES_ANALYTICS;ENABLE_CLOUD_SERVICES_PURCHASING;ENABLE_CLOUD_SERVICES_CRASH_REPORTING;PLATFORM_SUPPORTS_ADS_ID;UNITY_CAN_SHOW_SPLASH_SCREEN;ENABLE_VR;ENABLE_UNITYADS_RUNTIME;UNITY_UNITYADS_API;ENABLE_MONO;NET_2_0_SUBSET;ENABLE_PROFILER;UNITY_ASSERTIONS;UNITY_EDITOR;UNITY_EDITOR_64;UNITY_EDITOR_WIN;ENABLE_NATIVE_ARRAY_CHECKS;UNITY_TEAM_LICENSE;UNITY_HAS_GOOGLEVR</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Temp\bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <NoWarn>0169</NoWarn>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="UnityEngine">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor">
+      <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Button\Scripts\ActiveStateToggler.cs" />
+     <Compile Include="Assets\Button\Scripts\ApplicationManager.cs" />
+     <Compile Include="Assets\Button\Scripts\ChangeColor.cs" />
+     <Compile Include="Assets\Button\Scripts\DragMe.cs" />
+     <Compile Include="Assets\Button\Scripts\DragPanel.cs" />
+     <Compile Include="Assets\Button\Scripts\DropMe.cs" />
+     <Compile Include="Assets\Button\Scripts\PanelManager.cs" />
+     <Compile Include="Assets\Button\Scripts\ResizePanel.cs" />
+     <Compile Include="Assets\Button\Scripts\ScrollDetailTexture.cs" />
+     <Compile Include="Assets\Button\Scripts\ShowSliderValue.cs" />
+     <Compile Include="Assets\Button\Scripts\TiltWindow.cs" />
+     <Compile Include="Assets\ButtonX\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
+     <Compile Include="Assets\ButtonX\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCameraUI.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\Scripts\FirstPersonController.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\Scripts\HeadBob.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\Scripts\RigidbodyFirstPersonController.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\RollerBall\Scripts\Ball.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\RollerBall\Scripts\BallUserControl.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\Scripts\AICharacterControl.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\Scripts\ThirdPersonCharacter.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\Scripts\ThirdPersonUserControl.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\AxisTouchButton.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\ButtonHandler.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\CameraSwitch.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\CrossPlatformInputManager.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\InputAxisScrollbar.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\Joystick.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\LevelReset.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\MobileControlRig.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\PlatformSpecific\MobileInput.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\TiltInput.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\TouchPad.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\VirtualInput.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Utility\CameraRefocus.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Utility\CurveControlledBob.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Utility\FOVKick.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Utility\LerpControlledBob.cs" />
+     <Compile Include="Assets\ButtonX\GE Common Assets\Scripts\GE_UIResponder.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo00.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo01.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo02.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo03.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo04.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo05.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo06.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo07.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_Demo08.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_DemoPlaySound.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo (CSharp)\Scripts\GA_FREE_OpenOtherScene.cs" />
+     <Compile Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Demo Basic (CSharp)\Scripts\GUIAnimatorFREEDemo.cs" />
+     <Compile Include="Assets\ButtonX\MakakaIconPack\Scripts\SampleControl.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\Classes\InteractivePrimitive.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\Classes\InteractivePrimitivesMath.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\Enum\InteractivePrimitiveEnum.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\MonoBehaviours\InteractiveCone.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\MonoBehaviours\InteractiveCube.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\MonoBehaviours\InteractiveCylinder.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\MonoBehaviours\InteractivePlane.cs" />
+     <Compile Include="Assets\ButtonX\Parabox Primitives\MonoBehaviours\InteractivePrism.cs" />
+     <Compile Include="Assets\ButtonX\primitives.v1\primitives_testscene\_resources\controller\MouseLook.cs" />
+     <Compile Include="Assets\ButtonX\primitives.v1\primitives_testscene\_resources\failscript.cs" />
+     <Compile Include="Assets\ButtonX\Sript\Button_Event.cs" />
+     <Compile Include="Assets\ButtonX\Sript\Button_Event2.cs" />
+     <Compile Include="Assets\ButtonX\Sript\Button_Event3.cs" />
+     <Compile Include="Assets\ButtonX\Sript\Cube.cs" />
+     <Compile Include="Assets\ButtonX\Sript\CubeInit.cs" />
+     <Compile Include="Assets\ButtonX\Sript\gyroScope.cs" />
+     <Compile Include="Assets\ButtonX\Sript\Menu_Event.cs" />
+     <Compile Include="Assets\ButtonX\Sript\test.cs" />
+     <Compile Include="Assets\ButtonX\Sript\TimeCheck.cs" />
+     <Compile Include="Assets\ButtonX\Sript\zoomInAndOut.cs" />
+     <None Include="Assets\ButtonX\MakakaIconPack\Fonts\Font_Read_Me.txt" />
+     <None Include="Assets\ButtonX\Fantasy Skybox FREE\Readme.txt" />
+     <None Include="Assets\Button\Fonts\Jupiter\LICENSE.txt" />
+     <None Include="Assets\ButtonX\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
+     <None Include="Assets\Button\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+     <None Include="Assets\ButtonX\primitives.v1\readme.txt" />
+     <None Include="Assets\Button\Materials\UI-Default-No-Alpha.shader" />
+     <None Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\Readme.txt" />
+     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />
+     <None Include="Assets\ButtonX\GE Common Assets\Readme.txt" />
+     <None Include="Assets\ButtonX\GUI Animator\GUI Animator FREE\!How to.txt" />
+     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
+     <None Include="Assets\ButtonX\Parabox Primitives\README.txt" />
+     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
+ <Reference Include="UnityEngine.UI">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Networking">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.TestRunner">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/UnityEngine.TestRunner.dll</HintPath>
+ </Reference>
+ <Reference Include="nunit.framework">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/TestRunner/net35/unity-custom/nunit.framework.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Timeline">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.HoloLens">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityHoloLens/RuntimeEditor/UnityEngine.HoloLens.dll</HintPath>
+ </Reference>
+ <Reference Include="GETween">
+ <HintPath>C:/Users/김수봉/Desktop/3DSOS/touchMoving/Assets/ButtonX/GUI Animator/Common/Plugins/GETween.dll</HintPath>
+ </Reference>
+ <Reference Include="GUIAnimatorFREE">
+ <HintPath>C:/Users/김수봉/Desktop/3DSOS/touchMoving/Assets/ButtonX/GUI Animator/GUI Animator FREE/Plugins/GUIAnimatorFREE.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  
+</Project>
