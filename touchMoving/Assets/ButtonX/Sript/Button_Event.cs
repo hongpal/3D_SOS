@@ -13,9 +13,15 @@ public class Button_Event : MonoBehaviour {
     public static int figureNumber = -1;
     public int Cube_Number = 6;
 
+
+    public void Awake()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Screen.SetResolution(Screen.width, Screen.width/8*5, true);
+    }
     public void Start()
     {
-        Vector3 v = new Vector3(0, 0, 5);
+        Vector3 v = new Vector3(-3.541f, 0, 4.385f);
         
         ObjectArr[0] = GameObject.Find("Figure/Plane");
         ObjectArr[1] = GameObject.Find("Figure/Triangle");
@@ -41,6 +47,12 @@ public class Button_Event : MonoBehaviour {
             if (pastObject.activeSelf == true)
                 pastObject.SetActive(false);
             ObjectArr[number].SetActive(true);
+
+            for (int i = 0; i < 3; i++)
+                SinObject_1[i].SetActive(false);
+
+            for (int i = 3; i < 6; i++)
+                SinObject_1[i].SetActive(true);
         }
 
         else
@@ -118,7 +130,7 @@ public class Button_Event : MonoBehaviour {
 
         else
         {
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 3; i++)
                 SinObject_1[i].SetActive(true);
         }
     }

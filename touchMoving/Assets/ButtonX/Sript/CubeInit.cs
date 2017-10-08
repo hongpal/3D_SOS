@@ -15,6 +15,7 @@ public class CubeInit : MonoBehaviour {
             Vector3 v = new Vector3(Cube[i].transform.position.x, Cube[i].transform.position.y, 5);
             StartCubeLocation[i] = v;
         }
+        
     }
 
     public int Fold(int number, int figurenumber)

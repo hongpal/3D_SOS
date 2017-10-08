@@ -153,7 +153,6 @@
     <Compile Include="Assets\ButtonX\Sript\Button_Event.cs" />
     <Compile Include="Assets\ButtonX\Sript\Button_Event2.cs" />
     <Compile Include="Assets\ButtonX\Sript\Button_Event3.cs" />
-    <Compile Include="Assets\ButtonX\Sript\Cube.cs" />
     <Compile Include="Assets\ButtonX\Sript\CubeInit.cs" />
     <Compile Include="Assets\ButtonX\Sript\gyroScope.cs" />
     <Compile Include="Assets\ButtonX\Sript\Menu_Event.cs" />
