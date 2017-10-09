@@ -6,14 +6,14 @@ public class zoomInAndOut : MonoBehaviour
 {
     private string touchStatus; // 손가락 상태
     private float initTouchDistance; // 두 손가락 거리
-    private Vector3 pivot = new Vector3(-3.541f, 0, 4.385f); // 화면이동시 중심점  
+    private Vector3 pivot = new Vector3(-5, 0, 0); // 화면이동시 중심점  
     private Vector2 startPosition; // 손가락 시작 좌표
     public float horizontalSpeed = 360.0F;
     public float verticalSpeed = 120.0F;
     private float x, y, distance = 0.0F;
-    public static bool ok = true;
+    public static bool ok = false;
     
-    Vector3 Locatino;
+    public Vector3 Locatino;
    
     // Use this for initialization
 
@@ -73,8 +73,8 @@ public class zoomInAndOut : MonoBehaviour
         }
         else
         {
-            this.transform.position = Locatino;
-            this.transform.rotation = Quaternion.identity;
+           // this.transform.position = Locatino;
+         //   this.transform.rotation = Quaternion.identity;
         }
        
 
@@ -84,6 +84,6 @@ public class zoomInAndOut : MonoBehaviour
     void OnGUI() //데이터 표시
     {
         Rect guiPosition = new Rect(0, 100, 100, 100);
-        GUI.Label(guiPosition, "TouchStatus : \n " + touchStatus);
+        GUI.Label(guiPosition, "TouchStatus : \n " + this.transform.position);
     }
 }

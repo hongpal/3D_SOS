@@ -6,9 +6,8 @@ public class Button_Event : MonoBehaviour {
 
     public GameObject pastObject;
     public GameObject nowObject;
-    public static GameObject[] ObjectArr = new GameObject[3];
-    public GameObject[] SinObject_1 = new GameObject[6]; //이 캔버스에 있는 버튼 배열
-    public bool[] isChange = new bool[3]; // 전개도인 상태 : false 도형 상태 : true
+    public static GameObject[] ObjectArr = new GameObject[7];
+    public GameObject[] SinObject_1 = new GameObject[3]; //이 캔버스에 있는 버튼 배열
     public Vector3[] StartCubeLocation = new Vector3[6];    
     public static int figureNumber = -1;
     public int Cube_Number = 6;
@@ -17,11 +16,12 @@ public class Button_Event : MonoBehaviour {
     public void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.SetResolution(Screen.width, Screen.width/8*5, true);
+        Screen.SetResolution(Screen.width, Screen.width * 1280 / 800, true);
     }
+
     public void Start()
     {
-        Vector3 v = new Vector3(-3.541f, 0, 4.385f);
+        Vector3 v = new Vector3(0, 0, 0);
         
         ObjectArr[0] = GameObject.Find("Figure/Plane");
         ObjectArr[1] = GameObject.Find("Figure/Triangle");
@@ -32,7 +32,7 @@ public class Button_Event : MonoBehaviour {
             print(i);
             ObjectArr[i].SetActive(false);
             ObjectArr[i].transform.position = v;
-            isChange[i] = false;
+
         }
 
         pastObject = ObjectArr[0];
@@ -53,12 +53,33 @@ public class Button_Event : MonoBehaviour {
 
             for (int i = 3; i < 6; i++)
                 SinObject_1[i].SetActive(true);
+            zoomInAndOut.ok = true;
+            
+
+            switch (figureNumber)
+            {
+                case 0:
+                    ObjectArr[figureNumber].transform.position = new Vector3(-5, 0, 0);
+                    SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
+                    //SinObject_1[6].transform.position = new Vector3(-0.1f, -0.1f, -0.8f);
+                    break;
+                case 1:
+                    print("a");
+                    break;
+                case 2:
+                    print("s");
+                    break;
+                default:
+                    print("bobo");
+                    break;
+            }
+
         }
 
         else
         {
             ObjectArr[number].SetActive(false);
-            figureNumber = -1;
         }
 
         pastObject = ObjectArr[number];
@@ -118,14 +139,36 @@ public class Button_Event : MonoBehaviour {
     {
         // number가 1일 경우 신 끄기 0일경우 신 켜기
         if(number == 1)
-        {
+        { 
+            switch (figureNumber)
+            {
+                case 0:
+                    for(int i = 1; i < 6; i++)
+                        GameObject.Find("Figure/Plane").GetComponent<CubeInit>().UnFold(i, 0);
+                    Cube_Number = 6;
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0, -100);
+                    break;
+                case 1:
+                    print("a");
+                    break;
+                case 2:
+                    print("s");
+                    break;
+                default:
+                    print("bobo");
+                    break;
+            }
+
+
             for (int i = 0; i < 6; i++)
                 SinObject_1[i].SetActive(false);
 
-            for (int i = 0; i < 3; i++)
-                ObjectArr[i].SetActive(false);
-           
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+            SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+            SinObject_1[6].transform.LookAt(new Vector3(0, 0, 5));
+
+            zoomInAndOut.ok = false;
+
         }
 
         else

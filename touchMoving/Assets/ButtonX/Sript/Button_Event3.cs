@@ -114,7 +114,7 @@ public class Button_Event3 : MonoBehaviour{
 
         BlockButton[20].SetActive(false);
         BlockButton[21].SetActive(false);
-        zoomInAndOut.ok = false;
+       // zoomInAndOut.ok = false;
 
         for (int i = 0; i < 20; i++)
         {
@@ -165,14 +165,14 @@ public class Button_Event3 : MonoBehaviour{
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
-            zoomInAndOut.ok = false;
+           // zoomInAndOut.ok = false;
         }
  
         else
         {
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(true);
-            zoomInAndOut.ok = true;
+           // zoomInAndOut.ok = true;
         }
     }
 }

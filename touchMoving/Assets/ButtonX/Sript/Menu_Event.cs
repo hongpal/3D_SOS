@@ -8,6 +8,8 @@ using UnityEngine.UI;
 */
 public class Menu_Event : MonoBehaviour {
     public GameObject[] Button = new GameObject[2];
+    public GameObject Cam;
+    public GameObject center;
 
     public void On_Off(int number)
     {
@@ -20,12 +22,15 @@ public class Menu_Event : MonoBehaviour {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-1").GetComponent<Button_Event>().On_Off(0);
+            Cam.transform.LookAt(center.transform);
+            zoomInAndOut.ok = true;
         }
         else if(number == 2)
         {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+            Cam.transform.LookAt(new Vector3(5, 0,6 ));
         }
         else
         {
