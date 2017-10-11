@@ -41,7 +41,7 @@ public class Button_Event : MonoBehaviour {
     public void ClickEvent(int number)
     {
         figureNumber = number;
-        
+        gyroScope.ok = false;
         if (ObjectArr[number].activeSelf == false)
         {
             if (pastObject.activeSelf == true)
@@ -61,11 +61,12 @@ public class Button_Event : MonoBehaviour {
                 case 0:
                     ObjectArr[figureNumber].transform.position = new Vector3(-5, 0, 0);
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+                    zoomInAndOut.pivot = new Vector3(-5, 0, 0);
                     SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
-                    //SinObject_1[6].transform.position = new Vector3(-0.1f, -0.1f, -0.8f);
                     break;
                 case 1:
-                    print("a");
+                    SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
                     break;
                 case 2:
                     print("s");
@@ -168,7 +169,7 @@ public class Button_Event : MonoBehaviour {
             SinObject_1[6].transform.LookAt(new Vector3(0, 0, 5));
 
             zoomInAndOut.ok = false;
-
+            gyroScope.ok = true;
         }
 
         else

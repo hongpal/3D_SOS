@@ -9,6 +9,7 @@ public class Button_Event2 : MonoBehaviour {
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
+    public GameObject Cam;
     private GameObject[] Block = new GameObject[16 * 4];
     private Vector3[,] Difficulty = new Vector3[3, 16];
     private TouchScreenKeyboard keyboard;
@@ -94,6 +95,8 @@ public class Button_Event2 : MonoBehaviour {
                 Button[i].SetActive(false);
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
             zoomInAndOut.ok = false;
+            gyroScope.ok = true;
+            Cam.transform.LookAt(new Vector3(0, 0, 5));
         }
 
         else 
@@ -110,6 +113,8 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(false);
         GameObject.Find("Sin-3").GetComponent<Button_Event3>().On_Off(0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        gyroScope.ok = false;
     }
 
     public void FrontCreate(Vector3 Scale, Vector3 Rotate, int[] Ans)
@@ -523,30 +528,6 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
  
-    void OnGUI()
-    {
-      /*  if (is_Ans)
-        {
-            stringToEdit = "";
-            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation);
-            
-            is_Ans = false;
-        }
-
-        if (keyboard.done)
-        {
-            stringToEdit = keyboard.text;
-            is_Ans = false;
-
-            Check_Ans();
-        }
-
-        else
-        {
-            stringToEdit = keyboard.text;
-        }*/
-    }
-
     public void Solving_Problems()
     {
         /*Vector3 Scale  = new Vector3(0.08f, 0.08f, 0.08f);

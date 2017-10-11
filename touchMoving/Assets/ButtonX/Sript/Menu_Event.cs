@@ -23,14 +23,14 @@ public class Menu_Event : MonoBehaviour {
                 Button[i].SetActive(false);
             GameObject.Find("Sin-1").GetComponent<Button_Event>().On_Off(0);
             Cam.transform.LookAt(center.transform);
-            zoomInAndOut.ok = true;
+
         }
         else if(number == 2)
         {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
-            Cam.transform.LookAt(new Vector3(5, 0,6 ));
+            Cam.transform.LookAt(new Vector3(5, 0, 6));
         }
         else
         {

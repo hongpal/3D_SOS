@@ -173,7 +173,7 @@ df343383b9d2e96226a204a164f3994d Assembly-CSharp.dll:.DragMe
 783bf6d659235f53a950684dd61ab5b9 Assembly-CSharp.dll:.MouseLook
 637a372a8286eb3be48e0ecd4a7ee7ac Assembly-UnityScript.dll:.GA_FREE_JS_DemoPlaySound
 b1f0704fc1b542c80ecf3fa1bbf472a1 Assembly-CSharp.dll:UnityStandardAssets.Characters.FirstPerson.RigidbodyFirstPersonController
-f1f2806160e46f4425a7d4e1e4ca0cef Assembly-CSharp.dll:.Button_Event2
+a3460816f501bda66707844b1e49344e Assembly-CSharp.dll:.Button_Event2
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.PlayModeRunnerCallback
 5f2ad81aa8994e8fbe25d1e57afe6773 UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.PlaymodeTestsController
 64eb32cc721b1cc68a91ed57461e188c UnityEngine.TestRunner.dll:UnityEngine.TestTools.TestRunner.Callbacks.RemoteTestResultSender
@@ -195,7 +195,7 @@ c00493cf06bf4cc3366207e1290d9bac Assembly-CSharp.dll:.Menu_Event
 d5f4ab0d0ef73021b0ab9dfc02d34cbc Assembly-CSharp.dll:Parabox.InteractivePrimitives.InteractiveCylinder
 5465eae51985f0cb194548215d2133ec Assembly-CSharp.dll:.ScrollDetailTexture
 e1b523733e31491ecb16527c7582e72c Assembly-CSharp.dll:.GA_FREE_Demo01
-d5c4a141e256607f84003e13897e4699 Assembly-CSharp.dll:.Button_Event3
+fd65b101df8c85d3236bd4c878f98147 Assembly-CSharp.dll:.Button_Event3
 7cbff8c317263ec22380fc125149ffed GUIAnimatorFREE.dll:.GUIAnimFREE
 d2e582a591d4af7c025408cacf0064d9 GUIAnimatorFREE.dll:.GUIAnimSystemFREE
 e16741e25fc2f13c6e39c95d67c29ac4 Assembly-CSharp.dll:.GA_FREE_Demo02
