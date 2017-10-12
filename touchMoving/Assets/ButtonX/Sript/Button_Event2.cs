@@ -537,8 +537,8 @@ public class Button_Event2 : MonoBehaviour {
             Button[i].SetActive(false);
 
         Button[7].SetActive(true);
-        Button[8].SetActive(true);  
-
+        Button[8].SetActive(true);
+        Cam.transform.LookAt(new Vector3(2.527f, 0, 0.267f));
        /* FrontCreate(Scale, Rotate, Ans);
         TopCreate(Scale, Rotate, Ans);
         SideCreate(Scale, Rotate, Ans);/*
