@@ -11,7 +11,7 @@ public class Button_Event : MonoBehaviour {
     public Vector3[] StartCubeLocation = new Vector3[6];    
     public static int figureNumber = -1;
     public int Cube_Number = 6;
-
+    public int Triangle_Number = 4;
 
     public void Awake()
     {
@@ -65,11 +65,13 @@ public class Button_Event : MonoBehaviour {
                     SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
                     break;
                 case 1:
+                    ObjectArr[figureNumber].transform.position = new Vector3(-2, 0, 2.5f);
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
                     SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
                     break;
                 case 2:
-                    print("s");
+                    SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
                     break;
                 default:
                     print("bobo");
@@ -90,11 +92,23 @@ public class Button_Event : MonoBehaviour {
     {
         if (is_Fold)
         {
-            Cube_Number = GameObject.Find("Figure/Plane").GetComponent<CubeInit>().Fold(Cube_Number, figureNumber);
+            Cube_Number = GameObject.Find("Figure").GetComponent<CubeInit>().Fold(Cube_Number, figureNumber);
         }
         else
         {
-            Cube_Number = GameObject.Find("Figure/Plane").GetComponent<CubeInit>().UnFold(Cube_Number, figureNumber);
+            Cube_Number = GameObject.Find("Figure").GetComponent<CubeInit>().UnFold(Cube_Number, figureNumber);
+        }
+    }
+
+    public void TriangleChange(bool is_Fold)
+    {
+        if (is_Fold)
+        {
+            Triangle_Number = GameObject.Find("Figure").GetComponent<CubeInit>().Fold(Triangle_Number, figureNumber);
+        }
+        else
+        {
+            Triangle_Number = GameObject.Find("Figure").GetComponent<CubeInit>().UnFold(Triangle_Number, figureNumber);
         }
     }
 
@@ -106,7 +120,7 @@ public class Button_Event : MonoBehaviour {
                 CubeChange(true);
                 break;
             case 1:
-                print("a");
+                TriangleChange(true);
                 break;
             case 2:
                 print("s");
@@ -125,7 +139,7 @@ public class Button_Event : MonoBehaviour {
                 CubeChange(false);
                 break;
             case 1:
-                print("a");
+                TriangleChange(false);
                 break;
             case 2:
                 print("s");
@@ -145,12 +159,12 @@ public class Button_Event : MonoBehaviour {
             {
                 case 0:
                     for(int i = 1; i < 6; i++)
-                        GameObject.Find("Figure/Plane").GetComponent<CubeInit>().UnFold(i, 0);
+                        GameObject.Find("Figure").GetComponent<CubeInit>().UnFold(i, 0);
                     Cube_Number = 6;
                     ObjectArr[figureNumber].transform.position = new Vector3(0, 0, -100);
                     break;
                 case 1:
-                    print("a");
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0, -100);
                     break;
                 case 2:
                     print("s");
