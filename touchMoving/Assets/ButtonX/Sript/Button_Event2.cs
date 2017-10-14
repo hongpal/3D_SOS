@@ -27,7 +27,7 @@ public class Button_Event2 : MonoBehaviour {
 
     public void Start()
     {
-        Difficulty[0, 0] = new Vector3(-0.5f, -2f, 8f);
+        Difficulty[0, 0] = new Vector3(-0.5f, -2f, 8f); // 0, -1.5, 7.5
         Difficulty[0, 1] = new Vector3(0.5f, -2f, 8f);
         Difficulty[0, 2] = new Vector3(-0.5f, -2f, 7f);
         Difficulty[0, 3] = new Vector3(0.5f, -2f, 7f);
@@ -65,8 +65,9 @@ public class Button_Event2 : MonoBehaviour {
         Button[9].SetActive(false);
         Button[12].SetActive(false);
 
-        if(Block_Number != 0)
+        if (Block_Number != 0)
         {
+            
             for(int i = 0; i < Block_Number; i++)
             {
                 Destroy(Block[i]);
@@ -80,11 +81,13 @@ public class Button_Event2 : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
-            zoomInAndOut.ok = false;
-
+           
             for (int i = 0; i < Dif * Dif; i++)
                 Ans[i] = Select[i] = 0;
-
+            Cam.transform.position = new Vector3(0, 0, 0);
+            Cam.transform.LookAt(new Vector3(5, 0, 6));
+            zoomInAndOut.ok = false;
+            gyroScope.ok = true;
             return;
         }
 
@@ -96,6 +99,7 @@ public class Button_Event2 : MonoBehaviour {
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
+            Cam.transform.position = new Vector3(0, 0, 0);
             Cam.transform.LookAt(new Vector3(0, 0, 5));
         }
 
@@ -236,7 +240,20 @@ public class Button_Event2 : MonoBehaviour {
 
     public void CreateBlock(int number)
     {
-        
+
+        switch (number)
+        {
+            case 2:
+                zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
+
+
         for(int i = 0; i < number*number; i++)
         {
             if (Ans[i] <= 0)
@@ -311,6 +328,10 @@ public class Button_Event2 : MonoBehaviour {
         Button[3].SetActive(true);
         Button[9].SetActive(true);
         zoomInAndOut.ok = true;
+        gyroScope.ok = false;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        zoomInAndOut.pivot = new Vector3(0, 0, 5);
     }
 
     public void Change_Appear(int number, bool ok)
@@ -359,6 +380,9 @@ public class Button_Event2 : MonoBehaviour {
         Button[3].SetActive(false);
         Button[9].SetActive(false);
 
+        zoomInAndOut.ok = false;
+        gyroScope.ok = false;
+
         if (problem == 1) // 블록 갯수 맞추기
         {
             for (int i = 0; i < Dif * Dif; i++)
@@ -377,6 +401,30 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
 
+    void OnGUI()
+    {
+          if (is_Ans)
+          {
+               stringToEdit = "";
+                keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation);
+
+            is_Ans = false;
+          }
+
+          if (keyboard.done)
+          {
+              stringToEdit = keyboard.text;
+              is_Ans = false;
+              
+              Check_Ans();
+          }
+
+          else
+          {
+              stringToEdit = keyboard.text;
+          }
+    }
+
     public void Correct()
     {
         for (int i = 0; i < Block_Number; i++)
@@ -390,8 +438,13 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(true);
 
-        
+
         Button[11].SetActive(false);
+       
+        zoomInAndOut.ok = false;
+        gyroScope.ok = true;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(5, 0, 6));
     }
 
     public void Wrong()
@@ -404,21 +457,26 @@ public class Button_Event2 : MonoBehaviour {
         Button[1].SetActive(true);
         Button[3].SetActive(true);
         Button[9].SetActive(true);
-
+        
         Button[12].SetActive(false);
 
-        for(int i = 0; i < Dif*Dif; i++)
+        for (int i = 0; i < Dif*Dif; i++)
             Select[i] = 0;
+
+        zoomInAndOut.ok = true;
+        gyroScope.ok = false;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
     }
 
     public void Check_Ans()
     {
         int num = 0;
-
+        
         if (sum != 0)
         {
             num = int.Parse(stringToEdit);
-
+            
             if (num == sum) // 정답
                 Button[11].SetActive(true);
             else  // 틀림

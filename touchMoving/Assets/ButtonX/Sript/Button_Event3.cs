@@ -123,8 +123,10 @@ public class Button_Event3 : MonoBehaviour{
             BlockButton[i].SetActive(false);
         }
         gyroScope.ok = true;
-        GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+        Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(5, 0, 6));
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+        
 
     }
 
@@ -156,6 +158,8 @@ public class Button_Event3 : MonoBehaviour{
                 BlockButton[i].SetActive(false);
             zoomInAndOut.pivot = new Vector3(0, 0, 6.5f);
             zoomInAndOut.ok = true;
+            Cam.transform.position = new Vector3(0, 0, 0);
+            Cam.transform.LookAt(new Vector3(0, 0, 5));
             CreateCube();
         }
 

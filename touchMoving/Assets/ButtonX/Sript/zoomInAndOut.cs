@@ -10,7 +10,7 @@ public class zoomInAndOut : MonoBehaviour
     private Vector2 startPosition; // 손가락 시작 좌표
     public float horizontalSpeed = 360.0F;
     public float verticalSpeed = 120.0F;
-    private float x, y, distance = 0.0F;
+    public static float x, y, distance = 0.0F;
     public static bool ok = false;
     
     public Vector3 Locatino;
@@ -33,7 +33,7 @@ public class zoomInAndOut : MonoBehaviour
 
         if (ok)
         {
-            if (Input.touchCount > 1) //손가락 터치 2개시
+           /* if (Input.touchCount > 1) //손가락 터치 2개시
             {
                 if (Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position) > initTouchDistance)
                 {
@@ -46,9 +46,9 @@ public class zoomInAndOut : MonoBehaviour
                     camera.fieldOfView += 0.5f;
                 }
                 initTouchDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-            }
+            }*/
 
-            else if (Input.touchCount == 1)
+            if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase) // 손가락 상태

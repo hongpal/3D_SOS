@@ -67,6 +67,7 @@ public class Button_Event : MonoBehaviour {
                 case 1:
                     ObjectArr[figureNumber].transform.position = new Vector3(-2, 0, 2.5f);
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
+                    zoomInAndOut.pivot = new Vector3(-2, 0, 2.5f);
                     SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
                     break;
                 case 2:
