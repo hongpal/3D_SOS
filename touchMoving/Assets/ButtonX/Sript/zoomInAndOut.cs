@@ -80,10 +80,4 @@ public class zoomInAndOut : MonoBehaviour
 
     }
 
-
-    void OnGUI() //데이터 표시
-    {
-        Rect guiPosition = new Rect(0, 100, 100, 100);
-        GUI.Label(guiPosition, "TouchStatus : \n " + this.transform.position);
-    }
 }

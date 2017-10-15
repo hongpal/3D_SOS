@@ -23,6 +23,8 @@ public class gyroScope : MonoBehaviour {
         {
             transform.Rotate(initialOrientationX - Input.gyro.rotationRateUnbiased.x,
                             initialOrientationY - Input.gyro.rotationRateUnbiased.y,
-          }              initialOrientationZ + Input.gyro.rotationRateUnbiased.z);
+                      initialOrientationZ + Input.gyro.rotationRateUnbiased.z);
+
+        }
     }
 }

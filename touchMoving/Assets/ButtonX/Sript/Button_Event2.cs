@@ -12,8 +12,8 @@ public class Button_Event2 : MonoBehaviour {
     public GameObject Cam;
     private GameObject[] Block = new GameObject[16 * 4];
     private Vector3[,] Difficulty = new Vector3[3, 16];
-    private TouchScreenKeyboard keyboard;
-    public string stringToEdit = "";
+    private TouchScreenKeyboard keyboard = null;
+    public string stringToEdit = "Hi";
     private int[] Ans   = new int[16];
     private int[] Select = new int[16];
     private string text ="Input Number";
@@ -88,6 +88,7 @@ public class Button_Event2 : MonoBehaviour {
             Cam.transform.LookAt(new Vector3(5, 0, 6));
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
+            sum = problem = Block_Number = Dif = 0;
             return;
         }
 
@@ -403,26 +404,32 @@ public class Button_Event2 : MonoBehaviour {
 
     void OnGUI()
     {
-          if (is_Ans)
-          {
-               stringToEdit = "";
-                keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation);
+        Rect guiPosition = new Rect(0, 100, 100, 100);
+        GUI.Label(guiPosition, "TouchStatus :  " + stringToEdit);
+
+        if (is_Ans)
+        {
+            stringToEdit = "";
+            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
 
             is_Ans = false;
-          }
 
-          if (keyboard.done)
-          {
-              stringToEdit = keyboard.text;
-              is_Ans = false;
-              
-              Check_Ans();
-          }
+        }
 
-          else
-          {
-              stringToEdit = keyboard.text;
-          }
+        if (keyboard != null && keyboard.done)
+         {
+            stringToEdit = keyboard.text;
+
+            keyboard = null;
+
+            Check_Ans();
+        }
+
+        else
+        {
+            //stringToEdit = keyboard.text;
+        }
+        
     }
 
     public void Correct()
@@ -450,7 +457,7 @@ public class Button_Event2 : MonoBehaviour {
     public void Wrong()
     {
         TimeCheck.time = 30f;
-
+        stringToEdit = "";
         for (int i = 0; i < Block_Number; i++)
             Block[i].SetActive(true);
 
@@ -476,7 +483,7 @@ public class Button_Event2 : MonoBehaviour {
         if (sum != 0)
         {
             num = int.Parse(stringToEdit);
-            
+            stringToEdit = "";
             if (num == sum) // 정답
                 Button[11].SetActive(true);
             else  // 틀림
@@ -502,7 +509,6 @@ public class Button_Event2 : MonoBehaviour {
                 Button[12].SetActive(true);
             }
         }
-
     }
 
     public void Change_Color_BLock(int number)
