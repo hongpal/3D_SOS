@@ -6,6 +6,7 @@ public class Button_Event3 : MonoBehaviour{
     public GameObject[] Button = new GameObject[7];
     public GameObject[] BlockButton = new GameObject[22];
     public GameObject[] temp = new GameObject[100]; // 생성된 큐브가 저장될 배열
+    public GameObject Cam;
     public static int floor; // 층수를 기록하는 변수
     public int count;
     public int Block_Number;
@@ -121,8 +122,11 @@ public class Button_Event3 : MonoBehaviour{
             BlockButton[i].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
             BlockButton[i].SetActive(false);
         }
-
+        gyroScope.ok = true;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(5, 0, 6));
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+        
 
     }
 
@@ -152,7 +156,10 @@ public class Button_Event3 : MonoBehaviour{
 
             for (int i = 0; i < 22; i++)
                 BlockButton[i].SetActive(false);
-
+            zoomInAndOut.pivot = new Vector3(0, 0, 6.5f);
+            zoomInAndOut.ok = true;
+            Cam.transform.position = new Vector3(0, 0, 0);
+            Cam.transform.LookAt(new Vector3(0, 0, 5));
             CreateCube();
         }
 
@@ -165,14 +172,14 @@ public class Button_Event3 : MonoBehaviour{
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
-            zoomInAndOut.ok = false;
+           // zoomInAndOut.ok = false;
         }
  
         else
         {
             for (int i = 0; i < 7; i++)
                 Button[i].SetActive(true);
-            zoomInAndOut.ok = true;
+           // zoomInAndOut.ok = true;
         }
     }
 }

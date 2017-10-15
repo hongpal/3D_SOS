@@ -6,14 +6,14 @@ public class zoomInAndOut : MonoBehaviour
 {
     private string touchStatus; // 손가락 상태
     private float initTouchDistance; // 두 손가락 거리
-    private Vector3 pivot = new Vector3(0, 0, 6); // 화면이동시 중심점  
+    public static Vector3 pivot = new Vector3(10, 0, 0); // 화면이동시 중심점  
     private Vector2 startPosition; // 손가락 시작 좌표
     public float horizontalSpeed = 360.0F;
     public float verticalSpeed = 120.0F;
-    private float x, y, distance = 0.0F;
-    public static bool ok = true;
+    public static float x, y, distance = 0.0F;
+    public static bool ok = false;
     
-    Vector3 Locatino;
+    public Vector3 Locatino;
    
     // Use this for initialization
 
@@ -30,9 +30,10 @@ public class zoomInAndOut : MonoBehaviour
     void Update()
     {
         Camera camera = GetComponent<Camera>();
+
         if (ok)
         {
-            if (Input.touchCount > 1) //손가락 터치 2개시
+           /* if (Input.touchCount > 1) //손가락 터치 2개시
             {
                 if (Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position) > initTouchDistance)
                 {
@@ -45,9 +46,9 @@ public class zoomInAndOut : MonoBehaviour
                     camera.fieldOfView += 0.5f;
                 }
                 initTouchDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-            }
+            }*/
 
-            else if (Input.touchCount == 1)
+            if (Input.touchCount == 1)
             {
                 Touch touch = Input.GetTouch(0);
                 switch (touch.phase) // 손가락 상태
@@ -72,17 +73,11 @@ public class zoomInAndOut : MonoBehaviour
         }
         else
         {
-            this.transform.position = Locatino;
-            this.transform.rotation = Quaternion.identity;
+           // this.transform.position = Locatino;
+         //   this.transform.rotation = Quaternion.identity;
         }
        
 
     }
 
-
-    void OnGUI() //데이터 표시
-    {
-        Rect guiPosition = new Rect(0, 100, 100, 100);
-        GUI.Label(guiPosition, "TouchStatus : \n " + touchStatus);
-    }
 }

@@ -6,5 +6,5 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Sin/Sin.unity
+    path: Assets/ButtonX/Sin/Sin.unity
     guid: ce7703963579eed49bf9813cb8759179
