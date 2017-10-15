@@ -22,7 +22,7 @@ public class Button_Event2 : MonoBehaviour {
     private int problem = 0;
     private int Block_Number = 0;
     private int Dif = 0;
-    private int sum = 0;
+    private int sum;
     private bool is_Ans = false;
 
     public void Start()
@@ -386,9 +386,11 @@ public class Button_Event2 : MonoBehaviour {
 
         if (problem == 1) // 블록 갯수 맞추기
         {
+            sum = 0;
             for (int i = 0; i < Dif * Dif; i++)
                 sum += Ans[i];
             is_Ans = true;
+            
         }
 
         else if (problem == 2) // 블록 똑같이 쌓기
@@ -404,8 +406,6 @@ public class Button_Event2 : MonoBehaviour {
 
     void OnGUI()
     {
-        Rect guiPosition = new Rect(0, 100, 100, 100);
-        GUI.Label(guiPosition, "TouchStatus :  " + stringToEdit);
 
         if (is_Ans)
         {
@@ -423,13 +423,7 @@ public class Button_Event2 : MonoBehaviour {
             keyboard = null;
 
             Check_Ans();
-        }
-
-        else
-        {
-            //stringToEdit = keyboard.text;
-        }
-        
+        }        
     }
 
     public void Correct()
