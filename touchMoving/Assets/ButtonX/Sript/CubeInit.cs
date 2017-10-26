@@ -55,11 +55,29 @@ public class CubeInit : MonoBehaviour {
                 }
                 break;
             case 1:
-                ani = Triangle[number - 3].GetComponent<Animation>();
-                ani["Triangle-1"].normalizedTime = 0f;
-                ani["Triangle-1"].speed = 1.0f;
-                ani.Play("Triangle-1");
+                switch (number)
+                {
+                    case 4:
+                        ani = Triangle[number - 3].GetComponent<Animation>();
+                        ani["Triangle-1"].normalizedTime = 0f;
+                        ani["Triangle-1"].speed = 1.0f;
+                        ani.Play("Triangle-1");
+                        break;
+                    case 3:
+                        ani = Triangle[number - 1].GetComponent<Animation>();
+                        ani["Triangle-2"].normalizedTime = 0f;
+                        ani["Triangle-2"].speed = 1.0f;
+                        ani.Play("Triangle-2");
+                        break;
+                    case 2:
+                        ani = Triangle[number + 1].GetComponent<Animation>();
+                        ani["Triangle-3"].normalizedTime = 0f;
+                        ani["Triangle-3"].speed = 1.0f;
+                        ani.Play("Triangle-3");
+                        break;
+                }
                 break;
+                    
         }
         
         return --number;
@@ -102,11 +120,29 @@ public class CubeInit : MonoBehaviour {
                 }
                 break;
             case 1:
-                ani = Triangle[number - 2].GetComponent<Animation>();
-                ani["Triangle-1"].normalizedTime = 1f;
-                ani["Triangle-1"].speed = -1.0f;
-                ani.Play("Triangle-1");
+                switch (number)
+                {
+                    case 3:
+                        ani = Triangle[number - 2].GetComponent<Animation>();
+                        ani["Triangle-1"].normalizedTime = 1f;
+                        ani["Triangle-1"].speed = -1.0f;
+                        ani.Play("Triangle-1");
+                        break;
+                    case 2:
+                        ani = Triangle[number].GetComponent<Animation>();
+                        ani["Triangle-2"].normalizedTime = 1f;
+                        ani["Triangle-2"].speed = -1.0f;
+                        ani.Play("Triangle-2");
+                        break;
+                    case 1:
+                        ani = Triangle[number + 2].GetComponent<Animation>();
+                        ani["Triangle-3"].normalizedTime = 1f;
+                        ani["Triangle-3"].speed = -1.0f;
+                        ani.Play("Triangle-3");
+                        break;
+                }
                 break;
+             
         }
 
         return ++number;
