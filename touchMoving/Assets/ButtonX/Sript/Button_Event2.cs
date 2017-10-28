@@ -14,7 +14,7 @@ public class Button_Event2 : MonoBehaviour {
     private Vector3[,] Difficulty = new Vector3[3, 16];
     private TouchScreenKeyboard keyboard = null;
     public string stringToEdit = "Hi";
-    private int[] Ans   = new int[16];
+    public int[] Ans   = new int[16];
     private int[] Select = new int[16];
     private string text ="Input Number";
     private int temp = 0;
@@ -150,9 +150,70 @@ public class Button_Event2 : MonoBehaviour {
         gyroScope.ok = false;
     }
 
+    public void CreateBlock()
+    {
+        int number = Dif;
+
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        zoomInAndOut.pivot = new Vector3(0, 0, 5);
+        Button[3].SetActive(true);
+        Button[9].SetActive(true);
+        zoomInAndOut.ok = true;
+        gyroScope.ok = false;
+
+        switch (number)
+        {
+            case 2:
+                zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
+
+
+        for (int i = 0; i < number * number; i++)
+        {
+            if (Ans[i] <= 0)
+                continue;
+
+            Vector3 temp = Difficulty[number - 2, i];
+
+            for (int k = 0; k < Ans[i]; k++)
+            {
+
+                Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Block[Block_Number].transform.position = temp;
+
+                int n = Random.Range(0, 5);
+                switch (n)
+                {
+                    case 0:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;
+                        break;
+                    case 1:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.blue;
+                        break;
+                    case 2:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.green;
+                        break;
+                    case 3:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.yellow;
+                        break;
+                    case 4:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.black;
+                        break;
+                }
+                temp.y += 1;
+            }
+        }
+    }
+    
     public void CreateBlock(int number)
     {
-
         switch (number)
         {
             case 2:
@@ -179,6 +240,72 @@ public class Button_Event2 : MonoBehaviour {
                 Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Block[Block_Number].transform.position = temp;
                 
+                int n = Random.Range(0, 5);
+                switch (n)
+                {
+                    case 0:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;
+                        break;
+                    case 1:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.blue;
+                        break;
+                    case 2:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.green;
+                        break;
+                    case 3:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.yellow;
+                        break;
+                    case 4:
+                        Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.black;
+                        break;
+                }
+                temp.y += 1;
+            }
+        }
+    }
+
+    public void CreateBlock(int number, int[] test)
+    {
+
+        Ans = test;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        zoomInAndOut.pivot = new Vector3(0, 0, 5);
+        Button[3].SetActive(true);
+        Button[9].SetActive(true);
+        zoomInAndOut.ok = true;
+        gyroScope.ok = false;
+
+        switch (number)
+        {
+            case 2:
+                zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
+                break;
+            case 3:
+                break;
+            case 4:
+                break;
+
+        }
+
+        for (int i = 0; i < 16; i++)
+            print(Ans[i]);
+
+        print("number :" + number);
+
+        for (int i = 0; i < number * number; i++)
+        {
+            if (Ans[i] <= 0)
+                continue;
+
+            Vector3 temp = Difficulty[number - 2, i];
+
+            for (int k = 0; k < Ans[i]; k++)
+            {
+
+                Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                Block[Block_Number].transform.position = temp;
+
                 int n = Random.Range(0, 5);
                 switch (n)
                 {
@@ -236,6 +363,8 @@ public class Button_Event2 : MonoBehaviour {
 
         if (net_check == 1)
         {
+            NetworkManager.Ans = Ans;
+            NetworkManager.Dif = Dif;
             GameObject.Find("Net").GetComponent<NetworkManager>().StartServer();
             return;
         }

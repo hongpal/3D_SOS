@@ -6,8 +6,13 @@ using UnityEngine.UI;
 public class NetworkManager : MonoBehaviour {
 
     public GameObject Net_Code;
+    public GameObject Cam;
+    public  static int[] Ans = new int[16];
+    public static int Dif;
     private TouchScreenKeyboard keyboard = null;
+    private bool is_join = false;
     private int num;
+    private int count = 0;
     private string typeName = "";
     private string Server_Code = "";
     private HostData[] hostList;
@@ -35,7 +40,7 @@ public class NetworkManager : MonoBehaviour {
         if (is_Ans)
         {
             Server_Code = "";
-            
+
             keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
             
             is_Ans = false;
@@ -49,9 +54,8 @@ public class NetworkManager : MonoBehaviour {
             RefreshHostList(Server_Code);
         }
 
-        if (hostList != null)
+        if (is_join)
         {
-            
             for (int i = 0; i < hostList.Length; i++)
             {
                 if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
@@ -67,36 +71,58 @@ public class NetworkManager : MonoBehaviour {
 
     void OnMasterServerEvent(MasterServerEvent msEvent)
     {
-        
+
         if (msEvent == MasterServerEvent.HostListReceived)
         {
             hostList = MasterServer.PollHostList();
+
+            if (hostList.Length == 0)
+            {
+                is_Ans = true;
+                return;
+            }
+            is_join = true;
         }
 
         else if(msEvent == MasterServerEvent.RegistrationSucceeded)
         {
-            print("ok!!");
-        }
+            count++;
 
-        else if(msEvent == MasterServerEvent.RegistrationFailedNoServer)
-        {
-            is_Ans = true;
-        }
-        print("asd");
-        print(msEvent);
+            if (count == 2)
+            {
+                Net_Code.SetActive(false);
+                //GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
+            }
+        } 
     }
 
     private void JoinServer(HostData hostData)
     {
-        print("server");
-        Network.Connect(hostData);
+        NetworkConnectionError e = Network.Connect(hostData);
+
+        
+    }
+    
+    void OnPlayerConnected(NetworkPlayer player)
+    {
+        GetComponent<NetworkView>().RPC("test", RPCMode.Others, Ans, Dif);
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
     }
 
     void OnConnectedToServer()
     {
+        is_join = false;
         Debug.Log("Server Joined");
+        print(Dif);
     }
 
-
+    [RPC] void test(int[] temp, int test)
+    {
+        print("asd");
+        Ans = temp;
+        Dif = test;
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(Dif, Ans);
+        
+    }
 
 }

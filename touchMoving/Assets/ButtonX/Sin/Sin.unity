@@ -705,6 +705,7 @@ GameObject:
   m_Component:
   - component: {fileID: 119771100}
   - component: {fileID: 119771099}
+  - component: {fileID: 119771101}
   m_Layer: 0
   m_Name: Net
   m_TagString: Untagged
@@ -724,6 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Net_Code: {fileID: 693445934}
+  Cam: {fileID: 94385290}
 --- !u!4 &119771100
 Transform:
   m_ObjectHideFlags: 0
@@ -737,6 +739,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!148 &119771101
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 119771098}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 119771100}
+  m_ViewID:
+    m_ID: 3
+    m_Type: 1
 --- !u!1 &120659146
 GameObject:
   m_ObjectHideFlags: 0
@@ -1580,6 +1594,7 @@ MonoBehaviour:
   - {fileID: 244458010}
   Cam: {fileID: 94385290}
   stringToEdit: Hello World
+  Ans: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!114 &178996098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14450,6 +14465,7 @@ MonoBehaviour:
   - {fileID: 0}
   Cam: {fileID: 0}
   stringToEdit: Hello World
+  Ans: 00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
 --- !u!1001 &1814647356
 Prefab:
   m_ObjectHideFlags: 0
