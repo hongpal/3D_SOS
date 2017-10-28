@@ -156,6 +156,7 @@
     <Compile Include="Assets\ButtonX\Sript\CubeInit.cs" />
     <Compile Include="Assets\ButtonX\Sript\gyroScope.cs" />
     <Compile Include="Assets\ButtonX\Sript\Menu_Event.cs" />
+    <Compile Include="Assets\ButtonX\Sript\NetworkManager.cs" />
     <Compile Include="Assets\ButtonX\Sript\Temp.cs" />
     <Compile Include="Assets\ButtonX\Sript\TimeCheck.cs" />
     <Compile Include="Assets\ButtonX\Sript\zoomInAndOut.cs" />

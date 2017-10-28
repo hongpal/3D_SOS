@@ -29,7 +29,7 @@ public class Menu_Event : MonoBehaviour {
         {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
-            GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
+            GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(2);
             Cam.transform.LookAt(new Vector3(5, 0, 6));
         }
         else
