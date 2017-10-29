@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[17];
+    public GameObject[] Button = new GameObject[18];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
@@ -61,6 +61,13 @@ public class Button_Event2 : MonoBehaviour {
         Difficulty[2, 15] = new Vector3(1.5f, -2f, 5f);
     }
 
+    public void Re_Input()
+    {
+        Button[1].SetActive(false);
+        Button[17].SetActive(false);
+        NetworkManager.is_Ans = true;
+    }
+
     public void On_Off(int number)
     {
         Button[9].SetActive(false);
@@ -96,15 +103,43 @@ public class Button_Event2 : MonoBehaviour {
         // number가 1일 경우 신 끄기 0일경우 신 켜기
         if (number == 1)
         {
+            if(Button[0].activeSelf)
+            {
+                Button[0].SetActive(false);
+                Button[2].SetActive(false);
+                Button[13].SetActive(true);
+                Button[14].SetActive(true);
+                return;
+            }
+
+            if(Button[15].activeSelf)
+            {
+                Button[15].SetActive(false);
+                Button[16].SetActive(false);
+                Button[13].SetActive(true);
+                Button[14].SetActive(true);
+                return;
+            }
+
+            if(Button[17].activeSelf)
+            {
+                Button[15].SetActive(true);
+                Button[16].SetActive(true);
+                Button[17].SetActive(false);
+                return;
+            }
+
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(false);
+            Button[13].SetActive(false);
+            Button[14].SetActive(false);
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
             Cam.transform.position = new Vector3(0, 0, 0);
             Cam.transform.LookAt(new Vector3(0, 0, 5));
         }
-
+        
         else if(number == 0) 
         {
             for (int i = 0; i < 3; i++)
@@ -117,6 +152,7 @@ public class Button_Event2 : MonoBehaviour {
 
         else if(number == 2)
         {
+            Button[1].SetActive(true);
             Button[13].SetActive(true);
             Button[14].SetActive(true);
         }
@@ -138,6 +174,12 @@ public class Button_Event2 : MonoBehaviour {
             Button[16].SetActive(false);
             net_check = 1;
             NetworkManager.is_Ans = true;
+        }
+
+        else if(number == 5)
+        {
+            Button[1].SetActive(true);
+            Button[17].SetActive(true);
         }
     }
 
@@ -174,7 +216,6 @@ public class Button_Event2 : MonoBehaviour {
 
         }
 
-
         for (int i = 0; i < number * number; i++)
         {
             if (Ans[i] <= 0)
@@ -188,8 +229,7 @@ public class Button_Event2 : MonoBehaviour {
                 Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Block[Block_Number].transform.position = temp;
 
-                int n = Random.Range(0, 5);
-                switch (n)
+                switch (k)
                 {
                     case 0:
                         Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;
@@ -291,8 +331,6 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 16; i++)
             print(Ans[i]);
 
-        print("number :" + number);
-
         for (int i = 0; i < number * number; i++)
         {
             if (Ans[i] <= 0)
@@ -306,8 +344,7 @@ public class Button_Event2 : MonoBehaviour {
                 Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Block[Block_Number].transform.position = temp;
 
-                int n = Random.Range(0, 5);
-                switch (n)
+                switch (k)
                 {
                     case 0:
                         Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;

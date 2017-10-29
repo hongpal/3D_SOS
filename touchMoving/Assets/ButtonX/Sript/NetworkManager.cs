@@ -7,9 +7,10 @@ public class NetworkManager : MonoBehaviour {
 
     public GameObject Net_Code;
     public GameObject Cam;
+    public static GameObject[] Block = new GameObject[16 * 4];
     public  static int[] Ans = new int[16];
     public static int Dif;
-    private TouchScreenKeyboard keyboard = null;
+    public  TouchScreenKeyboard keyboard = null;
     private bool is_join = false;
     private int num;
     private int count = 0;
@@ -78,7 +79,7 @@ public class NetworkManager : MonoBehaviour {
 
             if (hostList.Length == 0)
             {
-                is_Ans = true;
+                GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(5);
                 return;
             }
             is_join = true;
@@ -91,7 +92,7 @@ public class NetworkManager : MonoBehaviour {
             if (count == 2)
             {
                 Net_Code.SetActive(false);
-                //GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
+                count = 0;
             }
         } 
     }
@@ -105,8 +106,8 @@ public class NetworkManager : MonoBehaviour {
     
     void OnPlayerConnected(NetworkPlayer player)
     {
-        GetComponent<NetworkView>().RPC("test", RPCMode.Others, Ans, Dif);
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
+        GetComponent<NetworkView>().RPC("test", RPCMode.Others, Ans, Dif);
     }
 
     void OnConnectedToServer()
@@ -118,7 +119,6 @@ public class NetworkManager : MonoBehaviour {
 
     [RPC] void test(int[] temp, int test)
     {
-        print("asd");
         Ans = temp;
         Dif = test;
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(Dif, Ans);
