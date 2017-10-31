@@ -63,9 +63,17 @@ public class Button_Event2 : MonoBehaviour {
 
     public void Re_Input()
     {
-        Button[1].SetActive(false);
+        Button[1].SetActive(true);
         Button[17].SetActive(false);
         NetworkManager.is_Ans = true;
+    }
+
+    public void init()
+    {
+        for (int i = 0; i < Dif * Dif; i++)
+            Ans[i] = Select[i] = 0;
+        sum = problem = Block_Number = Dif = 0;
+        net_check = 0;
     }
 
     public void On_Off(int number)
@@ -74,8 +82,7 @@ public class Button_Event2 : MonoBehaviour {
         Button[12].SetActive(false);
 
         if (Block_Number != 0)
-        {
-            
+        {   
             for(int i = 0; i < Block_Number; i++)
             {
                 Destroy(Block[i]);
@@ -89,14 +96,12 @@ public class Button_Event2 : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
-           
-            for (int i = 0; i < Dif * Dif; i++)
-                Ans[i] = Select[i] = 0;
+
             Cam.transform.position = new Vector3(0, 0, 0);
             Cam.transform.LookAt(new Vector3(5, 0, 6));
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
-            sum = problem = Block_Number = Dif = 0;
+            
             return;
         }
 
@@ -304,10 +309,12 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
 
-    public void CreateBlock(int number, int[] test)
+    public void CreateBlock(int[] Client_Ans, int Client_Dif, int Client_problem)
     {
 
-        Ans = test;
+        Ans = Client_Ans;
+        Dif = temp = Client_Dif;
+        problem = Client_problem;
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         zoomInAndOut.pivot = new Vector3(0, 0, 5);
@@ -316,7 +323,7 @@ public class Button_Event2 : MonoBehaviour {
         zoomInAndOut.ok = true;
         gyroScope.ok = false;
 
-        switch (number)
+        switch (Client_Dif)
         {
             case 2:
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
@@ -331,12 +338,12 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 16; i++)
             print(Ans[i]);
 
-        for (int i = 0; i < number * number; i++)
+        for (int i = 0; i < Client_Dif * Client_Dif; i++)
         {
             if (Ans[i] <= 0)
                 continue;
 
-            Vector3 temp = Difficulty[number - 2, i];
+            Vector3 temp = Difficulty[Client_Dif - 2, i];
 
             for (int k = 0; k < Ans[i]; k++)
             {
@@ -402,6 +409,7 @@ public class Button_Event2 : MonoBehaviour {
         {
             NetworkManager.Ans = Ans;
             NetworkManager.Dif = Dif;
+            NetworkManager.problem = problem;
             GameObject.Find("Net").GetComponent<NetworkManager>().StartServer();
             return;
         }
@@ -455,6 +463,9 @@ public class Button_Event2 : MonoBehaviour {
 
     public void Answer()
     {
+        if (net_check == 1)
+            NetworkManager.time = TimeCheck.time;
+
         TimeCheck.time = 30f;
 
         for (int i = 0; i < Block_Number; i++)
@@ -489,7 +500,6 @@ public class Button_Event2 : MonoBehaviour {
 
     void OnGUI()
     {
-
         if (is_Ans)
         {
             stringToEdit = "";
@@ -556,35 +566,71 @@ public class Button_Event2 : MonoBehaviour {
     public void Check_Ans()
     {
         int num = 0;
-        
-        if (sum != 0)
+
+        if (net_check == 0)
         {
-            num = int.Parse(stringToEdit);
-            stringToEdit = "";
-            if (num == sum) // 정답
-                Button[11].SetActive(true);
-            else  // 틀림
+            if (sum != 0)
             {
-                Button[1].SetActive(true);
-                Button[12].SetActive(true);
+                num = int.Parse(stringToEdit);
+                stringToEdit = "";
+                if (num == sum) // 정답
+                    Button[11].SetActive(true);
+                else  // 틀림
+                {
+                    Button[1].SetActive(true);
+                    Button[12].SetActive(true);
+                }
+            }
+
+            else
+            {
+                for (int i = 0; i < Dif * Dif; i++)
+                {
+                    if (Ans[i] == Select[i])
+                        num++;
+                }
+
+                if (num == Dif * Dif)
+                    Button[11].SetActive(true);
+                else
+                {
+                    Button[1].SetActive(true);
+                    Button[12].SetActive(true);
+                }
             }
         }
 
         else
         {
-            for (int i = 0; i < Dif * Dif; i++)
+            if (sum != 0)
             {
-                if (Ans[i] == Select[i])
-                    num++;
+                num = int.Parse(stringToEdit);
+                stringToEdit = "";
+                if (num == sum) // 정답
+                    NetworkManager.answer = true;
+                else  // 틀림
+                {
+                    NetworkManager.answer = false;
+                }
             }
 
-            if (num == Dif * Dif)
-                Button[11].SetActive(true);
             else
             {
-                Button[1].SetActive(true);
-                Button[12].SetActive(true);
+                for (int i = 0; i < Dif * Dif; i++)
+                {
+                    if (Ans[i] == Select[i])
+                        num++;
+                }
+
+                if (num == Dif * Dif)
+                    NetworkManager.answer = true;
+                else
+                {
+                    NetworkManager.answer = false;
+                }
             }
+            NetworkManager.Get_Answer = true;
+            GameObject.Find("Net").GetComponent<NetworkManager>().Result();
         }
     }
 
