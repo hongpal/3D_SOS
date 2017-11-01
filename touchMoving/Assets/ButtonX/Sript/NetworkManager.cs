@@ -150,30 +150,53 @@ public class NetworkManager : MonoBehaviour {
 
     public void Ready()
     {
-        if (!ready_check)
+        if (Network.isClient)
         {
-            ready_check = true;
-            Ready_text.text = "Ready!!";
-            GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.All);
+            if (!ready_check)
+            {
+                ready_check = true;
+                Ready_text.text = "Ready!!";
+                GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.Server, ready_check);
+            }
+
+            else
+            {
+                ready_check = false;
+                Ready_text.text = "No Ready";
+                GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.Server, ready_check);
+            }
         }
-        
-       else
+        else
         {
-            ready_check = false;
-            Ready_text.text = "No Ready";
-            GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.All);
+            if (!ready_check)
+            {
+                ready_check = true;
+                Ready_text.text = "Ready!!";
+                Ready_Count(ready_check);
+            }
+
+            else
+            {
+                ready_check = false;
+                Ready_text.text = "No Ready";
+                Ready_Count(ready_check);
+            }
         }
     }
 
     public void Result()
     {
-        GetComponent<NetworkView>().RPC("Ans_Check", RPCMode.All);
+        if (Network.isClient)
+            GetComponent<NetworkView>().RPC("Ans_Check", RPCMode.Server);
+        else
+            Ans_Check();
     }
 
     void OnConnectedToServer()
     {
         is_server_join = false;
         Button[1].SetActive(true);
+        Ready_Str.SetActive(true);
         Debug.Log("Server Joined");   
     }
 
@@ -193,7 +216,7 @@ public class NetworkManager : MonoBehaviour {
     [RPC] void Ans_Check()
     {
         count++;
-
+        print("Ans_Check : " + count );
         if(count == Network.connections.Length + 1)
         {
             GetComponent<NetworkView>().RPC("Count_Init", RPCMode.All);
@@ -244,7 +267,8 @@ public class NetworkManager : MonoBehaviour {
 
     [RPC] void Result_Check(bool Client_Ans, float Client_Time)
     {
-        if(answer && Client_Ans)  // 시간 체크
+        
+        if (answer && Client_Ans)  // 시간 체크
         {
             if(time > Client_Time)  // 서버 승리
             {
@@ -283,14 +307,18 @@ public class NetworkManager : MonoBehaviour {
     {
         count = 0;
         Button[2].SetActive(false);
+        print("cube_init");
         if (Network.isClient)
         {
+            print("client");
             GetComponent<NetworkView>().RPC("Result_Check", RPCMode.Server, answer, time);
         }
-      
+        else
+            print("server");
+
     }
 
-    [RPC] void Ready_Count()
+    [RPC] void Ready_Count(bool ready_check)
     {
         if(ready_check)
         {
@@ -301,12 +329,11 @@ public class NetworkManager : MonoBehaviour {
         {
             count--;
         }
-
+       
         if (Network.isServer)
         {
             if (count == Network.connections.Length + 1)
             {
-                print(count);
                 count = 0;
                 Button[1].SetActive(false);
                 Ready_Str.SetActive(false);
