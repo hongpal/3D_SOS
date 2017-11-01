@@ -187,7 +187,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 d94b6b98b90ac311443cea09e7bd290c Assembly-CSharp.dll:Parabox.InteractivePrimitives.InteractivePlane
 e7cecaedb57da7aa2da2ecf128a29c40 Assembly-UnityScript.dll:.GA_FREE_JS_Demo04
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GE_OrbitCameraUI
-e3520d4f599ff04ca8fa7014a16c1c9f Assembly-CSharp.dll:.NetworkManager
+0e02065e4decc2dfe0ccd4a7933daa0e Assembly-CSharp.dll:.NetworkManager
 a8796ecdc9d5c260bbe32f30c4b10708 Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.TouchPad
 b7f557c19cce3b6f593e26edfe1ec859 Assembly-CSharp.dll:UnityStandardAssets.Vehicles.Ball.Ball
 4a9da55379ba01a415f32f3461838aa1 Assembly-CSharp.dll:.Button_Event

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class NetworkManager : MonoBehaviour {
 
     public GameObject Net_Code;
+    public GameObject Ready_Str;
     public GameObject[] Button = new GameObject[7];
     public GameObject Cam;
     public static GameObject[] Block = new GameObject[16 * 4];
@@ -26,7 +27,13 @@ public class NetworkManager : MonoBehaviour {
     private string Server_Code = "";
     private HostData[] hostList;
     private const string gameName = "3D_SOS";
+    private Text Ready_text;
     public static bool is_Ans = false;
+
+    public void Start()
+    {
+        Ready_text = Ready_Str.GetComponent<Text>();
+    }
 
     public void StartServer()
     {
@@ -42,8 +49,9 @@ public class NetworkManager : MonoBehaviour {
 
     public void init()
     {
-        Get_Answer = is_server_join = is_Ans = is_client_join = false;
+        answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
         count = 0;
+        Ready_text.text = "NO Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
     }
 
@@ -123,6 +131,7 @@ public class NetworkManager : MonoBehaviour {
                 Net_Code.SetActive(false);
                 Button[1].SetActive(true);
                 is_client_join = false;
+                Ready_Str.SetActive(true);
             }
         } 
     }
@@ -136,20 +145,22 @@ public class NetworkManager : MonoBehaviour {
     {
         is_client_join = true;
         Button[1].SetActive(true);
-        
+        Ready_Str.SetActive(true);
     }
 
     public void Ready()
     {
-       if(!ready_check)
+        if (!ready_check)
         {
             ready_check = true;
+            Ready_text.text = "Ready!!";
             GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.All);
         }
         
        else
         {
             ready_check = false;
+            Ready_text.text = "No Ready";
             GetComponent<NetworkView>().RPC("Ready_Count", RPCMode.All);
         }
     }
@@ -172,7 +183,9 @@ public class NetworkManager : MonoBehaviour {
         Dif = Server_Dif;
         problem = Server_problem;
         count = 0;
+        Ready_text.text = "NO Ready";
         Button[1].SetActive(false);
+        Ready_Str.SetActive(false);
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(Ans, Dif, problem);
 
     }
@@ -183,7 +196,7 @@ public class NetworkManager : MonoBehaviour {
 
         if(count == Network.connections.Length + 1)
         {
-            
+            GetComponent<NetworkView>().RPC("Count_Init", RPCMode.All);
         }
 
         else if(Get_Answer)
@@ -192,6 +205,89 @@ public class NetworkManager : MonoBehaviour {
         }
 
 
+    }
+
+    [RPC] void Result_Show(int select)   // 서버 : 0 클라이언트 : 1 비김 : 2
+    {
+        if(Network.isServer)
+        {
+            switch (select)
+            {
+                case 0:
+                    Button[3].SetActive(true);
+                    break;
+                case 1:
+                    Button[4].SetActive(true);
+                    break;
+                case 2:
+                    Button[5].SetActive(true);
+                    break;
+            }
+        }
+
+        else
+        {
+            switch (select)
+            {
+                case 0:
+                    Button[4].SetActive(true);
+                    break;
+                case 1:
+                    Button[3].SetActive(true);
+                    break;
+                case 2:
+                    Button[5].SetActive(true);
+                    break;
+            }
+        }
+    }
+
+    [RPC] void Result_Check(bool Client_Ans, float Client_Time)
+    {
+        if(answer && Client_Ans)  // 시간 체크
+        {
+            if(time > Client_Time)  // 서버 승리
+            {
+                GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 0);
+            }
+
+            else if(time < Client_Time) // 클라이언트 승리
+            {
+                GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 1);
+            }
+
+            else if(time == Client_Time) // 비김
+            {
+                GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 2);
+            }
+        }
+
+        else if (!answer && Client_Ans) // 클라이언트 승리
+        {
+            GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 1);
+        }
+
+        else if (answer && !Client_Ans) // 서버 승리
+        {
+            GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 0);
+        }
+
+        else if(!answer && !Client_Ans) // 비김
+        {
+            GetComponent<NetworkView>().RPC("Result_Show", RPCMode.All, 2);
+        }
+
+    }
+
+    [RPC] void Count_Init()
+    {
+        count = 0;
+        Button[2].SetActive(false);
+        if (Network.isClient)
+        {
+            GetComponent<NetworkView>().RPC("Result_Check", RPCMode.Server, answer, time);
+        }
+      
     }
 
     [RPC] void Ready_Count()
@@ -210,8 +306,11 @@ public class NetworkManager : MonoBehaviour {
         {
             if (count == Network.connections.Length + 1)
             {
-                print(count);                count = 0;
+                print(count);
+                count = 0;
                 Button[1].SetActive(false);
+                Ready_Str.SetActive(false);
+                Ready_text.text = "NO Ready";
                 GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
                 GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
             }
