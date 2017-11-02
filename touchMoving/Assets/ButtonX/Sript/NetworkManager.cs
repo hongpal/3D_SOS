@@ -7,7 +7,7 @@ public class NetworkManager : MonoBehaviour {
 
     public GameObject Net_Code;
     public GameObject Ready_Str;
-    public GameObject[] Button = new GameObject[7];
+    public GameObject[] Button = new GameObject[9];
     public GameObject Cam;
     public static GameObject[] Block = new GameObject[16 * 4];
     public  static int[] Ans = new int[16];
@@ -39,12 +39,13 @@ public class NetworkManager : MonoBehaviour {
     {
         num = Random.Range(0, 9999);
         typeName = num.ToString();
-        Network.InitializeServer(2, 5500, !Network.HavePublicAddress());
+        Network.InitializeServer(2, 3300, !Network.HavePublicAddress());
         MasterServer.RegisterHost(typeName, gameName);
         Net_Code.SetActive(true);
         Text text = Net_Code.GetComponent<Text>();
         text.text = "Net Cdoe : " + typeName;
         Button[0].SetActive(true);
+        print(Network.HavePublicAddress());
     }
 
     public void init()
@@ -79,7 +80,7 @@ public class NetworkManager : MonoBehaviour {
         {
             Server_Code = "";
 
-            keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
+           keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
             
             is_Ans = false;
 
@@ -94,7 +95,6 @@ public class NetworkManager : MonoBehaviour {
 
         if (is_server_join)
         {
-            
             for (int i = 0; i < hostList.Length; i++)
             {
                 if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
@@ -139,6 +139,7 @@ public class NetworkManager : MonoBehaviour {
     private void JoinServer(HostData hostData)
     {
         NetworkConnectionError e = Network.Connect(hostData);
+        print(e);
     }
     
     void OnPlayerConnected(NetworkPlayer player)
@@ -198,6 +199,54 @@ public class NetworkManager : MonoBehaviour {
         Button[1].SetActive(true);
         Ready_Str.SetActive(true);
         Debug.Log("Server Joined");   
+    }
+
+    public void Re_Game_Event(int check)
+    {
+        if(check ==0)  // 리 게임
+        {
+            Button_Event2.net_check = 1;
+            if (Network.isClient)
+            {
+                GetComponent<NetworkView>().RPC("Re_Game", RPCMode.Server, check);
+
+            }
+            else
+                Re_Game(check);
+        }
+
+        else
+        {
+            if (Network.isClient)
+            {
+                GetComponent<NetworkView>().RPC("Re_Game", RPCMode.Server, check);
+
+            }
+            else
+                Re_Game(check);
+
+            UnConnect();
+        }
+    }
+
+    [RPC] void Re_Game(int check)
+    {
+
+    }
+
+    public void Game_Start()
+    {
+        if(Network.isClient)
+        {
+            Button[6].SetActive(false);
+        }
+
+        else
+        {
+            Button[6].SetActive(false);
+            GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
+            GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(); 
+        }
     }
 
     [RPC] void Intent(int[] Server_Ans, int Server_Dif, int Server_problem) // 블록이랑, 난이도만 넘어옴
@@ -263,6 +312,10 @@ public class NetworkManager : MonoBehaviour {
                     break;
             }
         }
+
+        Button[7].SetActive(true);
+        Button[8].SetActive(true);
+        init();
     }
 
     [RPC] void Result_Check(bool Client_Ans, float Client_Time)
@@ -318,6 +371,13 @@ public class NetworkManager : MonoBehaviour {
 
     }
 
+    [RPC] void time_check()
+    {
+        Button[1].SetActive(false);
+        Ready_Str.SetActive(false);
+        Button[6].SetActive(true);
+    }
+
     [RPC] void Ready_Count(bool ready_check)
     {
         if(ready_check)
@@ -334,12 +394,9 @@ public class NetworkManager : MonoBehaviour {
         {
             if (count == Network.connections.Length + 1)
             {
-                count = 0;
-                Button[1].SetActive(false);
-                Ready_Str.SetActive(false);
                 Ready_text.text = "NO Ready";
-                GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
-                GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
+                count = 0;
+                GetComponent<NetworkView>().RPC("time_check", RPCMode.All);
             }
         }
     }

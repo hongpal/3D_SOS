@@ -23,7 +23,7 @@ public class Button_Event2 : MonoBehaviour {
     private int Block_Number = 0;
     private int Dif = 0;
     private int sum;
-    private int net_check = 0;
+    public static int net_check = 0;
     private bool is_Ans = false;
 
     public void Start()

@@ -29,10 +29,8 @@ public class Button_Event : MonoBehaviour {
 
         for (int i = 0; i < 3; i++)
         {
-            print(i);
             ObjectArr[i].SetActive(false);
             ObjectArr[i].transform.position = v;
-
         }
 
         pastObject = ObjectArr[0];
