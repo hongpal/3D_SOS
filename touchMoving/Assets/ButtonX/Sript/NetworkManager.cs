@@ -7,7 +7,7 @@ public class NetworkManager : MonoBehaviour {
 
     public GameObject Net_Code;
     public GameObject Ready_Str;
-    public GameObject[] Button = new GameObject[9];
+    public GameObject[] Button = new GameObject[10];
     public GameObject Cam;
     public static GameObject[] Block = new GameObject[16 * 4];
     public  static int[] Ans = new int[16];
@@ -16,6 +16,7 @@ public class NetworkManager : MonoBehaviour {
     public static float time;
     public static bool answer = false;  // 정답 오답
     public static bool Get_Answer = false;
+    public static bool is_Re_Game = false;
     public  TouchScreenKeyboard keyboard = null;
     private bool is_server_join = false;
     private bool is_client_join = false;
@@ -45,12 +46,12 @@ public class NetworkManager : MonoBehaviour {
         Text text = Net_Code.GetComponent<Text>();
         text.text = "Net Cdoe : " + typeName;
         Button[0].SetActive(true);
-        print(Network.HavePublicAddress());
+        
     }
 
     public void init()
     {
-        answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
+        is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
         count = 0;
         Ready_text.text = "NO Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
@@ -76,32 +77,42 @@ public class NetworkManager : MonoBehaviour {
 
     void OnGUI()
     {
-        if (is_Ans)
+        if (TouchScreenKeyboard.isSupported)
         {
-            Server_Code = "";
-
-           keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
-            
-            is_Ans = false;
-
-        }
-
-        if (keyboard != null && keyboard.done)
-        {
-            Server_Code = keyboard.text;
-            keyboard = null;
-            RefreshHostList(Server_Code);
-        }
-
-        if (is_server_join)
-        {
-            for (int i = 0; i < hostList.Length; i++)
+            if (is_Ans)
             {
-                if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
-                    JoinServer(hostList[i]);
+                Server_Code = "";
+
+                keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false, "Net Code");
+                keyboard.text = "";
+                is_Ans = false;
+
+            }
+            
+            if (keyboard != null && keyboard.done)
+            {
+                if(keyboard.text.Equals(""))
+                {
+                    GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(5);
+                    return;
+                }
+                Server_Code = keyboard.text;
+                keyboard = null;
+
+                RefreshHostList(Server_Code);
+                
+            }
+
+            if (is_server_join)
+            {
+                for (int i = 0; i < hostList.Length; i++)
+                {
+                    if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+                        JoinServer(hostList[i]);
+                }
             }
         }
-       
+
     }
 
     private void RefreshHostList(string temp)
@@ -145,8 +156,13 @@ public class NetworkManager : MonoBehaviour {
     void OnPlayerConnected(NetworkPlayer player)
     {
         is_client_join = true;
-        Button[1].SetActive(true);
-        Ready_Str.SetActive(true);
+        //Button[1].SetActive(true);
+        //Ready_Str.SetActive(true);
+    }
+
+    public void Re_Game_Ready()
+    {
+        GetComponent<NetworkView>().RPC("Re_Game_Start", RPCMode.All);
     }
 
     public void Ready()
@@ -188,7 +204,7 @@ public class NetworkManager : MonoBehaviour {
     public void Result()
     {
         if (Network.isClient)
-            GetComponent<NetworkView>().RPC("Ans_Check", RPCMode.Server);
+            GetComponent<NetworkView>().RPC("Ans_Check", RPCMode.All);
         else
             Ans_Check();
     }
@@ -203,7 +219,7 @@ public class NetworkManager : MonoBehaviour {
 
     public void Re_Game_Event(int check)
     {
-        if(check ==0)  // 리 게임
+        if(check == 1)  // 리 게임
         {
             Button_Event2.net_check = 1;
             if (Network.isClient)
@@ -215,7 +231,7 @@ public class NetworkManager : MonoBehaviour {
                 Re_Game(check);
         }
 
-        else
+        else if (check == -1)
         {
             if (Network.isClient)
             {
@@ -224,14 +240,63 @@ public class NetworkManager : MonoBehaviour {
             }
             else
                 Re_Game(check);
+        }
+    }
 
-            UnConnect();
+    [RPC] void Re_Game_Start()
+    {
+        ready_check = false;
+
+        if (Network.isServer)
+        {
+            Button[1].SetActive(true);
+            Ready_Str.SetActive(true);
+        }
+
+        else
+        {
+            Button[1].SetActive(true);
+            Ready_Str.SetActive(true);
+            Button[9].SetActive(false);
         }
     }
 
     [RPC] void Re_Game(int check)
     {
+        if(check == -1) // 아직 확정 아님
+        {
+            count = check;
+            UnConnect();
+        }
 
+        else if(check == 1)
+        {
+            count += check;
+
+            if(count == Network.connections.Length + 1)
+            {
+                is_Re_Game = true;
+                count = 0;
+                GetComponent<NetworkView>().RPC("settings", RPCMode.All);
+            }
+        }
+
+    }
+
+    [RPC] void settings()
+    {
+        for (int i = 3; i < 9; i++)
+            Button[i].SetActive(false);
+
+        if (Network.isServer)
+        {
+            GameObject.Find("Sin-2").GetComponent<Button_Event2>().Solving_Problems();
+        }
+
+        else
+        {
+            Button[9].SetActive(true);
+        }
     }
 
     public void Game_Start()
@@ -361,6 +426,7 @@ public class NetworkManager : MonoBehaviour {
         count = 0;
         Button[2].SetActive(false);
         print("cube_init");
+
         if (Network.isClient)
         {
             print("client");

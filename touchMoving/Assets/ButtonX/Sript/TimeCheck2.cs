@@ -19,10 +19,11 @@ public class TimeCheck2 : MonoBehaviour {
         if (time != 0)
         {
             time -= Time.deltaTime;
-            if (time < 0)
+            if (time <= 0)
             {
                 time = 4;
                 GameObject.Find("Net").GetComponent<NetworkManager>().Game_Start();
+                return;
             }
         }
 

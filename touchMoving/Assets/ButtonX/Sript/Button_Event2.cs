@@ -335,8 +335,7 @@ public class Button_Event2 : MonoBehaviour {
 
         }
 
-        for (int i = 0; i < 16; i++)
-            print(Ans[i]);
+
 
         for (int i = 0; i < Client_Dif * Client_Dif; i++)
         {
@@ -403,6 +402,15 @@ public class Button_Event2 : MonoBehaviour {
                 Ans[i] = Random.Range(0, number + 1);
                 sum += Ans[i];
             }
+        }
+
+        if(NetworkManager.is_Re_Game)
+        {
+            NetworkManager.Ans = Ans;
+            NetworkManager.Dif = Dif;
+            NetworkManager.problem = problem;
+            GameObject.Find("Net").GetComponent<NetworkManager>().Re_Game_Ready();
+            return;
         }
 
         if (net_check == 1)
@@ -504,19 +512,27 @@ public class Button_Event2 : MonoBehaviour {
         {
             stringToEdit = "";
             keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false);
-
+            keyboard.text ="";
             is_Ans = false;
 
         }
 
         if (keyboard != null && keyboard.done)
          {
+            if (keyboard.text.Equals(""))
+            {
+                keyboard = null;
+                is_Ans = true;
+                return;
+            }
             stringToEdit = keyboard.text;
 
             keyboard = null;
 
             Check_Ans();
-        }        
+        }   
+        
+         
     }
 
     public void Correct()
