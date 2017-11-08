@@ -44,7 +44,7 @@ public class NetworkManager : MonoBehaviour {
         MasterServer.RegisterHost(typeName, gameName);
         Net_Code.SetActive(true);
         Text text = Net_Code.GetComponent<Text>();
-        text.text = "Net Cdoe : " + typeName;
+        text.text = "Net Code : " + typeName;
         Button[0].SetActive(true);
         
     }
@@ -57,8 +57,9 @@ public class NetworkManager : MonoBehaviour {
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
     }
 
-    public void UnConnect()
+    [RPC] public void UnConnect()
     {
+        print("asd");
         Network.Disconnect();
         Button[0].SetActive(false);
         Net_Code.SetActive(false);
@@ -68,6 +69,24 @@ public class NetworkManager : MonoBehaviour {
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         init();
+    }
+
+    public void OnDisconnectedFromServer(NetworkDisconnection info)
+    {
+        
+        if(Network.isClient)
+        {
+            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.All);
+        }
+        else if(Network.isServer)
+        {
+            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.All);
+        }
+        for (int i = 0; i < 10; i++)
+            Button[i].SetActive(false);
+
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
+
     }
 
     void OnServerInitialized()
@@ -156,8 +175,6 @@ public class NetworkManager : MonoBehaviour {
     void OnPlayerConnected(NetworkPlayer player)
     {
         is_client_join = true;
-        //Button[1].SetActive(true);
-        //Ready_Str.SetActive(true);
     }
 
     public void Re_Game_Ready()

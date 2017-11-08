@@ -76,8 +76,8 @@ public class Button_Event3 : MonoBehaviour{
                 {
                     temp[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     temp[Block_Number].transform.position = tempV;
-                    int n = Random.Range(0, 5);
-                    switch (n)
+                    
+                    switch (k)
                     {
                         case 0:
                             temp[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;

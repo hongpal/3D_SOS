@@ -70,6 +70,11 @@ public class Button_Event2 : MonoBehaviour {
 
     public void init()
     {
+        if(Block_Number != 0)
+        {
+            for(int i = 0; i < Block_Number; i++)
+                Destroy(Block[i]);
+        }
         for (int i = 0; i < Dif * Dif; i++)
             Ans[i] = Select[i] = 0;
         sum = problem = Block_Number = Dif = 0;
@@ -285,8 +290,8 @@ public class Button_Event2 : MonoBehaviour {
                 Block[Block_Number] = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 Block[Block_Number].transform.position = temp;
                 
-                int n = Random.Range(0, 5);
-                switch (n)
+                
+                switch (k)
                 {
                     case 0:
                         Block[Block_Number++].GetComponent<MeshRenderer>().material.color = Color.red;
@@ -740,6 +745,8 @@ public class Button_Event2 : MonoBehaviour {
         Button[16].SetActive(false);
         Button[7].SetActive(true);
         Button[8].SetActive(true);
+        gyroScope.ok = true;
+        Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(2.527f, 0, 0.267f));
         
     }
