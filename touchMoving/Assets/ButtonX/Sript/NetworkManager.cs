@@ -51,15 +51,16 @@ public class NetworkManager : MonoBehaviour {
 
     public void init()
     {
-        is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
+        Ready_Str.SetActive(false);
+        Net_Code.SetActive(false);
+        ready_check = is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
         count = 0;
-        Ready_text.text = "NO Ready";
+        Ready_text.text = "No Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
     }
 
     [RPC] public void UnConnect()
     {
-        print("asd");
         Network.Disconnect();
         Button[0].SetActive(false);
         Net_Code.SetActive(false);
@@ -68,19 +69,23 @@ public class NetworkManager : MonoBehaviour {
         gyroScope.ok = true;
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
+        for (int i = 0; i < 10; i++)
+            Button[i].SetActive(false);
         init();
     }
 
     public void OnDisconnectedFromServer(NetworkDisconnection info)
     {
-        
+        count = 0;
         if(Network.isClient)
         {
-            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.All);
+            print("client");
+            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
         }
         else if(Network.isServer)
         {
-            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.All);
+            print("server");
+            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Others);
         }
         for (int i = 0; i < 10; i++)
             Button[i].SetActive(false);
@@ -91,6 +96,7 @@ public class NetworkManager : MonoBehaviour {
 
     void OnServerInitialized()
     {
+        count = 0;
         Debug.Log(typeName + " Server Initializied");
     }
 
@@ -282,7 +288,7 @@ public class NetworkManager : MonoBehaviour {
     {
         if(check == -1) // 아직 확정 아님
         {
-            count = check;
+            count = 0;
             UnConnect();
         }
 
@@ -402,7 +408,6 @@ public class NetworkManager : MonoBehaviour {
 
     [RPC] void Result_Check(bool Client_Ans, float Client_Time)
     {
-        
         if (answer && Client_Ans)  // 시간 체크
         {
             if(time > Client_Time)  // 서버 승리
@@ -472,7 +477,7 @@ public class NetworkManager : MonoBehaviour {
         {
             count--;
         }
-       
+        print("count" + count);       
         if (Network.isServer)
         {
             if (count == Network.connections.Length + 1)
