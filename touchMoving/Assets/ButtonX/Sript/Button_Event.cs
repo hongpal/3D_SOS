@@ -57,20 +57,20 @@ public class Button_Event : MonoBehaviour {
             switch (figureNumber)
             {
                 case 0:
-                    ObjectArr[figureNumber].transform.position = new Vector3(-5, 0, 0);
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0,5);
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
-                    zoomInAndOut.pivot = new Vector3(-5, 0, 0);
-                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
+                    zoomInAndOut.pivot = new Vector3(0, 0, 5);
+                    SinObject_1[6].transform.LookAt(new Vector3(0, 0, 5));
                     break;
                 case 1:
-                    ObjectArr[figureNumber].transform.position = new Vector3(-2, 0, 2.5f);
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0, 5);
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
-                    zoomInAndOut.pivot = new Vector3(-2, 0, 2.5f);
-                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
+                    zoomInAndOut.pivot = new Vector3(0, 0, 2.5f);
+                    SinObject_1[6].transform.LookAt(new Vector3(0, 0, 5));
                     break;
                 case 2:
                     SinObject_1[6].transform.position = new Vector3(0, 0, 0);
-                    SinObject_1[6].transform.LookAt(SinObject_1[number].transform);
+                    SinObject_1[6].transform.LookAt(new Vector3(0, 0, 5));
                     break;
                 default:
                     print("bobo");

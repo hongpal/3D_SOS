@@ -22,7 +22,7 @@ public class Menu_Event : MonoBehaviour {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-1").GetComponent<Button_Event>().On_Off(0);
-            Cam.transform.LookAt(center.transform);
+            Cam.transform.LookAt(new Vector3(0, 0, 5));
 
         }
         else if(number == 2)
