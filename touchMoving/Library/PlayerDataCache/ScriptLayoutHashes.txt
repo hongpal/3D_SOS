@@ -144,6 +144,7 @@ a7d3c6c6948d99dd4116e659ddcf5ac4 Assembly-CSharp.dll:UnityStandardAssets.CrossPl
 83877f03b51b3b13fa0d6c51291e0575 Assembly-CSharp.dll:UnityStandardAssets.Characters.FirstPerson.HeadBob
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityStandardAssets.Characters.ThirdPerson.ThirdPersonUserControl
 847108a4f4300c8402f74cce11a88a67 Assembly-CSharp.dll:.DropMe
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Cube
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ShowSliderValue
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.MobileControlRig
 7b1e25dae21f10af340b2c5f2631d9bf Assembly-CSharp.dll:.GE_FantasySkyboxFREE_Demo
@@ -189,7 +190,7 @@ d94b6b98b90ac311443cea09e7bd290c Assembly-CSharp.dll:Parabox.InteractivePrimitiv
 e7cecaedb57da7aa2da2ecf128a29c40 Assembly-UnityScript.dll:.GA_FREE_JS_Demo04
 1e31b8977e9b2607ddde91e3fb78ea72 Assembly-CSharp.dll:.Cam_Light
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GE_OrbitCameraUI
-0e02065e4decc2dfe0ccd4a7933daa0e Assembly-CSharp.dll:.NetworkManager
+a99f244075f680542297a3811a7b788a Assembly-CSharp.dll:.NetworkManager
 a8796ecdc9d5c260bbe32f30c4b10708 Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.TouchPad
 b7f557c19cce3b6f593e26edfe1ec859 Assembly-CSharp.dll:UnityStandardAssets.Vehicles.Ball.Ball
 4a9da55379ba01a415f32f3461838aa1 Assembly-CSharp.dll:.Button_Event
@@ -210,3 +211,4 @@ e1b523733e31491ecb16527c7582e72c Assembly-UnityScript.dll:.GA_FREE_JS_Demo01
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
 42057599834e76900d0987379e4fa2cd Assembly-CSharp.dll:.GA_FREE_Demo06
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ChangeColor
+795ea2dbfe084238ce251eff0a6c2ac1 Assembly-CSharp.dll:.VoiceChat

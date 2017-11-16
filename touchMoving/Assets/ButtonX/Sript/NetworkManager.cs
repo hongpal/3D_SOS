@@ -30,10 +30,29 @@ public class NetworkManager : MonoBehaviour {
     private const string gameName = "3D_SOS";
     private Text Ready_text;
     public static bool is_Ans = false;
+    public bool notRecording = true;
+    public bool sending = false;
+    private AudioSource audioSource;
+    int lastSample = 0;
+    public string microphone;
+    private List<string> allMicrophones = new List<string>();
+    public AudioClip sendingClip;
 
     public void Start()
     {
         Ready_text = Ready_Str.GetComponent<Text>();
+
+        audioSource = GetComponent<AudioSource>();
+
+        //사용가능한 마이크들 찾기
+        for (int i = 0; i < Microphone.devices.Length; i++)
+        {
+            if (microphone == null)//첫번째 마이크를 기본마이크로 설정
+            {
+                microphone = Microphone.devices[i];
+            }
+            allMicrophones.Add(Microphone.devices[i]);
+        }
     }
 
     public void StartServer()

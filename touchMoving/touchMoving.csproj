@@ -159,9 +159,9 @@
     <Compile Include="Assets\ButtonX\Sript\gyroScope.cs" />
     <Compile Include="Assets\ButtonX\Sript\Menu_Event.cs" />
     <Compile Include="Assets\ButtonX\Sript\NetworkManager.cs" />
-    <Compile Include="Assets\ButtonX\Sript\Temp.cs" />
     <Compile Include="Assets\ButtonX\Sript\TimeCheck.cs" />
     <Compile Include="Assets\ButtonX\Sript\TimeCheck2.cs" />
+    <Compile Include="Assets\ButtonX\Sript\VoiceChat.cs" />
     <Compile Include="Assets\ButtonX\Sript\zoomInAndOut.cs" />
   </ItemGroup>
   <ItemGroup>
