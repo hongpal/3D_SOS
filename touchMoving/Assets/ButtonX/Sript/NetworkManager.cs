@@ -56,7 +56,7 @@ public class NetworkManager : MonoBehaviour {
     }
 
 
-    void FixedUpdate()
+   /* void FixedUpdate()
     {
         // If there is a connection
         if (Network.connections.Length > 0)
@@ -95,7 +95,7 @@ public class NetworkManager : MonoBehaviour {
         else
             print("client-> server");
         float[] f = ToFloatArray(ba);
-        audioSource.clip = AudioClip.Create("", f.Length, chan, 44100, true, false);
+        audioSource.clip = AudioClip.Create(microphone, f.Length, chan, 44100, false);
         audioSource.clip.SetData(f, 0);
         if (!audioSource.isPlaying) audioSource.Play();
 
@@ -124,7 +124,7 @@ public class NetworkManager : MonoBehaviour {
             floatArray[i / 4] = System.BitConverter.ToSingle(byteArray, i);
         }
         return floatArray;
-    }
+    }*/
 
     public void StartServer()
     {

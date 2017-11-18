@@ -199,6 +199,7 @@ c00493cf06bf4cc3366207e1290d9bac Assembly-CSharp.dll:.Menu_Event
 d5f4ab0d0ef73021b0ab9dfc02d34cbc Assembly-CSharp.dll:Parabox.InteractivePrimitives.InteractiveCylinder
 5465eae51985f0cb194548215d2133ec Assembly-CSharp.dll:.ScrollDetailTexture
 e1b523733e31491ecb16527c7582e72c Assembly-CSharp.dll:.GA_FREE_Demo01
+795ea2dbfe084238ce251eff0a6c2ac1 Assembly-CSharp.dll:.VoiceChat
 fd65b101df8c85d3236bd4c878f98147 Assembly-CSharp.dll:.Button_Event3
 7cbff8c317263ec22380fc125149ffed GUIAnimatorFREE.dll:.GUIAnimFREE
 d2e582a591d4af7c025408cacf0064d9 GUIAnimatorFREE.dll:.GUIAnimSystemFREE
@@ -211,4 +212,4 @@ e1b523733e31491ecb16527c7582e72c Assembly-UnityScript.dll:.GA_FREE_JS_Demo01
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
 42057599834e76900d0987379e4fa2cd Assembly-CSharp.dll:.GA_FREE_Demo06
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ChangeColor
-795ea2dbfe084238ce251eff0a6c2ac1 Assembly-CSharp.dll:.VoiceChat
+ca3a052aafd496a210ed62c01ba61dc8 Assembly-CSharp.dll:.Temp
