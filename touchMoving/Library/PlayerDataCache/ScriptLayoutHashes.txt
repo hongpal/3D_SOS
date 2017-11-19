@@ -134,6 +134,7 @@ b6fd5f90df867653e022197c32a8f8dd Assembly-CSharp.dll:.failscript
 05524b8f659e7bfe5756d1335fec24ba Assembly-UnityScript.dll:.GA_FREE_JS_OpenOtherScene
 37bf4d6a6d424731cb4a9b998783e5c6 Assembly-CSharp.dll:UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter
 9927f9033995c048dcee5258ceb7659a Assembly-CSharp.dll:.CameraSwitch
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.genga
 05524b8f659e7bfe5756d1335fec24ba Assembly-UnityScript.dll:.FPSInputController
 7b1e994e6b6343e69e5aedce4ab96151 Assembly-CSharp.dll:.SampleControl
 a2efb0db652b8114d1ae7dd9a600d626 Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.InputAxisScrollbar
@@ -188,6 +189,7 @@ c2275a8bfbb9f9942cad75ecdfded41d UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.Spa
 45f3431f0103c41611e8d4eec3d439df UnityEngine.HoloLens.dll:UnityEngine.VR.WSA.SpatialMappingRenderer
 d94b6b98b90ac311443cea09e7bd290c Assembly-CSharp.dll:Parabox.InteractivePrimitives.InteractivePlane
 e7cecaedb57da7aa2da2ecf128a29c40 Assembly-UnityScript.dll:.GA_FREE_JS_Demo04
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.TouchEvent
 1e31b8977e9b2607ddde91e3fb78ea72 Assembly-CSharp.dll:.Cam_Light
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GE_OrbitCameraUI
 a99f244075f680542297a3811a7b788a Assembly-CSharp.dll:.NetworkManager
@@ -212,4 +214,3 @@ e1b523733e31491ecb16527c7582e72c Assembly-UnityScript.dll:.GA_FREE_JS_Demo01
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
 42057599834e76900d0987379e4fa2cd Assembly-CSharp.dll:.GA_FREE_Demo06
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ChangeColor
-ca3a052aafd496a210ed62c01ba61dc8 Assembly-CSharp.dll:.Temp

@@ -9,6 +9,7 @@ public class CubeInit : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
+
         for (int i = 0; i < 6; i++)
         {
             Cube[i] = GameObject.Find("Plane").transform.Find("Cube-" + (i + 1)).gameObject;
