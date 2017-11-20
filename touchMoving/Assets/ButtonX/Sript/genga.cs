@@ -5,8 +5,9 @@ using UnityEngine;
 public class genga : MonoBehaviour {
     public static GameObject[] block = new GameObject[30];
     public static bool[] check = new bool[30];
-    bool check1 = true;
+    public static bool check1 = true;
     int k = 0;
+
     private void Start()
     {
         for (int i = 0; i < 30; i++)

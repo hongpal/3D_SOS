@@ -154,6 +154,7 @@
     <Compile Include="Assets\ButtonX\Sript\Button_Event2.cs" />
     <Compile Include="Assets\ButtonX\Sript\Button_Event3.cs" />
     <Compile Include="Assets\ButtonX\Sript\Cam_Light.cs" />
+    <Compile Include="Assets\ButtonX\Sript\ColiEvent.cs" />
     <Compile Include="Assets\ButtonX\Sript\Cube.cs" />
     <Compile Include="Assets\ButtonX\Sript\CubeInit.cs" />
     <Compile Include="Assets\ButtonX\Sript\genga.cs" />

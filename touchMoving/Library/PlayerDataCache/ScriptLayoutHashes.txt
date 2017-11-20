@@ -214,3 +214,4 @@ e1b523733e31491ecb16527c7582e72c Assembly-UnityScript.dll:.GA_FREE_JS_Demo01
 563daf171b5d1c7c75b1108951401223 Assembly-UnityScript.dll:.CharacterMotor
 42057599834e76900d0987379e4fa2cd Assembly-CSharp.dll:.GA_FREE_Demo06
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ChangeColor
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ColiEvent
