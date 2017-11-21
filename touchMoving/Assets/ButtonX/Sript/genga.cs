@@ -6,6 +6,7 @@ public class genga : MonoBehaviour {
     public static GameObject[] block = new GameObject[30];
     public static bool[] check = new bool[30];
     public static bool check1 = true;
+    public static int check_count = 0;
     int k = 0;
 
     private void Start()
@@ -39,7 +40,10 @@ public class genga : MonoBehaviour {
 
                 if (Input.GetTouch(0).phase == TouchPhase.Began)    // 딱 처음 터치 할때 발생한다
                 {
-                    print(hit.transform.gameObject);
+                    print(hit.transform.gameObject.name);
+
+                    if (hit.transform.gameObject.name == "Cubetest" || hit.transform.gameObject.name == "Cube")
+                        return;
 
                     for (int i = 0; i < 30; i++)
                     {
@@ -69,4 +73,19 @@ public class genga : MonoBehaviour {
 
         }
     }
+
+    public void Roate(int num)
+    {
+        switch (num)
+        {
+            case 0:
+                this.transform.Rotate(new Vector3(0, -90, 0));
+                break;
+            case 1:
+                this.transform.Rotate(new Vector3(0, 90, 0));
+                break;
+        }
+
+    }
+
 }

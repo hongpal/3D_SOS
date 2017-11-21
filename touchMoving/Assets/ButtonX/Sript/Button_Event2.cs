@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[18];
+    public GameObject[] Button = new GameObject[20];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];

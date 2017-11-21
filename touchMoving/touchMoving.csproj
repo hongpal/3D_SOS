@@ -95,8 +95,6 @@
     <Compile Include="Assets\Button\Scripts\ScrollDetailTexture.cs" />
     <Compile Include="Assets\Button\Scripts\ShowSliderValue.cs" />
     <Compile Include="Assets\Button\Scripts\TiltWindow.cs" />
-    <Compile Include="Assets\ButtonX\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_Demo.cs" />
-    <Compile Include="Assets\ButtonX\Fantasy Skybox FREE\Demo\Scripts\GE_FantasySkyboxFREE_UIs.cs" />
     <Compile Include="Assets\ButtonX\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCamera.cs" />
     <Compile Include="Assets\ButtonX\GE Common Assets\GE Orbit Camera\Scripts\GE_OrbitCameraUI.cs" />
     <Compile Include="Assets\ButtonX\GE Common Assets\GE Toggle Full Screen\Scripts\GE_ToggleFullScreenUI.cs" />
@@ -166,13 +164,12 @@
     <Compile Include="Assets\ButtonX\Sript\TouchEvent.cs" />
     <Compile Include="Assets\ButtonX\Sript\VoiceChat.cs" />
     <Compile Include="Assets\ButtonX\Sript\zoomInAndOut.cs" />
+    <Compile Include="Assets\ButtonX\temp\test.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Button\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\Button\Materials\UI-Default-No-Alpha.shader" />
     <None Include="Assets\Button\Textures and Sprites\SF UI\Background\LICENSE.txt" />
-    <None Include="Assets\ButtonX\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
-    <None Include="Assets\ButtonX\Fantasy Skybox FREE\Readme.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

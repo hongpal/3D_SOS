@@ -13,10 +13,11 @@ public class TouchEvent : MonoBehaviour {
     private void Start()
     {
         c = this.GetComponent<MeshRenderer>().material.color;
-        
-        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        this.gameObject.GetComponent<Rigidbody>().drag = 100;
 
+        this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
+        this.gameObject.GetComponent<Rigidbody>().mass = 40;
+        this.gameObject.GetComponent<Rigidbody>().drag = 40;
         name = this.transform.gameObject.name;
         
         if (name.Length < 9)
@@ -26,30 +27,15 @@ public class TouchEvent : MonoBehaviour {
             k = Convert.ToInt32(name.Substring(6, 2));
         }
 
-        switch (UnityEngine.Random.Range(0, 5))
-        {
-            case 0:
-                this.GetComponent<MeshRenderer>().material.color = Color.red;
-                break;
-            case 1:
-                this.GetComponent<MeshRenderer>().material.color = Color.blue;
-                break;
-            case 2:
-                this.GetComponent<MeshRenderer>().material.color = Color.green;
-                break;
-            case 3:
-                this.GetComponent<MeshRenderer>().material.color = Color.yellow;
-                break;
-            default:
-                break;
-        }
-
+        genga.check_count++;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.gameObject.GetComponent<Rigidbody>().drag = 0;
+        
+        this.gameObject.GetComponent<Rigidbody>().drag = 1;
+
         if (genga.check[k] && Input.touchCount > 0)
         {
             Touch touch = Input.GetTouch(0); // get first touch since touch count is greater than zero
