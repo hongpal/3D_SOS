@@ -133,6 +133,14 @@
       <Project>{C2C7ADA8-48E6-1064-ACD6-62FF2C7E9543}</Project>
       <Name>touchMoving</Name>
     </ProjectReference>
+    <ProjectReference Include="touchMoving.Plugins.csproj">
+      <Project>{67046900-76CF-C332-910B-6B37E00C8DF2}</Project>
+      <Name>touchMoving.Plugins</Name>
+    </ProjectReference>
+    <ProjectReference Include="touchMoving.Editor.Plugins.csproj">
+      <Project>{68A3DEC9-992B-7799-9469-AFAAEF9C19AA}</Project>
+      <Name>touchMoving.Editor.Plugins</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\CrossPlatformInput\Scripts\Editor\CrossPlatformInputInitialize.cs" />

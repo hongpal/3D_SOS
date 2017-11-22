@@ -4,16 +4,12 @@ using UnityEngine;
 
 public class genga : MonoBehaviour {
     public static GameObject[] block = new GameObject[30];
-    public static bool[] check = new bool[30];
-    public static bool check1 = true;
+    public static bool check = true;
     public static int check_count = 0;
     int k = 0;
 
     private void Start()
     {
-        for (int i = 0; i < 30; i++)
-            check[i] = false;
-
         for (int i = 0; i < 30; i++)
         {
             block[i] = GameObject.Find("GenGa/Cube (" + i +")");
@@ -24,7 +20,7 @@ public class genga : MonoBehaviour {
     // Update is called once per frame
     void Update () {
 
-        if (Input.touchCount > 0 && check1)
+        if (Input.touchCount > 0 && check)
         {
             Vector2 pos = Input.GetTouch(0).position;    // 터치한 위치
 
@@ -50,13 +46,14 @@ public class genga : MonoBehaviour {
                         if (hit.transform.gameObject.name.Equals(block[i].name))
                         {
                             print("go");
-                            genga.check[i] = true;
-                            k = i;
+                            block[i].GetComponent<Rigidbody>().mass = 1;
+                            JoyStick.Player = block[i].transform;
+                            genga.block[i].GetComponent<MeshRenderer>().material.color = Color.black;
+                            check = false;
                             break;
                         }
                     }
-                    check1 = false;
-                    genga.block[k].GetComponent<MeshRenderer>().material.color = Color.black;
+                       
                 }
 
                 else if (Input.GetTouch(0).phase == TouchPhase.Moved)    // 터치하고 움직이믄 발생한다.
@@ -72,20 +69,6 @@ public class genga : MonoBehaviour {
             }
 
         }
-    }
-
-    public void Roate(int num)
-    {
-        switch (num)
-        {
-            case 0:
-                this.transform.Rotate(new Vector3(0, -90, 0));
-                break;
-            case 1:
-                this.transform.Rotate(new Vector3(0, 90, 0));
-                break;
-        }
-
     }
 
 }
