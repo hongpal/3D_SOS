@@ -13,7 +13,7 @@ public class TouchEvent : MonoBehaviour {
 
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
         this.gameObject.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.None;
-        this.gameObject.GetComponent<Rigidbody>().mass = 400;
+        this.gameObject.GetComponent<Rigidbody>().mass = 40;
         this.gameObject.GetComponent<Rigidbody>().drag = 1;
     }
 

@@ -31,8 +31,11 @@ public class JoyStick : MonoBehaviour
 
      void Update()
      {
-        if (MoveFlag && Player1 != null)
-            Player1.transform.Translate(Vector3.forward * Time.deltaTime * 1f);
+       // if (MoveFlag && Player != null)
+        
+            
+            //Player.transform.Translate(Vector3.forward * Time.deltaTime * 1f);
+        
      }
 
      // 드래그
@@ -55,9 +58,14 @@ public class JoyStick : MonoBehaviour
          // 거리가 반지름보다 커지면 조이스틱을 반지름의 크기만큼만 이동.
          else
              Stick.position = StickFirstPos + JoyVec * Radius;
+        Vector3 v = new Vector3(0, 0, 0);
+        v.x = JoyVec.x * 0.05f;
+        v.z = JoyVec.y * 0.05f;
+        Player.position += v;
+        print(Player.position);
 
-        Player1.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
-     }
+        //Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
+    }
 
      // 드래그 끝.
      public void DragEnd()

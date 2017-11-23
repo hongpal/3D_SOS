@@ -46,7 +46,7 @@ public class genga : MonoBehaviour {
                         if (hit.transform.gameObject.name.Equals(block[i].name))
                         {
                             print("go");
-                            block[i].GetComponent<Rigidbody>().mass = 1;
+                            //block[i].GetComponent<Rigidbody>().mass = ;
                             JoyStick.Player = block[i].transform;
                             genga.block[i].GetComponent<MeshRenderer>().material.color = Color.black;
                             check = false;
