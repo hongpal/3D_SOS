@@ -5,7 +5,8 @@ using UnityEngine;
 public class genga : MonoBehaviour {
     public static GameObject[] block = new GameObject[30];
     public static bool check = true;
-    public static int check_count = 0;
+    public static Vector3[] block_vector = new Vector3[30];
+    public static Quaternion[] block_rotate = new Quaternion[30];
     int k = 0;
 
     private void Start()
@@ -13,6 +14,8 @@ public class genga : MonoBehaviour {
         for (int i = 0; i < 30; i++)
         {
             block[i] = GameObject.Find("GenGa/Cube (" + i +")");
+            block_vector[i] = block[i].transform.position;
+            block_rotate[i] = block[i].transform.rotation;
         }
        
     }
@@ -45,8 +48,6 @@ public class genga : MonoBehaviour {
                     {
                         if (hit.transform.gameObject.name.Equals(block[i].name))
                         {
-                            print("go");
-                            //block[i].GetComponent<Rigidbody>().mass = ;
                             JoyStick.Player = block[i].transform;
                             genga.block[i].GetComponent<MeshRenderer>().material.color = Color.black;
                             check = false;

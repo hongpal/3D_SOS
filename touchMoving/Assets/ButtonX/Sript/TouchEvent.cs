@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class TouchEvent : MonoBehaviour {
 
-    Color c;
+    public static Color c;
    
     private void Start()
-    {
+    { 
         c = this.GetComponent<MeshRenderer>().material.color;
 
         this.GetComponent<Rigidbody>().velocity = Vector3.zero;
