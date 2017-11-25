@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[20];
+    public GameObject[] Button = new GameObject[21];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
@@ -101,7 +101,8 @@ public class Button_Event2 : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
-
+            print("asd");
+            Button[18].SetActive(true);
             Cam.transform.position = new Vector3(0, 0, 0);
             Cam.transform.LookAt(new Vector3(5, 0, 6));
             zoomInAndOut.ok = false;
@@ -139,6 +140,16 @@ public class Button_Event2 : MonoBehaviour {
                 return;
             }
 
+            if(Button[19].activeSelf)
+            {
+                Button[19].SetActive(false);
+                Button[20].SetActive(false);
+                Button[0].SetActive(true);
+                Button[2].SetActive(true);
+                Button[18].SetActive(true);
+                return;
+            }
+
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(false);
             Button[13].SetActive(false);
@@ -155,6 +166,7 @@ public class Button_Event2 : MonoBehaviour {
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
 
+            Button[18].SetActive(true);
             Button[13].SetActive(false);
             Button[14].SetActive(false);
             net_check = 0;
@@ -197,6 +209,8 @@ public class Button_Event2 : MonoBehaviour {
     {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(false);
+
+        Button[18].SetActive(false);
         GameObject.Find("Sin-3").GetComponent<Button_Event3>().On_Off(0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         gyroScope.ok = false;
@@ -262,6 +276,21 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
     
+
+    public void JenGa()
+    {
+        for (int i = 0; i < 3; i++)
+            Button[i].SetActive(false);
+        Button[18].SetActive(false);
+
+        Button[19].SetActive(true);
+        Button[20].SetActive(true);
+        Button[1].SetActive(true);
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        gyroScope.ok = false;
+    }
+
     public void CreateBlock(int number)
     {
         switch (number)
@@ -741,6 +770,7 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(false);
 
+        Button[18].SetActive(false);
         Button[15].SetActive(false);
         Button[16].SetActive(false);
         Button[7].SetActive(true);
