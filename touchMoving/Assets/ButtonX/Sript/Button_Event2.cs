@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[21];
+    public GameObject[] Button = new GameObject[23];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
@@ -765,6 +765,25 @@ public class Button_Event2 : MonoBehaviour {
         }
     }
  
+    public void select_jenga()
+    {
+        NetworkManager.problem = problem = 3;
+        Button[21].SetActive(false);
+        Button[22].SetActive(false);
+        GameObject.Find("Net").GetComponent<NetworkManager>().StartServer();
+
+    }
+    public void jenga_or_solving()
+    {
+        for (int i = 0; i < 3; i++)
+            Button[i].SetActive(false);
+
+        Button[15].SetActive(false);
+        Button[16].SetActive(false);
+        Button[21].SetActive(true);
+        Button[22].SetActive(true);
+    }
+
     public void Solving_Problems()
     {
         for (int i = 0; i < 3; i++)
@@ -779,5 +798,17 @@ public class Button_Event2 : MonoBehaviour {
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(2.527f, 0, 0.267f));
         
+    }
+
+
+    public void net_solving_problems()
+    {
+        Button[7].SetActive(true);
+        Button[8].SetActive(true);
+        Button[21].SetActive(false);
+        Button[22].SetActive(false);
+        gyroScope.ok = true;
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(2.527f, 0, 0.267f));
     }
 }

@@ -11,6 +11,10 @@ public class genga : MonoBehaviour {
 
     private void Start()
     {
+        if (this.gameObject.name != "GenGa")
+        {
+            return;
+        }
         for (int i = 0; i < 30; i++)
         {
             block[i] = GameObject.Find("GenGa/Cube (" + i +")");
@@ -71,5 +75,18 @@ public class genga : MonoBehaviour {
 
         }
     }
-
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        Vector3 syncPosition = Vector3.zero;
+        if (stream.isWriting)
+        {
+            syncPosition = GetComponent<Rigidbody>().position;
+            stream.Serialize(ref syncPosition);
+        }
+        else
+        {
+            stream.Serialize(ref syncPosition);
+            GetComponent<Rigidbody>().position = syncPosition;
+        }
+    }
 }

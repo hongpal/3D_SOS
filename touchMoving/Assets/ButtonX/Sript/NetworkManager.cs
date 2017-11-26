@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class NetworkManager : MonoBehaviour {
 
+    public GameObject Joystick;
+    public GameObject Jenga;
     public GameObject Net_Code;
     public GameObject Ready_Str;
     public GameObject[] Button = new GameObject[10];
@@ -414,7 +416,7 @@ public class NetworkManager : MonoBehaviour {
 
     public void Game_Start()
     {
-        if(Network.isClient)
+        if (Network.isClient)
         {
             Button[6].SetActive(false);
         }
@@ -422,11 +424,31 @@ public class NetworkManager : MonoBehaviour {
         else
         {
             Button[6].SetActive(false);
-            GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
-            GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(); 
+
+            if (problem == 3)
+            {
+                Cam.transform.position = new Vector3(0, 0, 0);
+                Cam.transform.LookAt(new Vector3(0, 0, 5f));
+                Jenga.SetActive(true);
+                Joystick.SetActive(true);
+                Network.Instantiate(Jenga, Jenga.transform.position, Quaternion.identity, 0);
+                GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, problem);
+            }
+            else
+            {
+                GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
+                GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
+            }
         }
     }
 
+    [RPC] void Intent(int Server_problem)
+    {
+        problem = Server_problem;
+        Joystick.SetActive(true);
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5f));
+    }
     [RPC] void Intent(int[] Server_Ans, int Server_Dif, int Server_problem) // 블록이랑, 난이도만 넘어옴
     {
         Ans = Server_Ans;
