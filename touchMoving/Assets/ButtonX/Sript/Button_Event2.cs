@@ -368,9 +368,7 @@ public class Button_Event2 : MonoBehaviour {
                 break;
 
         }
-
-
-
+        
         for (int i = 0; i < Client_Dif * Client_Dif; i++)
         {
             if (Ans[i] <= 0)

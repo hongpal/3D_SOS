@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 
-public class JoyStick : MonoBehaviour
+public class JoyStick : NetworkBehaviour
 {
-
     // 공개
     public static Transform Player;        // 플레이어.
     public Transform Stick;         // 조이스틱.
@@ -32,8 +33,6 @@ public class JoyStick : MonoBehaviour
      void Update()
      {
        // if (MoveFlag && Player != null)
-        
-            
             //Player.transform.Translate(Vector3.forward * Time.deltaTime * 1f);
         
      }
@@ -62,13 +61,36 @@ public class JoyStick : MonoBehaviour
         v.x = JoyVec.x * 0.05f;
         v.z = JoyVec.y * 0.05f;
         Player.position += v;
+        v = Player.position;
+        if (Network.isClient)
+        {
+            int k = Int32.Parse(GetMiddleString(Player.name, "(", ")"));
+            genga.block[k].GetComponent<TouchEvent>().move_event(k, v);
+        }
         print(Player.position);
 
         //Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
     }
 
-     // 드래그 끝.
-     public void DragEnd()
+    public static string GetMiddleString(string str, string begin, string end)
+    {
+        if (string.IsNullOrEmpty(str))
+        {
+            return null;
+        }
+
+        string result = null;
+        if (str.IndexOf(begin) > -1)
+        {
+            str = str.Substring(str.IndexOf(begin) + begin.Length);
+            if (str.IndexOf(end) > -1) result = str.Substring(0, str.IndexOf(end));
+            else result = str;
+        }
+        return result;
+    }
+
+    // 드래그 끝.
+    public void DragEnd()
      {
          zoomInAndOut.ok = true;
          Stick.position = StickFirstPos; // 스틱을 원래의 위치로.

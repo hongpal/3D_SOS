@@ -2,9 +2,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class TouchEvent : MonoBehaviour {
-
+public class TouchEvent : MonoBehaviour
+{
     public static Color c;
    
     private void Start()
@@ -39,21 +40,8 @@ public class TouchEvent : MonoBehaviour {
         return result;
     }
 
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    public void move_event(int num, Vector3 v)
     {
-        Vector3 syncPosition = Vector3.zero;
-        
-        if (stream.isWriting)
-        {
-            print("write");
-            syncPosition = GetComponent<Rigidbody>().position;
-            stream.Serialize(ref syncPosition);
-        }
-        else
-        {
-            print("read");
-            stream.Serialize(ref syncPosition);
-            GetComponent<Rigidbody>().position = syncPosition;
-        }
+        genga.block[num].transform.position = v;
     }
 }

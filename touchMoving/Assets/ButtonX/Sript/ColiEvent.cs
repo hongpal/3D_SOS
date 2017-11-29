@@ -8,10 +8,9 @@ public class ColiEvent : MonoBehaviour {
     {
         if(JoyStick.Player == null || collision.transform.name != JoyStick.Player.name )
         {
-            print("colll!!\n");
             genga.check = true;
             JoyStick.Player = null;
-
+            
             for (int i = 0; i < 30; i++)
             {
                 genga.block[i].SetActive(false);
@@ -22,8 +21,7 @@ public class ColiEvent : MonoBehaviour {
                 genga.block[i].SetActive(true);
                 genga.block[i].transform.position = genga.block_vector[i];
                 genga.block[i].transform.rotation = genga.block_rotate[i];
-                genga.block[i].GetComponent<MeshRenderer>().material.color = TouchEvent.c;
-                
+                genga.block[i].GetComponent<MeshRenderer>().material.color = TouchEvent.c;   
             }
             return;
         }

@@ -55,6 +55,10 @@ public class genga : MonoBehaviour {
                             JoyStick.Player = block[i].transform;
                             genga.block[i].GetComponent<MeshRenderer>().material.color = Color.black;
                             check = false;
+                            if (Button_Event2.net_check == 1)
+                            {
+                                GameObject.Find("Net").GetComponent<NetworkManager>().select(i);
+                            }
                             break;
                         }
                     }
@@ -73,20 +77,6 @@ public class genga : MonoBehaviour {
 
             }
 
-        }
-    }
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-        Vector3 syncPosition = Vector3.zero;
-        if (stream.isWriting)
-        {
-            syncPosition = GetComponent<Rigidbody>().position;
-            stream.Serialize(ref syncPosition);
-        }
-        else
-        {
-            stream.Serialize(ref syncPosition);
-            GetComponent<Rigidbody>().position = syncPosition;
         }
     }
 }
