@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.EventSystems;
 
-public class JoyStick : NetworkBehaviour
+public class JoyStick : MonoBehaviour
 {
     // 공개
     public static Transform Player;        // 플레이어.
@@ -65,7 +65,8 @@ public class JoyStick : NetworkBehaviour
         if (Network.isClient)
         {
             int k = Int32.Parse(GetMiddleString(Player.name, "(", ")"));
-            genga.block[k].GetComponent<TouchEvent>().move_event(k, v);
+            GameObject.Find("Net").GetComponent<NetworkManager>().jenga_move(k, v);
+            //genga.block[k].GetComponent<TouchEvent>().move_event(k, v);
         }
         print(Player.position);
 
