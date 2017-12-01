@@ -49,8 +49,10 @@ public class TouchEvent : MonoBehaviour
     {
         Vector3 syncPosition = Vector3.zero;
         Vector3 syncVelocity = Vector3.zero;
+
         if (stream.isWriting)
         {
+            print("write");
             syncPosition = GetComponent<Rigidbody>().position;
             stream.Serialize(ref syncPosition);
 
@@ -59,6 +61,7 @@ public class TouchEvent : MonoBehaviour
         }
         else
         {
+            print("read");
             stream.Serialize(ref syncPosition);
             stream.Serialize(ref syncVelocity);
 
@@ -69,9 +72,19 @@ public class TouchEvent : MonoBehaviour
             syncEndPosition = syncPosition + syncVelocity * syncDelay;
             syncStartPosition = GetComponent<Rigidbody>().position;
         }
-    }
-    public void move_event(int num, Vector3 v)
-    {
-        genga.block[num].transform.position = v;
+
+        /*if (stream.isWriting)
+        {
+            print("write");
+            syncPosition = GetComponent<Rigidbody>().position;
+            stream.Serialize(ref syncPosition);
+        }
+        else
+        {
+            print("read");
+            stream.Serialize(ref syncPosition);
+            GetComponent<Rigidbody>().position = syncPosition;
+        }
+        */
     }
 }

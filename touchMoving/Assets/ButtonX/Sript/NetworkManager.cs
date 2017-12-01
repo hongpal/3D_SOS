@@ -11,7 +11,7 @@ public class NetworkManager : MonoBehaviour
     public GameObject Jenga;
     public GameObject Net_Code;
     public GameObject Ready_Str;
-    public GameObject[] Button = new GameObject[10];
+    public GameObject[] Button = new GameObject[13];
     public GameObject Cam;
     public Vector3[] v_block = new Vector3[30];
     public static GameObject[] Block = new GameObject[16 * 4];
@@ -23,6 +23,7 @@ public class NetworkManager : MonoBehaviour
     public static bool answer = false;  // 정답 오답
     public static bool Get_Answer = false;
     public static bool is_Re_Game = false;
+    public static bool my_turn = false;
     public  TouchScreenKeyboard keyboard = null;
     private bool is_server_join = false;
     private bool is_client_join = false;
@@ -166,6 +167,12 @@ public class NetworkManager : MonoBehaviour
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         for (int i = 0; i < 10; i++)
             Button[i].SetActive(false);
+        for(int i = 0; i < 30; i ++)
+        {
+            if (genga.block[i] != null)
+                Destroy(genga.block[i]);
+        }
+
         init();
     }
 
@@ -232,7 +239,6 @@ public class NetworkManager : MonoBehaviour
                 }
             }
         }
-
     }
 
     private void RefreshHostList(string temp)
@@ -435,6 +441,14 @@ public class NetworkManager : MonoBehaviour
                 Jenga.SetActive(true);
                 Joystick.SetActive(true);
                 Network.Instantiate(Jenga, Jenga.transform.position, Quaternion.identity, 0);
+                Button[12].SetActive(true);
+                Text text = Button[12].GetComponent<Text>();
+
+                if (my_turn)
+                    text.text = "My turn";
+                else
+                    text.text = "Wait";
+
                 GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, problem);
             }
             else
@@ -448,6 +462,15 @@ public class NetworkManager : MonoBehaviour
     [RPC] void Intent(int Server_problem)
     {
         problem = Server_problem;
+        Button[12].SetActive(true);
+
+        Text text = Button[12].GetComponent<Text>();
+
+        if (my_turn)
+            text.text = "My turn";
+        else
+            text.text = "Wait";
+
         Joystick.SetActive(true);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5f));
@@ -458,7 +481,7 @@ public class NetworkManager : MonoBehaviour
         Dif = Server_Dif;
         problem = Server_problem;
         count = 0;
-        Ready_text.text = "NO Ready";
+        Ready_text.text = "No Ready";
         Button[1].SetActive(false);
         Ready_Str.SetActive(false);
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock(Ans, Dif, problem);
@@ -577,8 +600,10 @@ public class NetworkManager : MonoBehaviour
     [RPC] void time_check()
     {
         Button[1].SetActive(false);
+        Button[2].SetActive(false);
         Ready_Str.SetActive(false);
         Button[6].SetActive(true);
+        count = 0;
     }
 
     [RPC] void Ready_Count(bool ready_check)
@@ -597,11 +622,74 @@ public class NetworkManager : MonoBehaviour
         {
             if (count == Network.connections.Length + 1)
             {
-                Ready_text.text = "NO Ready";
+                Ready_text.text = "No Ready";
                 count = 0;
+                if(problem == 3)
+                {
+                    Button[1].SetActive(false);
+                    Ready_Str.SetActive(false);
+                    Button[10].SetActive(true);
+                    Button[11].SetActive(true);
+                    turn = UnityEngine.Random.Range(0, 2);
+                    GetComponent<NetworkView>().RPC("turn_select", RPCMode.Others, turn);
+                    return;
+                }
                 GetComponent<NetworkView>().RPC("time_check", RPCMode.All);
             }
         }
+    }
+
+    [RPC] public void turn_button_select(int turn_num)
+    {
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5f));
+
+        switch(turn_num)
+        {
+            case 0:
+                Button[11].SetActive(false);
+                break;
+            case 1:
+                Button[10].SetActive(false);
+                break;
+        }
+        Button[turn_num + 10].SetActive(false);
+        Button[2].SetActive(true);
+
+        if(turn_num == turn)
+            my_turn = true;
+            
+
+        if (Network.isClient)
+        {
+            GetComponent<NetworkView>().RPC("jenga_start", RPCMode.Server, turn_num);
+        }
+        else
+        {
+            GetComponent<NetworkView>().RPC("jenga_start", RPCMode.All, turn_num);
+        }
+    }
+
+    [RPC] void jenga_start(int turn_num)
+    {
+        count++;
+        Button[turn_num + 10].SetActive(false);
+        if (Network.isServer)
+        {
+            if (count == Network.connections.Length + 1)
+            {
+                GetComponent<NetworkView>().RPC("time_check", RPCMode.All);
+            }
+        }
+    }
+
+    [RPC] void turn_select(int num)
+    {
+        Button[1].SetActive(false);
+        Ready_Str.SetActive(false);
+        Button[10].SetActive(true);
+        Button[11].SetActive(true);
+        turn = num;
     }
 
     public void jenga_move(int num, Vector3 v)

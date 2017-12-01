@@ -62,6 +62,7 @@ public class JoyStick : MonoBehaviour
         v.z = JoyVec.y * 0.05f;
         Player.position += v;
         v = Player.position;
+
         if (Network.isClient)
         {
             int k = Int32.Parse(GetMiddleString(Player.name, "(", ")"));
