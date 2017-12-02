@@ -15,10 +15,9 @@ public class TouchEvent : MonoBehaviour
 
     private void Start()
     {
-        int k;
         c = this.GetComponent<MeshRenderer>().material.color;
 
-        k = Int32.Parse(GetMiddleString(this.gameObject.name, "(", ")"));
+        int k = Int32.Parse(GetMiddleString(this.gameObject.name, "(", ")"));
         genga.block[k] = this.gameObject;
         genga.block_vector[k] = genga.block[k].transform.position;
         genga.block_rotate[k] = genga.block[k].transform.rotation;
@@ -52,7 +51,6 @@ public class TouchEvent : MonoBehaviour
 
         if (stream.isWriting)
         {
-            print("write");
             syncPosition = GetComponent<Rigidbody>().position;
             stream.Serialize(ref syncPosition);
 
@@ -61,7 +59,6 @@ public class TouchEvent : MonoBehaviour
         }
         else
         {
-            print("read");
             stream.Serialize(ref syncPosition);
             stream.Serialize(ref syncVelocity);
 
@@ -72,19 +69,5 @@ public class TouchEvent : MonoBehaviour
             syncEndPosition = syncPosition + syncVelocity * syncDelay;
             syncStartPosition = GetComponent<Rigidbody>().position;
         }
-
-        /*if (stream.isWriting)
-        {
-            print("write");
-            syncPosition = GetComponent<Rigidbody>().position;
-            stream.Serialize(ref syncPosition);
-        }
-        else
-        {
-            print("read");
-            stream.Serialize(ref syncPosition);
-            GetComponent<Rigidbody>().position = syncPosition;
-        }
-        */
     }
 }

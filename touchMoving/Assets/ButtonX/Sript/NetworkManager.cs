@@ -11,6 +11,7 @@ public class NetworkManager : MonoBehaviour
     public GameObject Jenga;
     public GameObject Net_Code;
     public GameObject Ready_Str;
+    public GameObject time_cont;
     public GameObject[] Button = new GameObject[13];
     public GameObject Cam;
     public Vector3[] v_block = new Vector3[30];
@@ -27,7 +28,7 @@ public class NetworkManager : MonoBehaviour
     public  TouchScreenKeyboard keyboard = null;
     private bool is_server_join = false;
     private bool is_client_join = false;
-    private bool ready_check = false;
+    public bool ready_check = false;
     private bool check = true;
     private int num;
     private static int count = 0;
@@ -153,6 +154,7 @@ public class NetworkManager : MonoBehaviour
         count = 0;
         Ready_text.text = "No Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
+        
     }
 
     [RPC] public void UnConnect()
@@ -163,11 +165,35 @@ public class NetworkManager : MonoBehaviour
         GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
         zoomInAndOut.ok = false;
         gyroScope.ok = true;
+        Destroy(ColiEvent.jenga);
+        Joystick.SetActive(false);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
-        for (int i = 0; i < 10; i++)
+        for (int i = 0; i < 13; i++)
             Button[i].SetActive(false);
         for(int i = 0; i < 30; i ++)
+        {
+            if (genga.block[i] != null)
+                Destroy(genga.block[i]);
+        }
+
+        init();
+    }
+
+    public void temp()
+    {
+        Button[0].SetActive(false);
+        Net_Code.SetActive(false);
+        GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+        zoomInAndOut.ok = false;
+        gyroScope.ok = true;
+        Destroy(ColiEvent.jenga);
+        Joystick.SetActive(false);
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        for (int i = 0; i < 13; i++)
+            Button[i].SetActive(false);
+        for (int i = 0; i < 30; i++)
         {
             if (genga.block[i] != null)
                 Destroy(genga.block[i]);
@@ -181,12 +207,13 @@ public class NetworkManager : MonoBehaviour
         count = 0;
         if(Network.isClient)
         {
-            print("client");
+            temp();
             GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
         }
         else if(Network.isServer)
         {
             print("server");
+            temp();
             GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Others);
         }
         for (int i = 0; i < 10; i++)
@@ -401,10 +428,36 @@ public class NetworkManager : MonoBehaviour
             {
                 is_Re_Game = true;
                 count = 0;
-                GetComponent<NetworkView>().RPC("settings", RPCMode.All);
+                if (problem != 3)
+                    GetComponent<NetworkView>().RPC("settings", RPCMode.All);
+                else
+                    GetComponent<NetworkView>().RPC("jenga_restart", RPCMode.All);
             }
         }
 
+    }
+
+    [RPC] public void jenga_restart()
+    {
+        Destroy(ColiEvent.jenga);
+        print("asd");
+        //ColiEvent.jenga.SetActive(true);
+        Jenga.SetActive(true);
+        Button[3].SetActive(false);
+        Button[4].SetActive(false);
+        Button[7].SetActive(false);
+        Button[8].SetActive(false);
+        /*for (int i = 0; i < 30; i++)
+        {
+            genga.block[i].SetActive(true);
+            genga.block[i].transform.position = genga.block_vector[i];
+            genga.block[i].transform.rotation = genga.block_rotate[i];
+            genga.block[i].GetComponent<MeshRenderer>().material.color = TouchEvent.c;
+        }*/
+        if(Network.isServer)
+        {
+            Network.Instantiate(Jenga, Jenga.transform.position, Quaternion.identity, 0);
+        }
     }
 
     [RPC] void settings()
@@ -711,5 +764,38 @@ public class NetworkManager : MonoBehaviour
     {
         JoyStick.Player = genga.block[num].transform;
         genga.block[num].GetComponent<MeshRenderer>().material.color = Color.black;
+    }
+
+    [RPC] public void time_go()
+    {
+        time_cont.SetActive(true);
+    }
+
+    [RPC] public void time_stop()
+    {
+        time_cont.SetActive(false);
+    }
+
+    [RPC] public void turn_change()
+    {
+        Text text = Button[12].GetComponent<Text>();
+
+        if (!my_turn)
+            text.text = "My turn";
+        else
+            text.text = "Wait";
+        time_cont.SetActive(false);
+        my_turn = !my_turn;
+    }
+
+    [RPC] public void jenga_result()
+    {
+        if (!my_turn)
+            Button[3].SetActive(true);
+        else
+            Button[4].SetActive(true);
+
+        Button[7].SetActive(true);
+        Button[8].SetActive(true);
     }
 }

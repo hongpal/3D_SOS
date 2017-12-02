@@ -85,7 +85,7 @@ public class Button_Event2 : MonoBehaviour {
     {
         Button[9].SetActive(false);
         Button[12].SetActive(false);
-
+        Button[18].SetActive(false);
         if (Block_Number != 0)
         {   
             for(int i = 0; i < Block_Number; i++)

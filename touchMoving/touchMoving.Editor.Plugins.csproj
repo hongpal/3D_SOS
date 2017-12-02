@@ -146,6 +146,8 @@
     <None Include="Assets\Button\Fonts\Jupiter\LICENSE.txt" />
     <None Include="Assets\Button\Materials\UI-Default-No-Alpha.shader" />
     <None Include="Assets\Button\Textures and Sprites\SF UI\Background\LICENSE.txt" />
+    <None Include="Assets\ButtonX\Fantasy Skybox FREE\Fog and Ambient reference.txt" />
+    <None Include="Assets\ButtonX\Fantasy Skybox FREE\Readme.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\FirstPersonCharacter\FirstPersonCharacterGuidelines.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\RollerBall\RollerBallGuidelines.txt" />
     <None Include="Assets\ButtonX\GE Common Assets\GE Touch Joystick\Characters\ThirdPersonCharacter\ThirdPersonCharacterGuidelines.txt" />

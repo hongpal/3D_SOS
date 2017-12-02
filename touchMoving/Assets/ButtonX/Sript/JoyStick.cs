@@ -67,7 +67,6 @@ public class JoyStick : MonoBehaviour
         {
             int k = Int32.Parse(GetMiddleString(Player.name, "(", ")"));
             GameObject.Find("Net").GetComponent<NetworkManager>().jenga_move(k, v);
-            //genga.block[k].GetComponent<TouchEvent>().move_event(k, v);
         }
         print(Player.position);
 
