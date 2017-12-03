@@ -7,6 +7,10 @@ public class genga : MonoBehaviour {
     public static bool check = true;
     public static Vector3[] block_vector = new Vector3[30];
     public static Quaternion[] block_rotate = new Quaternion[30];
+    public static GameObject Cam;
+    public GameObject left;
+    public GameObject right;
+    public static int cam_status = 1;
     int k = 0;
 
     private void Start()
@@ -27,6 +31,7 @@ public class genga : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
+
         if (TouchScreenKeyboard.isSupported)
         {
             if (Input.touchCount > 0 && check)
@@ -51,9 +56,13 @@ public class genga : MonoBehaviour {
                             return;
 
                         if (Button_Event2.net_check == 1)
+                        {
+                            print("aa");
                             if (!NetworkManager.my_turn)
                                 return;
+                        }
 
+                        
                         for (int i = 0; i < 30; i++)
                         {
                             if (hit.transform.gameObject.name.Equals(block[i].name))
@@ -82,10 +91,106 @@ public class genga : MonoBehaviour {
                     }
 
                 }
-
             }
             return;
         }
+        else
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);    // 터치한 좌표 레이로 바꾸엉
 
+                RaycastHit hit;    // 정보 저장할 구조체 만들고
+
+                if(Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.gameObject.name == "Cubetest" || hit.transform.gameObject.name == "Cube")
+                        return;
+
+                    if (Button_Event2.net_check == 1)
+                    {
+                        if (!NetworkManager.my_turn)
+                            return;
+                    }
+
+
+                    for (int i = 0; i < 30; i++)
+                    {
+                        if (hit.transform.gameObject.name.Equals(block[i].name))
+                        {
+                            JoyStick.Player = block[i].transform;
+                            genga.block[i].GetComponent<MeshRenderer>().material.color = Color.black;
+                            check = false;
+                            if (Button_Event2.net_check == 1)
+                            {
+                                GameObject.Find("Net").GetComponent<NetworkManager>().select(i);
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    public void left_move()
+    {
+        if(Button_Event2.net_check == 1 && NetworkManager.my_turn)
+        {
+            GameObject.Find("Net").GetComponent<NetworkManager>().left_move();
+            return;
+        }
+        cam_status++;
+
+        if (cam_status == 5)
+            cam_status = 1;
+
+        switch (cam_status)
+        {
+            case 1:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 0);
+                break;
+            case 2:
+                NetworkManager.Cam.transform.position = new Vector3(-7, 0, 7);
+                break;
+            case 3:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 14);     
+                break;
+            case 4:
+                NetworkManager.Cam.transform.position = new Vector3(7, 0, 7);
+                break;
+        }
+        NetworkManager.Cam.transform.LookAt(new Vector3(0, 0, 7));
+    }
+
+    public void right_move()
+    {
+        if (Button_Event2.net_check == 1 && NetworkManager.my_turn)
+        {
+            GameObject.Find("Net").GetComponent<NetworkManager>().right_move();
+            return;
+        }
+        cam_status--;
+
+        if (cam_status == 0)
+            cam_status = 4;
+
+        switch (cam_status)
+        {
+            case 1:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 0);
+                break;
+            case 2:
+                NetworkManager.Cam.transform.position = new Vector3(-7, 0, 7);
+                break;
+            case 3:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 14);
+                break;
+            case 4:
+                NetworkManager.Cam.transform.position = new Vector3(7, 0, 7);
+                break;
+        }
+        NetworkManager.Cam.transform.LookAt(new Vector3(0, 0, 7));
     }
 }

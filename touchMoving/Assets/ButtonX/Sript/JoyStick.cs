@@ -40,7 +40,6 @@ public class JoyStick : MonoBehaviour
      // 드래그
      public void Drag(BaseEventData _Data)
      {
-         zoomInAndOut.ok = false;
          MoveFlag = true;
          PointerEventData Data = _Data as PointerEventData;
          Vector3 Pos = Data.position;
@@ -58,9 +57,31 @@ public class JoyStick : MonoBehaviour
          else
              Stick.position = StickFirstPos + JoyVec * Radius;
         Vector3 v = new Vector3(0, 0, 0);
-        v.x = JoyVec.x * 0.05f;
-        v.z = JoyVec.y * 0.05f;
-        Player.position += v;
+
+        switch (genga.cam_status)
+        {
+            case 1:
+                v.x = JoyVec.x * 0.05f;
+                v.z = JoyVec.y * 0.05f;
+                Player.position += v;
+                break;
+            case 2:
+                v.z = -JoyVec.x * 0.05f;
+                v.x = JoyVec.y * 0.05f;
+                Player.position += v;
+                break;
+            case 3:
+                v.x = -JoyVec.x * 0.05f;
+                v.z = -JoyVec.y * 0.05f;
+                Player.position += v;
+                break;
+            case 4:
+                v.z = JoyVec.x * 0.05f;
+                v.x = -JoyVec.y * 0.05f;
+                Player.position += v;
+                break;
+        }
+        
         v = Player.position;
 
         if (Network.isClient)
@@ -68,7 +89,6 @@ public class JoyStick : MonoBehaviour
             int k = Int32.Parse(GetMiddleString(Player.name, "(", ")"));
             GameObject.Find("Net").GetComponent<NetworkManager>().jenga_move(k, v);
         }
-        print(Player.position);
 
         //Player.eulerAngles = new Vector3(0, Mathf.Atan2(JoyVec.x, JoyVec.y) * Mathf.Rad2Deg, 0);
     }
@@ -93,7 +113,6 @@ public class JoyStick : MonoBehaviour
     // 드래그 끝.
     public void DragEnd()
      {
-         zoomInAndOut.ok = true;
          Stick.position = StickFirstPos; // 스틱을 원래의 위치로.
          JoyVec = Vector3.zero;          // 방향을 0으로.
          MoveFlag = false;

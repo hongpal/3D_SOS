@@ -12,8 +12,8 @@ public class NetworkManager : MonoBehaviour
     public GameObject Net_Code;
     public GameObject Ready_Str;
     public GameObject time_cont;
-    public GameObject[] Button = new GameObject[13];
-    public GameObject Cam;
+    public GameObject[] Button = new GameObject[14];
+    public static GameObject Cam;
     public Vector3[] v_block = new Vector3[30];
     public static GameObject[] Block = new GameObject[16 * 4];
     public  static int[] Ans = new int[16];
@@ -49,7 +49,7 @@ public class NetworkManager : MonoBehaviour
     public void Start()
     {
         Ready_text = Ready_Str.GetComponent<Text>();
-
+        Cam = GameObject.Find("Main Camera");
         audioSource = GetComponent<AudioSource>();
 
         //사용가능한 마이크들 찾기
@@ -150,7 +150,7 @@ public class NetworkManager : MonoBehaviour
     {
         Ready_Str.SetActive(false);
         Net_Code.SetActive(false);
-        ready_check = is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
+        my_turn = ready_check = is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
         count = 0;
         Ready_text.text = "No Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
@@ -159,6 +159,11 @@ public class NetworkManager : MonoBehaviour
 
     [RPC] public void UnConnect()
     {
+        if (Network.isClient)
+        {
+            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
+        }
+        print("unconnet");
         Network.Disconnect();
         Button[0].SetActive(false);
         Net_Code.SetActive(false);
@@ -169,7 +174,7 @@ public class NetworkManager : MonoBehaviour
         Joystick.SetActive(false);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 14; i++)
             Button[i].SetActive(false);
         for(int i = 0; i < 30; i ++)
         {
@@ -191,7 +196,7 @@ public class NetworkManager : MonoBehaviour
         Joystick.SetActive(false);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
-        for (int i = 0; i < 13; i++)
+        for (int i = 0; i < 14; i++)
             Button[i].SetActive(false);
         for (int i = 0; i < 30; i++)
         {
@@ -487,6 +492,7 @@ public class NetworkManager : MonoBehaviour
         {
             Button[6].SetActive(false);
 
+            print("problem : "+ problem);
             if (problem == 3)
             {
                 Cam.transform.position = new Vector3(0, 0, 0);
@@ -495,6 +501,7 @@ public class NetworkManager : MonoBehaviour
                 Joystick.SetActive(true);
                 Network.Instantiate(Jenga, Jenga.transform.position, Quaternion.identity, 0);
                 Button[12].SetActive(true);
+                Button[13].SetActive(true);
                 Text text = Button[12].GetComponent<Text>();
 
                 if (my_turn)
@@ -525,6 +532,8 @@ public class NetworkManager : MonoBehaviour
             text.text = "Wait";
 
         Joystick.SetActive(true);
+        Button[13].SetActive(true);
+        zoomInAndOut.ok = false;
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5f));
     }
@@ -652,6 +661,8 @@ public class NetworkManager : MonoBehaviour
 
     [RPC] void time_check()
     {
+        zoomInAndOut.ok = true;
+        zoomInAndOut.pivot = new Vector3(0, 0.425f, 7);
         Button[1].SetActive(false);
         Button[2].SetActive(false);
         Ready_Str.SetActive(false);
@@ -719,6 +730,7 @@ public class NetworkManager : MonoBehaviour
         }
         else
         {
+            zoomInAndOut.ok = false;
             GetComponent<NetworkView>().RPC("jenga_start", RPCMode.All, turn_num);
         }
     }
@@ -738,6 +750,7 @@ public class NetworkManager : MonoBehaviour
 
     [RPC] void turn_select(int num)
     {
+        zoomInAndOut.ok = false;
         Button[1].SetActive(false);
         Ready_Str.SetActive(false);
         Button[10].SetActive(true);
@@ -797,5 +810,66 @@ public class NetworkManager : MonoBehaviour
 
         Button[7].SetActive(true);
         Button[8].SetActive(true);
+    }
+
+    public void left_move()
+    {
+        GetComponent<NetworkView>().RPC("rpc_left_move", RPCMode.All);
+    }
+
+    public void right_move()
+    {
+        GetComponent<NetworkView>().RPC("rpc_right_move", RPCMode.All);
+    }
+
+    [RPC] public void rpc_left_move()
+    {
+        genga.cam_status++;
+
+        if (genga.cam_status == 5)
+            genga.cam_status = 1;
+
+        switch (genga.cam_status)
+        {
+            case 1:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 0);
+                break;
+            case 2:
+                NetworkManager.Cam.transform.position = new Vector3(-7, 0, 7);
+                break;
+            case 3:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 14);
+                break;
+            case 4:
+                NetworkManager.Cam.transform.position = new Vector3(7, 0, 7);
+                break;
+        }
+        NetworkManager.Cam.transform.LookAt(new Vector3(0, 0, 7));
+    }
+
+    [RPC]
+    public void rpc_right_move()
+    {
+        genga.cam_status--;
+
+        if (genga.cam_status == 0)
+            genga.cam_status = 4;
+
+        switch (genga.cam_status)
+        {
+            case 1:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 0);
+                break;
+            case 2:
+                NetworkManager.Cam.transform.position = new Vector3(-7, 0, 7);
+                break;
+            case 3:
+                NetworkManager.Cam.transform.position = new Vector3(0, 0, 14);
+                break;
+            case 4:
+                NetworkManager.Cam.transform.position = new Vector3(7, 0, 7);
+                break;
+        }
+        NetworkManager.Cam.transform.LookAt(new Vector3(0, 0, 7));
     }
 }

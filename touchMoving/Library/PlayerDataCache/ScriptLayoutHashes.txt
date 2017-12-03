@@ -142,7 +142,7 @@ cf934baaaa52e700f1f652a0846b1de8 Assembly-CSharp-firstpass.dll:Examples.Scenes.T
 05524b8f659e7bfe5756d1335fec24ba Assembly-UnityScript.dll:.GA_FREE_JS_OpenOtherScene
 37bf4d6a6d424731cb4a9b998783e5c6 Assembly-CSharp.dll:UnityStandardAssets.Characters.ThirdPerson.ThirdPersonCharacter
 9927f9033995c048dcee5258ceb7659a Assembly-CSharp.dll:.CameraSwitch
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.genga
+375224ba53d27967efbeff98562dc72a Assembly-CSharp.dll:.genga
 05524b8f659e7bfe5756d1335fec24ba Assembly-UnityScript.dll:.FPSInputController
 7b1e994e6b6343e69e5aedce4ab96151 Assembly-CSharp.dll:.SampleControl
 a2efb0db652b8114d1ae7dd9a600d626 Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.InputAxisScrollbar
@@ -212,7 +212,7 @@ e7cecaedb57da7aa2da2ecf128a29c40 Assembly-UnityScript.dll:.GA_FREE_JS_Demo04
 1e31b8977e9b2607ddde91e3fb78ea72 Assembly-CSharp.dll:.Cam_Light
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.GE_OrbitCameraUI
 600bf2432747463c84424edccb3c1d05 Assembly-CSharp-firstpass.dll:UnityStandardAssets._2D.Camera2DFollow
-7cf79ee11909e6be521031089b61de96 Assembly-CSharp.dll:.NetworkManager
+ad14d304fbae4db8c7b04596573dc9f0 Assembly-CSharp.dll:.NetworkManager
 a8796ecdc9d5c260bbe32f30c4b10708 Assembly-CSharp.dll:UnityStandardAssets.CrossPlatformInput.TouchPad
 b7f557c19cce3b6f593e26edfe1ec859 Assembly-CSharp.dll:UnityStandardAssets.Vehicles.Ball.Ball
 4a9da55379ba01a415f32f3461838aa1 Assembly-CSharp.dll:.Button_Event

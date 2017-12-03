@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Button_Event2 : MonoBehaviour {
 
-    public GameObject[] Button = new GameObject[23];
+    public GameObject[] Button = new GameObject[24];
     public GameObject[] Easy_Ans = new GameObject[4];
     public GameObject[] Middle_Ans = new GameObject[9];
     public GameObject[] Hard_Ans = new GameObject[16];
@@ -86,6 +86,8 @@ public class Button_Event2 : MonoBehaviour {
         Button[9].SetActive(false);
         Button[12].SetActive(false);
         Button[18].SetActive(false);
+        Button[23].SetActive(false);
+        problem = 0;
         if (Block_Number != 0)
         {   
             for(int i = 0; i < Block_Number; i++)
@@ -114,6 +116,10 @@ public class Button_Event2 : MonoBehaviour {
         // number가 1일 경우 신 끄기 0일경우 신 켜기
         if (number == 1)
         {
+            if(net_check == 1)
+            {
+                GameObject.Find("Net").GetComponent<NetworkManager>().UnConnect();
+            }
             if(Button[0].activeSelf)
             {
                 Button[0].SetActive(false);
@@ -282,13 +288,14 @@ public class Button_Event2 : MonoBehaviour {
         for (int i = 0; i < 3; i++)
             Button[i].SetActive(false);
         Button[18].SetActive(false);
-
+        Button[23].SetActive(true);
         Button[19].SetActive(true);
         Button[20].SetActive(true);
         Button[1].SetActive(true);
+        zoomInAndOut.pivot = new Vector3(0, 0.425f, 7);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
-        gyroScope.ok = false;
+        zoomInAndOut.ok = false;
     }
 
     public void CreateBlock(int number)

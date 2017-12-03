@@ -33,7 +33,7 @@ public class zoomInAndOut : MonoBehaviour
 
         if (ok)
         {
-           /* if (Input.touchCount > 1) //손가락 터치 2개시
+           if (Input.touchCount > 1) //손가락 터치 2개시
             {
                 if (Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position) > initTouchDistance)
                 {
@@ -46,7 +46,7 @@ public class zoomInAndOut : MonoBehaviour
                     camera.fieldOfView += 0.5f;
                 }
                 initTouchDistance = Vector2.Distance(Input.GetTouch(0).position, Input.GetTouch(1).position);
-            }*/
+            }
 
             if (Input.touchCount == 1)
             {

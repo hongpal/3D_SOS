@@ -6,6 +6,7 @@ public class ColiEvent : MonoBehaviour {
 
     public GameObject count;
     public static GameObject jenga;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (Button_Event2.net_check != 1)
