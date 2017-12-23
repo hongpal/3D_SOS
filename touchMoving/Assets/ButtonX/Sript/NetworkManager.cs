@@ -513,7 +513,9 @@ public class NetworkManager : MonoBehaviour
             }
             else
             {
-                GetComponent<NetworkView>().RPC("Intent", RPCMode.Others, Ans, Dif, problem);
+                print(Ans);
+                print(Dif);
+                GetComponent<NetworkView>().RPC("Intent2", RPCMode.Others, Ans, Dif, problem);
                 GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
             }
         }
@@ -537,7 +539,7 @@ public class NetworkManager : MonoBehaviour
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5f));
     }
-    [RPC] void Intent(int[] Server_Ans, int Server_Dif, int Server_problem) // 블록이랑, 난이도만 넘어옴
+    [RPC] void Intent2(int[] Server_Ans, int Server_Dif, int Server_problem) // 블록이랑, 난이도만 넘어옴
     {
         Ans = Server_Ans;
         Dif = Server_Dif;

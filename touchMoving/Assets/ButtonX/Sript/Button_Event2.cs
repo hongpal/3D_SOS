@@ -118,8 +118,13 @@ public class Button_Event2 : MonoBehaviour {
         {
             if(net_check == 1)
             {
+                Button[15].SetActive(false);
+                Button[16].SetActive(false);
+                Button[1].SetActive(false);
                 GameObject.Find("Net").GetComponent<NetworkManager>().UnConnect();
+                return;
             }
+
             if(Button[0].activeSelf)
             {
                 Button[0].SetActive(false);
@@ -131,6 +136,7 @@ public class Button_Event2 : MonoBehaviour {
 
             if(Button[15].activeSelf)
             {
+                print("asd");
                 Button[15].SetActive(false);
                 Button[16].SetActive(false);
                 Button[13].SetActive(true);
@@ -240,6 +246,8 @@ public class Button_Event2 : MonoBehaviour {
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
                 break;
             case 3:
+                print("asd");
+                zoomInAndOut.pivot = new Vector3(0, -1f, 7f);
                 break;
             case 4:
                 break;
@@ -306,6 +314,8 @@ public class Button_Event2 : MonoBehaviour {
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
                 break;
             case 3:
+                print("asd");
+                zoomInAndOut.pivot = new Vector3(0, -1f, 7f);
                 break;
             case 4:
                 break;
@@ -370,6 +380,8 @@ public class Button_Event2 : MonoBehaviour {
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
                 break;
             case 3:
+                print("asd");
+                zoomInAndOut.pivot = new Vector3(0, -1f, 7f);
                 break;
             case 4:
                 break;

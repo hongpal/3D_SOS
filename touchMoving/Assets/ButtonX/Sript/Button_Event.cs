@@ -153,17 +153,17 @@ public class Button_Event : MonoBehaviour {
     {
         // number가 1일 경우 신 끄기 0일경우 신 켜기
         if(number == 1)
-        { 
+        {   
             switch (figureNumber)
             {
                 case 0:
                     for(int i = 1; i < 6; i++)
                         GameObject.Find("Figure").GetComponent<CubeInit>().UnFold(i, 0);
                     Cube_Number = 6;
-                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0, -100);
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 100, -100);
                     break;
                 case 1:
-                    ObjectArr[figureNumber].transform.position = new Vector3(0, 0, -100);
+                    ObjectArr[figureNumber].transform.position = new Vector3(0, 100, -100);
                     break;
                 case 2:
                     print("s");

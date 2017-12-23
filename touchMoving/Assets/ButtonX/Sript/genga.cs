@@ -96,7 +96,7 @@ public class genga : MonoBehaviour {
         }
         else
         {
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && check)
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);    // 터치한 좌표 레이로 바꾸엉
 

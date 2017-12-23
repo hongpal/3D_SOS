@@ -22,7 +22,7 @@ public class zoomInAndOut : MonoBehaviour
         touchStatus = "idle";
         x = transform.eulerAngles.y;
         y = transform.eulerAngles.x;
-        distance = (transform.position - pivot).magnitude; //카메라와 중심간의 거리
+        distance = 7;//(transform.position - pivot).magnitude; //카메라와 중심간의 거리
         Locatino = this.transform.position;
         
     }

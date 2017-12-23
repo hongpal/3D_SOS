@@ -7,9 +7,18 @@ using UnityEngine.UI;
  * 메뉴 버튼 이벤트 정의
 */
 public class Menu_Event : MonoBehaviour {
-    public GameObject[] Button = new GameObject[2];
+    public GameObject[] Button = new GameObject[4];
     public GameObject Cam;
     public GameObject center;
+
+
+    public void game_start()
+    {
+        Button[0].SetActive(true);
+        Button[1].SetActive(true);
+        Button[2].SetActive(false);
+        Button[3].SetActive(false);
+    }
 
     public void On_Off(int number)
     {
@@ -30,7 +39,7 @@ public class Menu_Event : MonoBehaviour {
             for (int i = 0; i < 2; i++)
                 Button[i].SetActive(false);
             GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(2);
-            Cam.transform.LookAt(new Vector3(5, 0, 6));
+           // Cam.transform.LookAt(new Vector3(5, 0, 6));
         }
         else
         {
