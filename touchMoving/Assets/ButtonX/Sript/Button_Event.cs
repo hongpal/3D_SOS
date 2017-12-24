@@ -13,12 +13,6 @@ public class Button_Event : MonoBehaviour {
     public int Cube_Number = 6;
     public int Triangle_Number = 4;
 
-    public void Awake()
-    {
-        Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Screen.SetResolution(Screen.width, Screen.width * 1280 / 800, true);
-    }
-
     public void Start()
     {
         Vector3 v = new Vector3(0, 0, 0);

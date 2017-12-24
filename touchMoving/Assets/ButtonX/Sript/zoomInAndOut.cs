@@ -14,8 +14,14 @@ public class zoomInAndOut : MonoBehaviour
     public static bool ok = false;
     
     public Vector3 Locatino;
-   
+
     // Use this for initialization
+
+   /* public void Awake()
+    {
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Screen.SetResolution(Screen.width, Screen.width * 1280 / 800, true);
+    }*/
 
     void Start()
     {
@@ -27,6 +33,10 @@ public class zoomInAndOut : MonoBehaviour
         
     }
 
+    /*public void OnApplicationQuit()
+    {
+        GetComponent<NetworkManger>
+    }*/
     void Update()
     {
         Camera camera = GetComponent<Camera>();

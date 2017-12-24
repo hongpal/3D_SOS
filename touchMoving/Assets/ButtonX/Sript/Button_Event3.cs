@@ -117,6 +117,9 @@ public class Button_Event3 : MonoBehaviour{
         BlockButton[21].SetActive(false);
         zoomInAndOut.ok = false;
 
+        for (int i = 0; i < 7; i++)
+            Button[i].SetActive(false);
+
         for (int i = 0; i < 20; i++)
         {
             BlockButton[i].GetComponent<UnityEngine.UI.Image>().color = new Color(1, 1, 1);
@@ -124,7 +127,7 @@ public class Button_Event3 : MonoBehaviour{
         }
         gyroScope.ok = true;
         Cam.transform.position = new Vector3(0, 0, 0);
-        Cam.transform.LookAt(new Vector3(5, 0, 6));
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(0);
         
 

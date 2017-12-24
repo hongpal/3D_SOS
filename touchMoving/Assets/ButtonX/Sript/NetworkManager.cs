@@ -12,7 +12,7 @@ public class NetworkManager : MonoBehaviour
     public GameObject Net_Code;
     public GameObject Ready_Str;
     public GameObject time_cont;
-    public GameObject[] Button = new GameObject[14];
+    public GameObject[] Button = new GameObject[16];
     public static GameObject Cam;
     public Vector3[] v_block = new Vector3[30];
     public static GameObject[] Block = new GameObject[16 * 4];
@@ -25,6 +25,7 @@ public class NetworkManager : MonoBehaviour
     public static bool Get_Answer = false;
     public static bool is_Re_Game = false;
     public static bool my_turn = false;
+    public int server_in_count = 0;
     public  TouchScreenKeyboard keyboard = null;
     private bool is_server_join = false;
     private bool is_client_join = false;
@@ -151,27 +152,106 @@ public class NetworkManager : MonoBehaviour
         Ready_Str.SetActive(false);
         Net_Code.SetActive(false);
         my_turn = ready_check = is_Re_Game = answer = Get_Answer = is_server_join = is_Ans = is_client_join = false;
-        count = 0;
+        count = server_in_count = 0;
         Ready_text.text = "No Ready";
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().init();
         
+    }
+
+    [RPC] public void unappear()
+    {
+        count = 0;
+        for (int i = 0; i < 10; i++)
+            Button[i].SetActive(false);
+
+        print("unconnet");
+
+        Button[0].SetActive(false);
+        Net_Code.SetActive(false);
+
+        //ameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
+
+        zoomInAndOut.ok = false;
+        gyroScope.ok = true;
+        Destroy(ColiEvent.jenga);
+        Joystick.SetActive(false);
+        time_cont.SetActive(false);
+        Cam.transform.position = new Vector3(0, 0, 0);
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
+        for (int i = 0; i < 14; i++)
+            Button[i].SetActive(false);
+        for (int i = 0; i < 30; i++)
+        {
+            if (genga.block[i] != null)
+                Destroy(genga.block[i]);
+        }
+        if(keyboard != null)
+        {
+            keyboard.active = false;
+            keyboard = null;
+        }
+
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
+        Button[14].SetActive(true);
+        Button[15].SetActive(true);
+    }
+
+    public void init_go()
+    {
+        init();
+        
+        GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+        Button[14].SetActive(false);
+        Button[15].SetActive(false);
+        if (server_in_count == 1)
+            Network.Disconnect();
+    }
+
+    public void OnApplicationQuit()
+    {
+        print("asd");
+        if(Button_Event2.net_check == 1)
+        {
+            if (Network.isClient)
+            {
+                GetComponent<NetworkView>().RPC("unappear", RPCMode.Server);
+            }
+
+            else if (Network.isServer)
+            {
+                GetComponent<NetworkView>().RPC("unappear", RPCMode.Others);
+            }
+        }
     }
 
     [RPC] public void UnConnect()
     {
         if (Network.isClient)
         {
-            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
+           GetComponent<NetworkView>().RPC("unappear", RPCMode.Server);
         }
+
+        else if(Network.isServer)
+        {
+            GetComponent<NetworkView>().RPC("unappear", RPCMode.Others);
+        }
+
+        count = 0;
+        for (int i = 0; i < 10; i++)
+            Button[i].SetActive(false);
+
         print("unconnet");
-        Network.Disconnect();
+        
         Button[0].SetActive(false);
         Net_Code.SetActive(false);
-        GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+        
+        //GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
+        
         zoomInAndOut.ok = false;
         gyroScope.ok = true;
         Destroy(ColiEvent.jenga);
         Joystick.SetActive(false);
+        time_cont.SetActive(false);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         for (int i = 0; i < 14; i++)
@@ -183,6 +263,10 @@ public class NetworkManager : MonoBehaviour
         }
 
         init();
+        GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
+        GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+        if(server_in_count == 1)
+            Network.Disconnect();
     }
 
     public void temp()
@@ -190,10 +274,12 @@ public class NetworkManager : MonoBehaviour
         Button[0].SetActive(false);
         Net_Code.SetActive(false);
         GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
+        
         zoomInAndOut.ok = false;
         gyroScope.ok = true;
         Destroy(ColiEvent.jenga);
         Joystick.SetActive(false);
+        time_cont.SetActive(false);
         Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         for (int i = 0; i < 14; i++)
@@ -207,26 +293,27 @@ public class NetworkManager : MonoBehaviour
         init();
     }
 
-    public void OnDisconnectedFromServer(NetworkDisconnection info)
+   /* public void OnDisconnectedFromServer(NetworkDisconnection info)
     {
         count = 0;
+
         if(Network.isClient)
         {
+            print("client");
             temp();
-            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
+            //GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Server);
         }
         else if(Network.isServer)
         {
             print("server");
-            temp();
-            GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Others);
+            //GetComponent<NetworkView>().RPC("UnConnect", RPCMode.Others);
         }
         for (int i = 0; i < 10; i++)
             Button[i].SetActive(false);
 
         GameObject.Find("Sin-2").GetComponent<Button_Event2>().On_Off(1);
 
-    }
+    }*/
 
     void OnServerInitialized()
     {
@@ -246,6 +333,7 @@ public class NetworkManager : MonoBehaviour
                 keyboard.text = "";
                 is_Ans = false;
 
+
             }
             
             if (keyboard != null && keyboard.done)
@@ -260,6 +348,29 @@ public class NetworkManager : MonoBehaviour
 
                 RefreshHostList(Server_Code);
                 
+            }
+
+            if (is_server_join)
+            {
+                for (int i = 0; i < hostList.Length; i++)
+                {
+                    if (GUI.Button(new Rect(400, 100 + (110 * i), 300, 100), hostList[i].gameName))
+                        JoinServer(hostList[i]);
+                }
+            }
+        }
+        else
+        {
+            if (is_Ans)
+            {
+                Server_Code = "";
+
+                keyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.NumbersAndPunctuation, false, false, false, false, "Net Code");
+                keyboard.text = "";
+                is_Ans = false;
+
+                RefreshHostList("3579");
+
             }
 
             if (is_server_join)
@@ -314,6 +425,7 @@ public class NetworkManager : MonoBehaviour
     void OnPlayerConnected(NetworkPlayer player)
     {
         is_client_join = true;
+        server_in_count = 1;
     }
 
     public void Re_Game_Ready()
@@ -486,12 +598,15 @@ public class NetworkManager : MonoBehaviour
         if (Network.isClient)
         {
             Button[6].SetActive(false);
+            Button[0].SetActive(true);
+            GameObject.Find("Sin-2").GetComponent<Button_Event2>().exit();
         }
 
         else
         {
             Button[6].SetActive(false);
-
+            Button[0].SetActive(true);
+            GameObject.Find("Sin-2").GetComponent<Button_Event2>().exit();
             print("problem : "+ problem);
             if (problem == 3)
             {
@@ -513,8 +628,6 @@ public class NetworkManager : MonoBehaviour
             }
             else
             {
-                print(Ans);
-                print(Dif);
                 GetComponent<NetworkView>().RPC("Intent2", RPCMode.Others, Ans, Dif, problem);
                 GameObject.Find("Sin-2").GetComponent<Button_Event2>().CreateBlock();
             }

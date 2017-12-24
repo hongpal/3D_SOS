@@ -61,6 +61,11 @@ public class Button_Event2 : MonoBehaviour {
         Difficulty[2, 15] = new Vector3(1.5f, -2f, 5f);
     }
 
+    public void exit()
+    {
+        Button[1].SetActive(false);
+    }
+
     public void Re_Input()
     {
         Button[1].SetActive(true);
@@ -87,6 +92,7 @@ public class Button_Event2 : MonoBehaviour {
         Button[12].SetActive(false);
         Button[18].SetActive(false);
         Button[23].SetActive(false);
+        
         problem = 0;
         if (Block_Number != 0)
         {   
@@ -94,6 +100,26 @@ public class Button_Event2 : MonoBehaviour {
             {
                 Destroy(Block[i]);
 
+            }
+            if(net_check == 1)
+            {
+                for (int i = 0; i < 24; i++)
+                    Button[i].SetActive(false);
+
+                for (int i = 0; i < 4; i++)
+                    Easy_Ans[i].SetActive(false);
+
+                for (int i = 0; i < 9; i++)
+                    Middle_Ans[i].SetActive(false);
+
+                for (int i = 0; i < 16; i++)
+                    Hard_Ans[i].SetActive(false);
+                Block_Number = 0;
+
+                Button[3].SetActive(false);
+
+                TimeCheck.time = 30f;
+                return;
             }
             Block_Number = 0;
 
@@ -103,16 +129,16 @@ public class Button_Event2 : MonoBehaviour {
 
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(true);
-            print("asd");
             Button[18].SetActive(true);
             Cam.transform.position = new Vector3(0, 0, 0);
-            Cam.transform.LookAt(new Vector3(5, 0, 6));
+            Cam.transform.LookAt(new Vector3(0, 0, 5));
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
             
             return;
         }
-
+        TimeCheck.time = 30f;
+        Button[3].SetActive(false);
         // number가 1일 경우 신 끄기 0일경우 신 켜기
         if (number == 1)
         {
@@ -121,12 +147,13 @@ public class Button_Event2 : MonoBehaviour {
                 Button[15].SetActive(false);
                 Button[16].SetActive(false);
                 Button[1].SetActive(false);
-                GameObject.Find("Net").GetComponent<NetworkManager>().UnConnect();
+                //GameObject.Find("Net").GetComponent<NetworkManager>().UnConnect();
                 return;
             }
 
             if(Button[0].activeSelf)
             {
+                print("asdf");
                 Button[0].SetActive(false);
                 Button[2].SetActive(false);
                 Button[13].SetActive(true);
@@ -146,6 +173,7 @@ public class Button_Event2 : MonoBehaviour {
 
             if(Button[17].activeSelf)
             {
+                print("asdf");
                 Button[15].SetActive(true);
                 Button[16].SetActive(true);
                 Button[17].SetActive(false);
@@ -154,6 +182,7 @@ public class Button_Event2 : MonoBehaviour {
 
             if(Button[19].activeSelf)
             {
+                print("asdf");
                 Button[19].SetActive(false);
                 Button[20].SetActive(false);
                 Button[0].SetActive(true);
@@ -161,11 +190,13 @@ public class Button_Event2 : MonoBehaviour {
                 Button[18].SetActive(true);
                 return;
             }
-
+            print("asdf");
             for (int i = 0; i < 3; i++)
                 Button[i].SetActive(false);
             Button[13].SetActive(false);
             Button[14].SetActive(false);
+            Button[16].SetActive(false);
+            Button[15].SetActive(false);
             GameObject.Find("Menu").GetComponent<Menu_Event>().On_Off(0);
             zoomInAndOut.ok = false;
             gyroScope.ok = true;
@@ -224,6 +255,7 @@ public class Button_Event2 : MonoBehaviour {
 
         Button[18].SetActive(false);
         GameObject.Find("Sin-3").GetComponent<Button_Event3>().On_Off(0);
+        Cam.transform.position = new Vector3(0, 0, 0);
         Cam.transform.LookAt(new Vector3(0, 0, 5));
         gyroScope.ok = false;
     }
@@ -246,7 +278,6 @@ public class Button_Event2 : MonoBehaviour {
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
                 break;
             case 3:
-                print("asd");
                 zoomInAndOut.pivot = new Vector3(0, -1f, 7f);
                 break;
             case 4:
@@ -373,6 +404,7 @@ public class Button_Event2 : MonoBehaviour {
         Button[9].SetActive(true);
         zoomInAndOut.ok = true;
         gyroScope.ok = false;
+        Button[1].SetActive(false);
 
         switch (Client_Dif)
         {
@@ -380,7 +412,6 @@ public class Button_Event2 : MonoBehaviour {
                 zoomInAndOut.pivot = new Vector3(0, -1.5f, 7.5f); //0, -1.5, 7.5
                 break;
             case 3:
-                print("asd");
                 zoomInAndOut.pivot = new Vector3(0, -1f, 7f);
                 break;
             case 4:
@@ -601,11 +632,11 @@ public class Button_Event2 : MonoBehaviour {
 
 
         Button[11].SetActive(false);
-       
+        Button[18].SetActive(true);
         zoomInAndOut.ok = false;
         gyroScope.ok = true;
         Cam.transform.position = new Vector3(0, 0, 0);
-        Cam.transform.LookAt(new Vector3(5, 0, 6));
+        Cam.transform.LookAt(new Vector3(0, 0, 5));
     }
 
     public void Wrong()
